@@ -15,7 +15,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http import HttpResponse
+
+def login(request):
+    return HttpResponse('Login')
+
+def home(request):
+    return HttpResponse('Home Dashboard')
+
+def summary(request):
+    return HttpResponse('Summary')
+
+def individual(request):
+    return HttpResponse('Individual Stats')
+
+def comparison(request):
+    return HttpResponse('Athlete Comparison')
+
+def team(request):
+    return HttpResponse('Team Filter')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', login),
+    path('home/', home),
+    path('summary/', summary),
+    path('individual/', individual),
+    path('comparison/', comparison),
+    path('team', team),
 ]

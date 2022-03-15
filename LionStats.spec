@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['LionStats\\manage.py'],
+a = Analysis(['C:\\LionStats\\LionStats\\manage.py\\'],
              pathex=[],
              binaries=[],
              datas=[],

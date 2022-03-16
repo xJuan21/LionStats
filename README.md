@@ -48,8 +48,7 @@ pip install django
 
 ### `Run Application`
 
-After creating and installing the packages use the command bellow and navigate the app by using the command bellow.
-
+After creating and installing the packages use the command bellow to navigate the app.
 ```
 python manage.py runserver
 ```

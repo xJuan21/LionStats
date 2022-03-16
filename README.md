@@ -59,3 +59,9 @@ This is the local link we will access.
 ### `!!!IMPORTANT`
 
 After the instalation of a package it must be added to this readme.
+
+### `Instalation`
+to install it and create the executable follow the steps in the link bellow.
+```
+https://github.com/pyinstaller/pyinstaller/wiki/Recipe-Executable-From-Django
+```

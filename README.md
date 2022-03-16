@@ -54,7 +54,7 @@ python manage.py runserver
 ```
 
 This is the local link we will access.
-[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000)
 
 ### `!!!IMPORTANT`
 

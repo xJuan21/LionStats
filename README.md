@@ -65,3 +65,10 @@ to install it and create the executable follow the steps in the link bellow.
 ```
 https://github.com/pyinstaller/pyinstaller/wiki/Recipe-Executable-From-Django
 ```
+The contents of the batch file is bellow.
+
+
+```
+start cmd /k C:\LionStats\dist\LionStats\LionStats.exe runserver --noreload
+start msedge 127.0.0.1:8000
+```

@@ -5,6 +5,7 @@
 *.log
 *.pot
 *.pyc
+*.bat
 __pycache__/
 local_settings.py
 #settings.py

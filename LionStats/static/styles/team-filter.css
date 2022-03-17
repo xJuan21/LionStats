@@ -145,7 +145,7 @@ body {
 .TeamRectangle{
   width: 241px;
   height: 78px;
-  background: rgba(252,181,37,1);
+  background: #DB9C1D;
   opacity: 1;
   position: absolute;
   top: 0px;
@@ -334,3 +334,4 @@ body {
   opacity: 1;
   text-align: center;
 }
+

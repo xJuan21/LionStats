@@ -4,10 +4,10 @@
 block_cipher = None
 
 
-a = Analysis(['C:\\LionStats\\LionStats\\manage.py\\'],
+a = Analysis(['C:\\LionStats\\LionStats\\manage.py'],
              pathex=[],
              binaries=[],
-             datas=[],
+             datas=[('LionStats/static/styles/team-filter.css', '.'), ('LionStats/static/images/Logo.png', '.'), ('LionStats/templates/team-filter.html', '.')],
              hiddenimports=[],
              hookspath=[],
              hooksconfig={},

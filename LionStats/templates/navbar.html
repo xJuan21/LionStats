@@ -2,13 +2,18 @@
 {% load static %}
 <html lang="en">
 <head>
+    {% block css %}
+    {% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="LionStats/team-filter.css">
+    <link rel="stylesheet" type="text/css" href="LionStats/navbar.css">
     <link href="{% static 'styles/navbar.css' %}" rel="stylesheet" />
-    <title>Team Filter</title>
+    {% block title %}
+    {% endblock %}
 </head>
 <body>
 <div class="GreyArea">
+    {% block content %}
+    {% endblock %}
     <div class="LindenwoodLogo">
         <div class="TopYellowBar">
 

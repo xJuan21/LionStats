@@ -1,13 +1,107 @@
+<!DOCTYPE html>
 {% extends 'navbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+<!--    <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />-->
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="LionStats/team-filter.css">
+    <link href="{% static 'styles/team-filter.css' %}" rel="stylesheet" />
+    {% endblock %}
 
+    {% block title %}
+    <title>Team Filter</title>
+    {% endblock %}
+</head>
+
+<body>
 {% block content %}
+    <div class="SelectSport">
+        <h4> Sport </h4>
+        <div class="Dropdown">
+            <nav>
+                <label for="touch"><span>Sport</span></label>
+                <input type="checkbox" id="touch">
 
-<div class="SelectSport">
-<label for="sport">Select a Sport:</label>
-<select name="sport" id="sport">
-    <option value="sport1">Sport 1</option>
-    <option value="sport2">Sport 2</option>
-</select>
-</div>
+                <ul class="menu">
+                <li><a href="#">Sport 1</a></li>
+                <li><a href="#">Sport 2</a></li>
+                <li><a href="#">Sport 3</a></li>
+                <li><a href="#">Sport 4</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
-{% endblock content %}
+    <div class="Position">
+        <h4> Position </h4>
+        <div class="Dropdown">
+            <nav>
+                <label for="touchPosition"><span>Position</span></label>
+                <input type="checkbox" id="touchPosition">
+
+                <ul class="menu">
+                <li><a href="#">Position 1</a></li>
+                <li><a href="#">Position 2</a></li>
+                <li><a href="#">Position 3</a></li>
+                <li><a href="#">Position 4</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="Age">
+        <h4> Age </h4>
+        <div class="Dropdown">
+            <nav>
+                <label for="touchAge"><span>Age</span></label>
+                <input type="checkbox" id="touchAge">
+
+                <ul class="menu">
+                <li><a href="#">18</a></li>
+                <li><a href="#">19</a></li>
+                <li><a href="#">20</a></li>
+                <li><a href="#">21</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="AcademicYear">
+        <h4> Academic Year </h4>
+        <div class="Dropdown">
+            <nav>
+                <label for="touchYear"><span>Academic Year</span></label>
+                <input type="checkbox" id="touchYear">
+
+                <ul class="menu">
+                <li><a href="#">Freshman</a></li>
+                <li><a href="#">Sophomore</a></li>
+                <li><a href="#">Junior</a></li>
+                <li><a href="#">Senior</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="StatisticType">
+        <h4> Statistic Type </h4>
+        <div class="Dropdown">
+            <nav>
+                <label for="touchType"><span>Type</span></label>
+                <input type="checkbox" id="touchType">
+
+                <ul class="menu">
+                <li><a href="#">Type 1</a></li>
+                <li><a href="#">Type 2</a></li>
+                <li><a href="#">Type 3</a></li>
+                <li><a href="#">Type 4</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+</body>
+
+</html>

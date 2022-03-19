@@ -1,0 +1,162 @@
+{% load static %}
+
+.SelectSport {
+    position: absolute;
+    width: 275px;
+    height: 36px;
+    left: 307px;
+    top: 210px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+
+    /* identical to box height */
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.Position {
+    position: absolute;
+    width: 469.59px;
+    height: 36px;
+    left: 649px;
+    top: 210px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+
+    /* identical to box height */
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.Age {
+    position: absolute;
+    width: 184px;
+    height: 36px;
+    left: 1186px;
+    top: 210px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+
+    /* identical to box height */
+    text-align: center;
+
+    color: #FFFFFF;
+
+}
+
+.AcademicYear {
+    position: absolute;
+    width: 493px;
+    height: 36px;
+    left: 242px;
+    top: 589px;
+    z-index: 1;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+
+    /* identical to box height */
+    text-align: center;
+
+    color: #FFFFFF;
+
+}
+
+.StatisticType {
+    position: absolute;
+    width: 653px;
+    height: 35.21px;
+    left: 714px;
+    top: 589px;
+    z-index: 1;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+
+    /* identical to box height */
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.menu{
+    clear:both;
+    width:100%;
+    height:0px;
+    overflow: hidden;
+    text-align: center;
+    transition: height .4s ease;
+    z-index: 5;
+}
+
+.Dropdown span{
+    padding : 30px;
+    background : white;
+    color : black;
+    font-size : 1.2em;
+    font-family: 'Zen Dots';
+    cursor : pointer;
+    display: block;
+    z-index: 100;
+}
+
+.Dropdown span::after {
+  float: right;
+  right: 10%;
+  content: "+";
+  z-index: 5;
+}
+
+li a {
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    z-index: 100;
+    /* identical to box height */
+    text-align: center;
+
+    color: black;
+}
+.Dropdown nav {
+  z-index: 100;
+  width : auto;
+  background: #d9d9d9;
+  margin : 40px auto;
+}
+
+.menu li {padding : 30px;}
+
+#touch {position: absolute; opacity: 0; height: 0px; }
+#touch:checked + .menu {height: auto; }
+
+#touchPosition {position: absolute; opacity: 0; height: 0px; }
+#touchPosition:checked + .menu {height: auto; }
+
+#touchAge {position: absolute; opacity: 0; height: 0px; }
+#touchAge:checked + .menu {height: auto; }
+
+#touchYear {position: absolute; opacity: 0; height: 0px; }
+#touchYear:checked + .menu {height: auto; }
+
+#touchType {position: absolute; opacity: 0; height: 0px; }
+#touchType:checked + .menu {height: auto; }

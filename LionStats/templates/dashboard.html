@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'navbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="LionStats/dashboard.css">
+    <link href="{% static 'styles/dashboard.css' %}" rel="stylesheet" />
+    {% endblock %}
+
+    {% block title %}
+    <title>Home</title>
+    {% endblock %}
+</head>
+<body>
+{% block notitle %}
+{% endblock %}
+
+{% block dashboard %}
+<div class="current"></div>
+{% endblock %}
+
+</body>
+</html>

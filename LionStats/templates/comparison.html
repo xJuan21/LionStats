@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'navbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="LionStats/comparison.css">
+    <link href="{% static 'styles/comparison.css' %}" rel="stylesheet" />
+    {% endblock %}
+
+    {% block title %}
+    <title>Comparison</title>
+    {% endblock %}
+</head>
+<body>
+{% block comparison %}
+<div class="current"></div>
+{% endblock %}
+
+{% block topbar %}
+<span class="TopBar">Athlete Comparison</span>
+{% endblock %}
+</body>
+</html>

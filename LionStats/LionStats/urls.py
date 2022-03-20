@@ -21,17 +21,17 @@ from django.shortcuts import render
 def login(request):
     return HttpResponse('Login')
 
-def home(request):
-    return HttpResponse('Home Dashboard')
+def dashboard(request):
+    return render(request, 'dashboard.html')
 
 def summary(request):
-    return HttpResponse('Summary')
+    return render(request, 'summary.html')
 
 def individual(request):
-    return HttpResponse('Individual Stats')
+    return render(request, 'individual.html')
 
 def comparison(request):
-    return HttpResponse('Athlete Comparison')
+    return render(request, 'comparison.html')
 
 def team(request):
     return render(request, 'team-filter.html')
@@ -39,7 +39,7 @@ def team(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', login),
-    path('home/', home),
+    path('dashboard/', dashboard),
     path('summary/', summary),
     path('individual/', individual),
     path('comparison/', comparison),

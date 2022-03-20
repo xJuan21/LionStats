@@ -49,7 +49,7 @@ body {
   left: 0px;
   overflow: hidden;
 }
-.TeamFilterBar {
+.TopBar {
   width: 100%;
   color: rgba(255,255,255,1);
   position: absolute;
@@ -145,7 +145,7 @@ body {
 .TeamRectangle{
   width: 241px;
   height: 78px;
-  background: #DB9C1D;
+  background: rgba(252,181,37,1);
   opacity: 1;
   position: absolute;
   top: 0px;
@@ -247,6 +247,7 @@ body {
   left: 0px;
   overflow: hidden;
 }
+
 .HomeRectangle {
   width: 242px;
   height: 78px;
@@ -257,6 +258,7 @@ body {
   left: 0px;
   overflow: hidden;
 }
+
 .Home {
   width: 106px;
   color: rgba(0,0,0,1);
@@ -333,5 +335,16 @@ body {
   font-size: 32px;
   opacity: 1;
   text-align: center;
+}
+
+.current {
+  width: 242px;
+  height: 78px;
+  background: #DB9C1D;
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
 }
 

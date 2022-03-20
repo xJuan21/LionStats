@@ -15,13 +15,15 @@
     {% block content %}
     {% endblock %}
     <div class="LindenwoodLogo">
+        {% block notitle %}
         <div class="TopYellowBar">
-
         </div>
         <div class="TopBlackBar">
-
         </div>
-        <span class="TeamFilterBar">Team Filter</span>
+        {% block topbar %}
+        <span class="TopBar">Team Filter</span>
+        {% endblock %}
+        {% endblock %}
     </div>
         <div class="NavBarBackground">
 
@@ -39,32 +41,39 @@
         <div class="LogoArea">
             <nav class = "navbar">
             <div class="TeamButton">
+                {% block team-filter %}
                 <div class="TeamRectangle">
                 </div>
+                {% endblock %}
                 <a href="http://localhost:8000/team"><span class="Team">Team</span></a>
             </div>
             <div class="IndividualButton">
-            <div class="IndividualRectangle">
-
-            </div>
+                {% block individual %}
+                <div class="IndividualRectangle">
+                </div>
+                {% endblock %}
             <a href="http://localhost:8000/individual"><span class="Individual">Individual</span></a>
         </div>
             <div class="SummaryButton">
+                {% block summary %}
                 <div class="SummaryRectangle">
-
                 </div>
+                {% endblock %}
+
                 <a href="http://localhost:8000/summary"><span class="Summary">Summary</span></a>
             </div>
             <div class="HomeButton">
+                {% block dashboard %}
                 <div class="HomeRectangle">
-
                 </div>
-                <a href="http://localhost:8000/home"><span class="Home">Home</span></a>
+                {% endblock %}
+                <a href="http://localhost:8000/dashboard"><span class="Home">Home</span></a>
             </div>
             <div class="ComparisonButton">
+                {% block comparison %}
                 <div class="ComparisonRectangle">
-
                 </div>
+                {% endblock %}
                 <a href="http://localhost:8000/comparison"><span class="Comparison">Comparison</span></a>
             </div>
             </nav>

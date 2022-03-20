@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'navbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="LionStats/summary.css">
+    <link href="{% static 'styles/summary.css' %}" rel="stylesheet" />
+    {% endblock %}
+
+    {% block title %}
+    <title>Summary</title>
+    {% endblock %}
+</head>
+<body>
+{% block summary %}
+<div class="current"></div>
+{% endblock %}
+
+{% block topbar %}
+<span class="TopBar">Summary</span>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'navbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="LionStats/individual.css">
+    <link href="{% static 'styles/individual.css' %}" rel="stylesheet" />
+    {% endblock %}
+
+    {% block title %}
+    <title>Individual</title>
+    {% endblock %}
+</head>
+<body>
+{% block individual %}
+<div class="current"></div>
+{% endblock %}
+
+{% block topbar %}
+<span class="TopBar">Individual Stats</span>
+{% endblock %}
+</body>
+</html>

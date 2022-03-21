@@ -348,3 +348,73 @@ body {
   overflow: hidden;
 }
 
+.menu{
+    clear:both;
+    width:100%;
+    height:0px;
+    overflow: hidden;
+    text-align: center;
+    transition: height .4s ease;
+    z-index: 5;
+}
+
+.TDropdown span{
+    padding : 30px;
+    background : white;
+    color : black;
+    font-size : 1.8em;
+    font-family: 'Zen Dots';
+    cursor : pointer;
+    display: block;
+    z-index: 100;
+}
+
+.TDropdown span::after {
+  position: absolute;
+  float: right;
+  right: 10%;
+  content: "+";
+  z-index: 5;
+}
+
+li a {
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    z-index: 100;
+    /* identical to box height */
+    text-align: center;
+
+    color: black;
+}
+.TDropdown nav {
+  z-index: 100;
+  width : auto;
+  background: #d9d9d9;
+  margin : 40px auto;
+}
+
+.menu li {padding : 30px;}
+
+#touchTeam {position: absolute; opacity: 0; height: 0px; }
+#touchTeam:checked + .menu {height: auto; }
+
+.TeamDropdown{
+    position: absolute;
+    width: 200px;
+    height: 0px;
+    left: 22px;
+    top: 150px;
+    z-index: 5;
+    background: #FFFFFF;
+}
+
+.content{
+    position: absolute;
+    left: 23%;
+    top: 5%;
+    transform: translate(-50%, -50%);
+}
+

@@ -62,7 +62,7 @@
     position: absolute;
     width: 493px;
     height: 36px;
-    left: 242px;
+    left: 200px;
     top: 589px;
     z-index: 1;
     font-family: 'Zen Dots';
@@ -82,7 +82,7 @@
     position: absolute;
     width: 653px;
     height: 35.21px;
-    left: 714px;
+    left: 756px;
     top: 589px;
     z-index: 1;
     font-family: 'Zen Dots';
@@ -99,7 +99,7 @@
 
 .menu{
     clear:both;
-    width:100%;
+    width:auto;
     height:0px;
     overflow: hidden;
     text-align: center;

@@ -105,14 +105,14 @@ body {
 }
 .LindenwoodLogo2 {
   width: 164px;
-  height: 109px;
+  height: 150px;
   background: url("/static/images/Logo.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   opacity: 1;
   position: absolute;
-  top: 0px;
+  top: 20px;
   left: 28px;
   overflow: hidden;
 }

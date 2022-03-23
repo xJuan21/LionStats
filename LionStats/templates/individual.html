@@ -14,26 +14,26 @@
     {% endblock %}
 </head>
 <body>
-{% block individual %}
+{% block content %}
 <div class="current">
 
-<div class="Name">
+<div class="indvName">
   <h2> Name : </h2>
 </div>
-<div class="Sport">
+<div class="indvSport">
   <h2> Sport : </h2>
 </div>
-<div class="Jersey">
+<div class="indvJersey">
   <h2> Jersey # : </h2>
 </div>
-<div class="Position">
+<div class="indvPosition">
   <h2> Position : </h2>
 </div>
 
 <div class="content">
-  <div class="Period">
+  <div class="indvPeriod">
       <h2> Period : </h2>
-      <div class="Dropdown">
+      <div class="indvDropdown">
           <nav>
               <label for="touch"><span>Period</span></label>
               <input type="checkbox" id="touch">
@@ -56,109 +56,3 @@
 {% endblock %}
 </body>
 </html>
-
-<style>*
-{
-
-.Period
-{
-position: absolute;
-width: 234.06px;
-height: 48.43px;
-left: 835.13px;
-top: 510.57px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-}
-
-.Position
-{
-position: absolute;
-width: 227.3px;
-height: 48.43px;
-left: 834px;
-top: 446.01px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-}
-
-.Jersey
-{
-position: absolute;
-width: 247.56px;
-height: 48.43px;
-left: 835.13px;
-top: 381.44px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-}
-
-.Sport
-{
-position: absolute;
-width: 169.92px;
-height: 48.43px;
-left: 835.13px;
-top: 315.72px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-
-}
-
-.Name
-{
-position: absolute;
-width: 162.04px;
-height: 48.43px;
-left: 835.13px;
-top: 250px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-}
-
-.Dropdown
-{
-position: absolute;
-width: 200px;
-height: 178px;
-left: 1069px;
-top: calc(50% - 178px/2 - 315.5px);
-
-background: #FFFFFF;
-border: 1px solid #707070;
-box-sizing: border-box;
-border-radius: 4px;
-}
-
-}
-</style>

@@ -57,7 +57,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'templates',
-            'C:/LionStats/dist/LionStats',
+            # 'C:/LionStats/LionStats/dist/manage',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -119,10 +119,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+# STATIC_ROOT = ''
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    'C:/LionStats/dist/LionStats',
+    # os.path.join('LionStats/manage/static'),
 ]
 
 # Default primary key field type

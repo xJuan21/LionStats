@@ -18,7 +18,6 @@
 
     color: #FFFFFF;
 }
-
 .Position {
     position: absolute;
     width: 469.59px;
@@ -31,7 +30,7 @@
     font-weight: 400;
     font-size: 30px;
     line-height: 36px;
-
+    
     /* identical to box height */
     text-align: center;
 

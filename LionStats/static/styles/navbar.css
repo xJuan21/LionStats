@@ -103,10 +103,10 @@ body {
   opacity: 1;
   text-align: center;
 }
-.LindenwoodLogo2 {
+/*.LindenwoodLogo2 {
   width: 164px;
   height: 150px;
-  background: url("/static/images/Logo.png");
+  background: url("/static/images/Logo.png"), url("C:\LionStats\LionStats\dist\manage\Logo.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -115,7 +115,7 @@ body {
   top: 20px;
   left: 28px;
   overflow: hidden;
-}
+}*/
 .LogoArea {
   width: 242px;
   height: 392px;

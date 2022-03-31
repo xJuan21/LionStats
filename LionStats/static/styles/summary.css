@@ -1,20 +1,57 @@
 {% load static %}
 
-.first-heading {
-    position: absolute;
-    width: 275px;
-    height: 36px;
-    left: 307px;
-    top: 210px;
-    z-index: 5;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
+.Summarycontent {
+        left: 242px;
+        top: 209px;
+    }
 
-    /* identical to box height */
-    text-align: center;
+    .first-heading {
+        position: absolute;
+        width: 1198px;
+        height: 118px;
+        left: 760px;
+        top: 209px;
 
-    color: #FFFFFF;
-}
+        font-family: 'Zen Dots';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 75px;
+        line-height: 90px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+
+        color: #FFFFFF;
+    }
+
+    .s1-stat-1{
+        position: absolute;
+        width: 900px;
+        height: 40px;
+        left: 760px;
+        top: 209px;
+
+        font-family: 'Zen Dots';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 75px;
+        line-height: 90px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+
+        color: #FFFFFF;
+    }
+
+
+    .s1-stat-2{
+    }
+
+    .second-heading{
+    }
+
+    .s2-stat-1{
+    }
+
+    .s2-stat-2{
+    }

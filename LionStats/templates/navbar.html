@@ -9,6 +9,7 @@
 <!--    <link href="{% static 'styles/navbar.css' %}" rel="stylesheet" />-->
 <!--    <link href="navbar.css" rel="stylesheet" type="text/css" >-->
 </head>
+
 <body>
 <div class="TeamDropdown">
         <div class="TDropdown">
@@ -29,6 +30,10 @@
 <div class="GreyArea">
     {% block content %}
     {% endblock %}
+    <script>
+    {% block jquery %}
+    {% endblock %}
+</script>
     <div class="LindenwoodLogo">
         {% block notitle %}
         <div class="TopYellowBar">

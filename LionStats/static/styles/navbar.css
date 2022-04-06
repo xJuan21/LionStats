@@ -1,7 +1,7 @@
 
-
 * {
   box-sizing: border-box;
+
 }
 body {
   font-size: 14px;
@@ -76,7 +76,7 @@ body {
 .NavBarBackground2 {
   width: 220px;
   height: 243px;
-  background: url("../images/v64_527.png");
+  /*background: url("../images/v64_527.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -117,7 +117,7 @@ body {
 .LogoArea {
   width: 242px;
   height: 392px;
-  background: url("../images/v64_532.png");
+  /*background: url("../images/v64_532.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -130,7 +130,7 @@ body {
 .TeamButton {
   width: 241px;
   height: 78px;
-  background: url("../images/v64_561.png");
+  /*/background: url("../images/v64_561.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -165,7 +165,7 @@ body {
 .IndividualButton{
   width: 242px;
   height: 84px;
-  background: url("../images/v64_533.png");
+  /*background: url("../images/v64_533.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -200,7 +200,7 @@ body {
 .SummaryButton {
   width: 242px;
   height: 78px;
-  background: url("../images/v64_536.png");
+  /*background: url("../images/v64_536.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -235,7 +235,7 @@ body {
 .HomeButton {
   width: 242px;
   height: 78px;
-  background: url("../images/v64_539.png");
+  /*'background: url("../images/v64_539.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -272,7 +272,7 @@ body {
 .ComparisonButton {
   width: 242px;
   height: 75px;
-  background: url("../images/v64_542.png");
+  /*background: url("../images/v64_542.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

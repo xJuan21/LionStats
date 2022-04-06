@@ -6,7 +6,7 @@
     {% block css %}
     <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static 'styles/team-filter.css' %}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!--    <script src="{% static 'js/.js' %}"></script>-->
     {% endblock %}
@@ -21,7 +21,10 @@
 {% endblock %}
 
 {% block content %}
-<canvas id ="teamChart" width="400" height="400"></canvas>
+<div class ="chart">
+    <canvas id ="teamChart" width="800px" height="500px"></canvas>
+</div>
+
 <script>
 {% block jquery %}
 var endpoint = '/api/team/data/'
@@ -32,45 +35,49 @@ $.ajax({
     url: endpoint,
     success: function(data){
         labels = data.labels
-        teamData = data.team
+        teamData = data.default
         //console.log(data)
-    },
+        var ctx = document.getElementById('teamChart').getContext('2d');
+        var teamChart = new Chart(ctx, {
+          type: 'bar',
+          data:{
+          labels: labels,
+          datasets: [{
+            data: teamData,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(255, 159, 64)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)',
+              'rgb(153, 102, 255)',
+              'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+          }]
+          },
+           options: {
+                responsive: false
+            }
+        });
+
+        },
     error: function(error_data){
         console.log("error")
         console.log(error_data)
     }
 })
 
-var ctx = document.getElementById("teamChart");
-var teamChart = new Chart(ctx, {
-  type: 'bar',
-  data:{
-  labels: labels,
-  datasets: [{
-    data: teamData,
-    backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(255, 205, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(153, 102, 255, 0.2)',
-      'rgba(201, 203, 207, 0.2)'
-    ],
-    borderColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)',
-      'rgb(255, 205, 86)',
-      'rgb(75, 192, 192)',
-      'rgb(54, 162, 235)',
-      'rgb(153, 102, 255)',
-      'rgb(201, 203, 207)'
-    ],
-    borderWidth: 1
-  }]
-  },
-});
-    {% endblock %}
+{% endblock %}
 </script>
 <div class="content">
     <div class="SelectSport">

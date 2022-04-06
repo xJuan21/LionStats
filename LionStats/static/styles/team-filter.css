@@ -1,5 +1,17 @@
 {% load static %}
 
+.chart {
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+
+.teamChart {
+    margin: 0 auto;
+}
+
 .GreyArea {
   width: 100%;
   height: 200%;/*1831px;*/

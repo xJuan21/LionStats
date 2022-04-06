@@ -18,9 +18,9 @@ class TeamData(APIView):
         Return a list of all users.
         """
         labels = ["DIST", "HR90"]
+        teamData = [5000, 15]
         data = {
             "labels": labels,
-            "Distance": 5000,
-            "HR90": 15,
+            "default": teamData,
         }
         return Response(data)

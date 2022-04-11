@@ -5,8 +5,7 @@
 <head>
     <meta charset="UTF-8">
     {% block css %}
-    <link rel="stylesheet" type="text/css" href="LionStats/dashboard.css">
-    <link href="{% static 'styles/dashboard.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/dashboard.css' %}">
     {% endblock %}
 
     {% block title %}
@@ -17,7 +16,7 @@
 {% block notitle %}
 {% endblock %}
 
-{% block dashboard %}
+{% block content %}
 <div class="current"></div>
 {% endblock %}
 

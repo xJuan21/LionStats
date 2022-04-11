@@ -44,6 +44,8 @@ We need to install this framework since we will be working with it.
 
 ```
 pip install django
+pip install django-jquery
+pip install djangorestframework
 ```
 
 ### `Run Application`

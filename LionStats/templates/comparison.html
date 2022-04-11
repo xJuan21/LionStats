@@ -13,9 +13,27 @@
     <title>Comparison</title>
     {% endblock %}
 </head>
+
 <body>
 {% block comparison %}
 <div class="current"></div>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="column-wrap">
+	    <div class="column one-third">
+            <div class="col-group">Athlete 1</div>
+	    </div>
+    	<div class="column one-third">
+    		<div class="col-group">Sample Text</div>
+    	</div>
+    	<div class="column one-third">
+    		<div class="col-group">Athlete 2</div>
+    	</div>
+</div>
+
+</div>
 {% endblock %}
 
 {% block topbar %}

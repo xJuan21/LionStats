@@ -52,7 +52,7 @@ urlpatterns = [
     path('comparison/', comparison),
     path('team/', team),
 
-    path('delete_product', views.delete_product, name='delete_product')
+    path('delete_product', views.delete_product, name='delete_product'),
 
     path('api/team/data/', TeamData.as_view()),
 

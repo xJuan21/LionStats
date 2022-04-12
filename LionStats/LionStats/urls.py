@@ -19,7 +19,11 @@ from django.conf import settings
 from django.shortcuts import render
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+from LionStats import views
+
 from .views import TeamData
+
 
 def login(request):
     return render(request, 'login.html')
@@ -47,7 +51,11 @@ urlpatterns = [
     path('individual/', individual),
     path('comparison/', comparison),
     path('team/', team),
+
+    path('delete_product', views.delete_product, name='delete_product'),
+
     path('api/team/data/', TeamData.as_view()),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

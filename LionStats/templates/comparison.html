@@ -5,17 +5,41 @@
 <head>
     <meta charset="UTF-8">
     {% block css %}
-    <link rel="stylesheet" type="text/css" href="LionStats/comparison.css">
-    <link href="{% static 'styles/comparison.css' %}" rel="stylesheet" />
+<!--    <link rel="stylesheet" type="text/css" href="LionStats/comparison.css">-->
+<!--    <link href="{% static 'styles/comparison.css' %}" rel="stylesheet" />-->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/comparison.css' %}">
     {% endblock %}
 
     {% block title %}
     <title>Comparison</title>
     {% endblock %}
 </head>
+
 <body>
 {% block comparison %}
 <div class="current"></div>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="column-wrap">
+	    <div class="column one-third">
+            <div class="col-group">
+                 <h2> Athlete 1 </h2>
+            </div>
+	    </div>
+    	<div class="column one-third">
+    		<div class="col-group">Sample Text</div>
+    	</div>
+    	<div class="column one-third">
+    		<div class="col-group">
+                <h2> Athlete 2 </h2>
+                <p> This is test code </p>
+            </div>
+    	</div>
+</div>
+
+</div>
 {% endblock %}
 
 {% block topbar %}

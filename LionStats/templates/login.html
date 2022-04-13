@@ -4,6 +4,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=ABeeZee&display=swap" rel="stylesheet" />
+    
 </head>
 <body>
     <div class="YellowArea">
@@ -13,25 +14,19 @@
     <div class="User-Content">
         <div class="User-Content-Inner">
             <span class="UserLoginTitle">User Login</span>
-            <span class="UserIDTitle">User ID</span>
-            <span class="PasswordTitle">Password</span>
-            <span class="ForgotPassword">Forgot Password?</span>
+           
 
-            <div class="UserTextBox">
-                <div class="v6_188"></div>
-                <span class="v6_189">Enter ID</span>
-            </div>
-
-            <div class="v6_192">
-                <div class="v6_193"></div>
-                <span class="v6_194">Enter your password</span>
-            </div>
+            
 
             <div class="LoginButton">
-                <div class="v6_201"></div>
-                <span class="LoginText">Login</span>
-            </div>
-        </div>
+              <div class="v6_201"></div>
+              <span class="LoginText"></span>
+              
+               <a
+               class="LoginText" href="{% url 'delete_product'%}">Login
+              
+          </div>
+      </div>
     </div>
 </body>
 </html>
@@ -234,7 +229,7 @@ img{
   background-size: cover;
   opacity: 1;
   position: absolute;
-  top: 761px;
+  top: 401px;
   left: 214px;
   overflow: hidden;
 }

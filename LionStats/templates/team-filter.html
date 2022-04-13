@@ -6,6 +6,9 @@
     {% block css %}
     <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static 'styles/team-filter.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--    <script src="{% static 'js/.js' %}"></script>-->
     {% endblock %}
     {% block title %}
     <title>Team Filter</title>
@@ -18,19 +21,77 @@
 {% endblock %}
 
 {% block content %}
+<div class ="chart">
+    <canvas id ="teamChart" width="800px" height="500px"></canvas>
+</div>
+
+<script>
+{% block jquery %}
+var endpoint = '/api/team/data/'
+var teamData = []
+var labels = []
+$.ajax({
+    method: "GET",
+    url: endpoint,
+    success: function(data){
+        labels = data.labels
+        teamData = data.default
+        //console.log(data)
+        var ctx = document.getElementById('teamChart').getContext('2d');
+        var teamChart = new Chart(ctx, {
+          type: 'bar',
+          data:{
+          labels: labels,
+          datasets: [{
+            data: teamData,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(255, 159, 64)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)',
+              'rgb(153, 102, 255)',
+              'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+          }]
+          },
+           options: {
+                responsive: false
+            }
+        });
+
+        },
+    error: function(error_data){
+        console.log("error")
+        console.log(error_data)
+    }
+})
+
+{% endblock %}
+</script>
 <div class="content">
-    <div class="SelectSport">
-        <h4> Sport </h4>
+    <div class="Athlete">
+        <h4> Athletes </h4>
         <div class="Dropdown">
             <nav>
-                <label for="touch"><span>Sport</span></label>
+                <label for="touch"><span>Athlete</span></label>
                 <input type="checkbox" id="touch">
 
                 <ul class="menu">
-                <li><a href="#">Sport 1</a></li>
-                <li><a href="#">Sport 2</a></li>
-                <li><a href="#">Sport 3</a></li>
-                <li><a href="#">Sport 4</a></li>
+                <li><a href="#">Smith, John</a></li>
+                <li><a href="#">Skywalker, Anakin</a></li>
+                <li><a href="#">Bolt, Usain</a></li>
+<!--                <li><a href="#">Sport 4</a></li>-->
                 </ul>
             </nav>
         </div>
@@ -53,18 +114,18 @@
         </div>
     </div>
 
-    <div class="Age">
-        <h4> Age </h4>
+    <div class="Session">
+        <h4> Session </h4>
         <div class="Dropdown">
             <nav>
-                <label for="touchAge"><span>Age</span></label>
-                <input type="checkbox" id="touchAge">
+                <label for="touchSession"><span>Session</span></label>
+                <input type="checkbox" id="touchSession">
 
                 <ul class="menu">
-                <li><a href="#">18</a></li>
-                <li><a href="#">19</a></li>
-                <li><a href="#">20</a></li>
-                <li><a href="#">21</a></li>
+                <li><a href="#">04/04/2022</a></li>
+                <li><a href="#">04/05/2022</a></li>
+                <li><a href="#">04/06/2022</a></li>
+                <li><a href="#">04/06/2022</a></li>
                 </ul>
             </nav>
         </div>
@@ -78,32 +139,36 @@
                 <input type="checkbox" id="touchYear">
 
                 <ul class="menu">
-                <li><a href="#">Freshman</a></li>
-                <li><a href="#">Sophomore</a></li>
-                <li><a href="#">Junior</a></li>
-                <li><a href="#">Senior</a></li>
+                <li><a href="#">2019-2020</a></li>
+                <li><a href="#">2020-2021</a></li>
+                <li><a href="#">2021-2022</a></li>
+<!--                <li><a href="#">Senior</a></li>-->
                 </ul>
             </nav>
         </div>
     </div>
 
-    <div class="StatisticType">
-        <h4> Statistic Type </h4>
-        <div class="Dropdown">
-            <nav>
-                <label for="touchType"><span>Type</span></label>
-                <input type="checkbox" id="touchType">
+<!--    <div class="StatisticType">-->
+<!--        <h4> Statistic Type </h4>-->
+<!--        <div class="Dropdown">-->
+<!--            <nav>-->
+<!--                <label for="touchType"><span>Type</span></label>-->
+<!--                <input type="checkbox" id="touchType">-->
 
-                <ul class="menu">
-                <li><a href="#">Type 1</a></li>
-                <li><a href="#">Type 2</a></li>
-                <li><a href="#">Type 3</a></li>
-                <li><a href="#">Type 4</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+<!--                <ul class="menu">-->
+<!--                <li><a href="#">Type 1</a></li>-->
+<!--                <li><a href="#">Type 2</a></li>-->
+<!--                <li><a href="#">Type 3</a></li>-->
+<!--                <li><a href="#">Type 4</a></li>-->
+<!--                </ul>-->
+<!--            </nav>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
+
+<canvas id="teamStats">
+
+</canvas>
 {% endblock %}
 </body>
 

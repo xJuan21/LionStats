@@ -1,1 +1,39 @@
-{% load static %}
+.Position {
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 649px;
+    top: 210px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+
+    /* identical to box height */
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.SelectSport {
+    position: absolute;
+    width: 275px;
+    height: 36px;
+    left: 307px;
+    top: 210px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+
+    /* identical to box height */
+    text-align: center;
+
+    color: #FFFFFF;
+
+}
+

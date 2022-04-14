@@ -1,14 +1,14 @@
-{% load static %}
 
 * {
   box-sizing: border-box;
+
 }
 body {
   font-size: 14px;
 }
 .GreyArea {
   width: 100%;
-  height: 100%;/*1831px;*/
+  height: 200%;/*1831px;*/
   background: rgba(68,68,68,1);
   opacity: 1;
   position: absolute;
@@ -78,7 +78,7 @@ body {
 .NavBarBackground2 {
   width: 220px;
   height: 243px;
-  background: url("../images/v64_527.png");
+  /*background: url("../images/v64_527.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -103,23 +103,23 @@ body {
   opacity: 1;
   text-align: center;
 }
-.LindenwoodLogo2 {
+/*.LindenwoodLogo2 {
   width: 164px;
-  height: 109px;
-  background: url("/static/images/Logo.png");
+  height: 150px;
+  background: url("/static/images/Logo.png"), url("C:\LionStats\LionStats\dist\manage\Logo.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   opacity: 1;
   position: absolute;
-  top: 0px;
+  top: 20px;
   left: 28px;
   overflow: hidden;
-}
+}*/
 .LogoArea {
   width: 242px;
   height: 392px;
-  background: url("../images/v64_532.png");
+  /*background: url("../images/v64_532.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -132,7 +132,7 @@ body {
 .TeamButton {
   width: 241px;
   height: 78px;
-  background: url("../images/v64_561.png");
+  /*/background: url("../images/v64_561.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -167,7 +167,7 @@ body {
 .IndividualButton{
   width: 242px;
   height: 84px;
-  background: url("../images/v64_533.png");
+  /*background: url("../images/v64_533.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -202,7 +202,7 @@ body {
 .SummaryButton {
   width: 242px;
   height: 78px;
-  background: url("../images/v64_536.png");
+  /*background: url("../images/v64_536.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -237,7 +237,7 @@ body {
 .HomeButton {
   width: 242px;
   height: 78px;
-  background: url("../images/v64_539.png");
+  /*'background: url("../images/v64_539.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -274,7 +274,7 @@ body {
 .ComparisonButton {
   width: 242px;
   height: 75px;
-  background: url("../images/v64_542.png");
+  /*background: url("../images/v64_542.png");*/
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -346,5 +346,75 @@ body {
   top: 0px;
   left: 0px;
   overflow: hidden;
+}
+
+.menu{
+    clear:both;
+    width:100%;
+    height:0px;
+    overflow: hidden;
+    text-align: center;
+    transition: height .4s ease;
+    z-index: 5;
+}
+
+.TDropdown span{
+    padding : 30px;
+    background : white;
+    color : black;
+    font-size : 1.8em;
+    font-family: 'Zen Dots';
+    cursor : pointer;
+    display: block;
+    z-index: 100;
+}
+
+.TDropdown span::after {
+  position: absolute;
+  float: right;
+  right: 10%;
+  content: "+";
+  z-index: 5;
+}
+
+li a {
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    z-index: 100;
+    /* identical to box height */
+    text-align: center;
+
+    color: black;
+}
+.TDropdown nav {
+  z-index: 100;
+  width : auto;
+  background: #d9d9d9;
+  margin : 40px auto;
+}
+
+.menu li {padding : 30px;}
+
+#touchTeam {position: absolute; opacity: 0; height: 0px; }
+#touchTeam:checked + .menu {height: auto; }
+
+.TeamDropdown{
+    position: absolute;
+    width: 200px;
+    height: 0px;
+    left: 22px;
+    top: 150px;
+    z-index: 5;
+    background: #FFFFFF;
+}
+
+.content{
+    position: absolute;
+    left: 23%;
+    top: 5%;
+    transform: translate(-50%, -50%);
 }
 

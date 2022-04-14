@@ -5,8 +5,7 @@
 <head>
     <meta charset="UTF-8">
     {% block css %}
-    <link rel="stylesheet" type="text/css" href="LionStats/summary.css">
-    <link href="{% static 'styles/summary.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/summary.css' %}">
     {% endblock %}
 
     {% block title %}
@@ -14,8 +13,18 @@
     {% endblock %}
 </head>
 <body>
-{% block summary %}
-<div class="current"></div>
+{% block content %}
+<div class="Summarycontent">
+
+    <h1 class="first-heading"> Session/Sport 1 </h1>
+
+    <p class="s1-stat-1"> Statistic #1 </p>
+
+    <h2 class="second-heading"> Session/Sport 2</h2>
+
+    <p class="s2-stat-1"> Statistic #1 </p>
+
+</div>
 {% endblock %}
 
 {% block topbar %}

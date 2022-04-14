@@ -1,1 +1,53 @@
 {% load static %}
+
+/*.GreyArea {
+  width: 100%;
+  height: 200%;/*1831px;*/
+/*  background: rgba(68,68,68,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}*/
+
+.current {
+   left: 242px;
+   top: 209px;
+   overflow: scroll;
+}
+
+/* This is CSS code for the columns in the Comparison.html file */
+.column
+{
+	margin-bottom: 20px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.column .col-group
+{
+	background-color: #f3f3f3;
+	padding: 10px;
+	display: block;
+}
+@media only screen and ( min-width: 1025px )
+{
+    .column-wrap
+    {
+    	width: 1366px;
+    	max-width: calc( 100% + 20px );
+    	margin: 0 -10px;
+    	overflow: hidden;
+    }
+    .column
+    {
+    	padding: 0 10px;
+    	float: left;
+    }
+    .column-wrap .one-third
+    {
+    	width: 33.33%;
+    }
+}
+/* End of column css code */

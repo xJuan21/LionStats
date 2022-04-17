@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-from utils import load_config, pretty_print_json
+from APIutils import load_config, pretty_print_json
 
 import requests
 import json

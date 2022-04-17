@@ -4,7 +4,7 @@ from __future__ import print_function
 import requests
 from flask import Flask, request, redirect
 
-from utils import load_config, save_config
+from APIutils import load_config, save_config
 from teampro import TeamPro
 
 
@@ -68,8 +68,8 @@ def shutdown():
 
 
 def main():
-    print("Navigate to http://localhost:{port}/ for authorization.\n".format(port=CALLBACK_PORT))
-    app.run(host='localhost', port=CALLBACK_PORT)
+    print("Navigate to http://localhost:{port}/ for authorization.\n".format(port=8080))
+    app.run(host='localhost', port=8080)
 
 
 if __name__ == "__main__":

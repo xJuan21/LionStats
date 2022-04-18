@@ -68,8 +68,8 @@ def shutdown():
 
 
 def main():
-    print("Navigate to http://localhost:{port}/ for authorization.\n".format(port=8080))
-    app.run(host='localhost', port=8080)
+    print("Navigate to http://localhost:{port}/ for authorization.\n".format(port=8000))
+    app.run(host='localhost', port=8000)
 
 
 if __name__ == "__main__":

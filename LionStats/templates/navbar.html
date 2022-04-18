@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     {% block css %}
     {% endblock %}
@@ -16,15 +16,16 @@
 <div class="TeamDropdown">
         <div class="TDropdown">
             <nav>
-                <label for="touchTeam"><span>Team</span></label>
+<!--                <script type="text/module" src="{% static 'js/dropdown.js' %}"></script>-->
+                <label for="touchTeam" id = "teamDropdown"><span>Team</span></label>
                 <input type="checkbox" id="touchTeam">
-                <script type="text/module" src="{% static 'js/dropdown.js' %}"></script>
-                <ul class="menu">
+                <select class="menu">
 <!--                <li><a href="#">Team 1</a></li>-->
 <!--                <li><a href="#">Team 2</a></li>-->
 <!--                <li><a href="#">Team 3</a></li>-->
 <!--                <li><a href="#">Team 4</a></li>-->
-                </ul>
+                    <option>Team 1</option>
+                </select>
             </nav>
         </div>
     </div>

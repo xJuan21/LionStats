@@ -50,6 +50,7 @@ pip install flask
 pip install pyyaml
 pip install selenium
 pip install webdriver-manager
+pip install requests
 ```
 
 ### `Run Application`

@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 
 import json
+import os.path
+
 import yaml
 
 
 def load_config(filename):
     """Load configuration from a yaml file"""
-    with open(filename) as f:
+    BASE = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(BASE, "config.yml")) as f:
         return yaml.safe_load(f)
 
 

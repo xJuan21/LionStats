@@ -1,21 +1,20 @@
-from email import utils
+import os
+import webbrowser
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from urllib import request
 from django.shortcuts import render
-import os
-import webbrowser 
-import time 
+from teamproAPI import teampro_test
 
 def delete_product(request):
     if request.method == "GET":
-        url = ' http://127.0.0.1:7000/' 
-        chrome_path = '"C:\Program Files\Google\Chrome\Application\chrome.exe" %s' 
-        webbrowser.get(chrome_path).open(url) 
-        os.system("cd utils && py authorization.py runserver")
-        
+        url = ' http://127.0.0.1:7000/'
+        browser_path = '"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" %s'
+        webbrowser.get(browser_path).open(url)
+        os.system("cd teamproAPI && py authorization.py runserver")
         return render(request, "dashboard.html")
       
 class TeamData(APIView):
@@ -39,4 +38,23 @@ class TeamData(APIView):
             "default": teamData,
         }
         return Response(data)
+
+
+class Dropdown(APIView):
+
+    def get(self, request, format=None):
+        teampro_test.TeamProExample.__init__(self)
+        dropData = teampro_test.TeamProExample.get_teams(self)
+
+        return Response(dropData)
+
+
+class TeamDetails(APIView):
+
+    def get(self, request, format=None):
+        name = request.POST.get('dropdown', False)
+        teampro = teampro_test.TeamProExample()
+        teamID = teampro.get_team_id("Women's Lacrosse")
+        teamDetails = teampro.get_team_details(teamID)
+        return Response(teamDetails)
 

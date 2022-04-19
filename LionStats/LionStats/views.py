@@ -1,13 +1,21 @@
+from email import utils
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from urllib import request
 from django.shortcuts import render
+import os
+import webbrowser 
+import time 
 
 def delete_product(request):
     if request.method == "GET":
-        print("hola delete")
+        url = ' http://127.0.0.1:7000/' 
+        chrome_path = '"C:\Program Files\Google\Chrome\Application\chrome.exe" %s' 
+        webbrowser.get(chrome_path).open(url) 
+        os.system("cd utils && py authorization.py runserver")
+        
         return render(request, "dashboard.html")
       
 class TeamData(APIView):

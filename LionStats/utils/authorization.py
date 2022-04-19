@@ -9,6 +9,7 @@ from teampro import TeamPro
 
 
 CALLBACK_PORT = 8000
+PORT2=7000
 CALLBACK_ENDPOINT = "/dashboard"
 
 CONFIG_FILENAME = "config.yml"

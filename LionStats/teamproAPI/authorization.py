@@ -8,8 +8,8 @@ from APIutils import load_config, save_config
 from teampro import TeamPro
 
 
-CALLBACK_PORT = 8000
-PORT2=7000
+CALLBACK_PORT = 8080
+
 CALLBACK_ENDPOINT = "/dashboard"
 
 CONFIG_FILENAME = "config.yml"
@@ -31,7 +31,7 @@ def authorize():
     return redirect(teampro.authorization_url)
 
 
-@app.route(CALLBACK_ENDPOINT)
+@app.route("/auth")
 def callback():
     """Callback for OAuth2 authorization request
 
@@ -69,8 +69,8 @@ def shutdown():
 
 
 def main():
-    print("Navigate to http://localhost:{port}/ for authorization.\n".format(port=8000))
-    app.run(host='localhost', port=8000)
+    print("Navigate to http://localhost:{port}/ for authorization.\n".format(port=8080))
+    app.run(host='localhost', port=8080)
 
 
 if __name__ == "__main__":

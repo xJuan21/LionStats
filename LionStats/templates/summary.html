@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/summary.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
     {% endblock %}
 
     {% block title %}
@@ -14,17 +16,75 @@
 </head>
 <body>
 {% block content %}
+<div class ="chart1">
+    <canvas id="stat1" width="1000" height="600"></canvas>
+</div>
+
+<div class ="chart2">
+    <canvas id="stat2" width="1000" height="600"></canvas>
+</div>
+
+<script>
+{% block jquery %}
+const ctx = document.getElementById('stat1').getContext('2d');
+const stat1 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Average', 'Athlete #1', 'Athlete #2', 'Athlete #3'],
+        datasets: [{
+            label: 'Distance',
+            data: [70, 60, 50, 100],
+            backgroundColor: [
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.7)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+{% endblock %}
+</script>
+
 <div class="Summarycontent">
 
-    <h1 class="first-heading"> Session/Sport 1 </h1>
+    <div class="Position">
+        <h4> Position </h4>
+        <div class="Dropdown">
+            <nav>
+                <label for="touchPosition"><span>Position</span></label>
+                <input type="checkbox" id="touchPosition">
 
-    <p class="s1-stat-1"> Statistic #1 </p>
+                <ul class="menu">
+                <li><a href="#">Position 1</a></li>
+                <li><a href="#">Position 2</a></li>
+                <li><a href="#">Position 3</a></li>
+                <li><a href="#">Position 4</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
-    <h2 class="second-heading"> Session/Sport 2</h2>
-
-    <p class="s2-stat-1"> Statistic #1 </p>
+    <h1 class="session"> Session 04/04/2022 </h1>
 
 </div>
+
 {% endblock %}
 
 {% block topbar %}
@@ -32,3 +92,5 @@
 {% endblock %}
 </body>
 </html>
+
+

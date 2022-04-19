@@ -1,35 +1,51 @@
 //var PythonShell = require('python-shell');
 
+//function dropdown()
+//{
+//const {PythonShell} = require('python-shell');
+//var data;
+//PythonShell.run('teamdropdown', null, function (err, results)
+//{
+//    data = results;
+//    console.log(data);
+//});
+
+
 function dropdown()
 {
-import {PythonShell} from 'python-shell'
-var data;
-PythonShell.run('teamdropdown', null, function (err, results)
-{
-    data = results;
-    console.log(data);
+var teamData;
+$.ajax({
+    async: false,
+    url: 'http://localhost:8000/api/dropdown/',
+    success: function(data)
+    {
+        teamData = data;
+    }
 });
-
-let dropdown = document.getElementById('select')
+let dropdown = document.getElementById('dropdown')
 let option;
-for (let i = 0; i < data.length; i++)
+while(dropdown.firstChild)
 {
-    option = document.createElement('option');
-    option.text = data[i];
-    dropdown.add(option);
+    dropdown.removeChild(dropdown.firstChild);
+}
+
+for (var i = 0; i < teamData.data.length; i++)
+{
+    option = document.createElement("option");
+    option.text = teamData.data[i].name;
+    dropdown.appendChild(option);
 }
 }
 
-let bttn = document.getElementById("teamDropdown");
-bttn.addEventListener("click", dropdown, false);
+function val()
+{
+    var selected = document.getElementById('dropdown').value;
 
-//document.getElementById("teamDropdown").onclick = dropdown;
-//let dropdown = $('#menu');
-//
-//dropdown.empty();
-//
-//$.each(data, function(key, entry)
-//{
-//    dropdown.append($('<li><a></a></li>').attr('value', entry.team).text(entry.team));
-//})
+}
+
+window.onload = function()
+{
+    let btn = document.getElementById("dropdown");
+    btn.onclick = dropdown;
+}
 

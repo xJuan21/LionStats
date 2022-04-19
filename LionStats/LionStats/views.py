@@ -1,4 +1,3 @@
-import js2py
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
@@ -49,7 +48,7 @@ class TeamDetails(APIView):
     def get(self, request, format=None):
         name = request.POST.get('dropdown', False)
         teampro = teampro_test.TeamProExample()
-        teamID = teampro.get_team_id("Women's Lacrosse")
+        teamID = teampro.get_team_id(name)
         teamDetails = teampro.get_team_details(teamID)
         return Response(teamDetails)
 

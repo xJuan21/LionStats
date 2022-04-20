@@ -5,8 +5,9 @@
 <head>
     <meta charset="UTF-8">
     {% block css %}
-    <link rel="stylesheet" type="text/css" href="LionStats/comparison.css">
-    <link href="{% static 'styles/comparison.css' %}" rel="stylesheet" />
+<!--    <link rel="stylesheet" type="text/css" href="LionStats/comparison.css">-->
+<!--    <link href="{% static 'styles/comparison.css' %}" rel="stylesheet" />-->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/comparison.css' %}">
     {% endblock %}
 
     {% block title %}
@@ -23,14 +24,18 @@
 <div class="content">
     <div class="column-wrap">
 	    <div class="column one-third">
-            <div class="col-group">Athlete 1</div>
-            <h1> Test </h1>
+            <div class="col-group">
+                 <h2> Athlete 1 </h2>
+            </div>
 	    </div>
     	<div class="column one-third">
     		<div class="col-group">Sample Text</div>
     	</div>
     	<div class="column one-third">
-    		<div class="col-group">Athlete 2</div>
+    		<div class="col-group">
+                <h2> Athlete 2 </h2>
+                <p> This is test code </p>
+            </div>
     	</div>
 </div>
 

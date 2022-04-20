@@ -13,17 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
+from django.urls import path
 from django.shortcuts import render
-from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
 from LionStats import views
-
 from .views import TeamData
-
+from .views import Dropdown
+from .views import TeamDetails
 
 def login(request):
     return render(request, 'login.html')
@@ -51,11 +49,10 @@ urlpatterns = [
     path('individual/', individual),
     path('comparison/', comparison),
     path('team/', team),
-
-    path('delete_product', views.delete_product, name='delete_product'),
-
+    path('api/dropdown/', Dropdown.as_view()),
     path('api/team/data/', TeamData.as_view()),
-
+    path('api/dropdown/team', TeamDetails.as_view()),
+    path('delete_product', views.delete_product, name='delete_product'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

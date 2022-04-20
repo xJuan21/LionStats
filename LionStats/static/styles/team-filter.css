@@ -1,4 +1,4 @@
-{% load static %}
+
 
 .chart {
     height: 100%;
@@ -29,13 +29,13 @@
         overflow: scroll;
     }
 
-.SelectSport {
+.Athlete {
     position: absolute;
-    width: 275px;
+    width: 1324px;
     height: 36px;
-    left: 307px;
-    top: 210px;
-    z-index: 5;
+    left: 165px;
+    top: 565px;
+    z-index: 1;
     font-family: 'Zen Dots';
     font-style: normal;
     font-weight: 400;
@@ -49,9 +49,9 @@
 }
 .Position {
     position: absolute;
-    width: 469.59px;
+    width: 470px;
     height: 36px;
-    left: 649px;
+    left: 606px;
     top: 210px;
     z-index: 5;
     font-family: 'Zen Dots';
@@ -66,12 +66,12 @@
     color: #FFFFFF;
 }
 
-.Age {
+.Session {
     position: absolute;
-    width: 184px;
+    width: 400px;
     height: 36px;
-    left: 1186px;
-    top: 210px;
+    left: 1089px;
+    top: 211px;
     z-index: 5;
     font-family: 'Zen Dots';
     font-style: normal;
@@ -88,10 +88,10 @@
 
 .AcademicYear {
     position: absolute;
-    width: 493px;
+    width: 425px;
     height: 36px;
-    left: 200px;
-    top: 589px;
+    left: 165px;
+    top: 210px;
     z-index: 1;
     font-family: 'Zen Dots';
     font-style: normal;
@@ -127,7 +127,7 @@
 
 .menu{
     clear:both;
-    width:auto;
+    width:1000px;
     height:0px;
     overflow: hidden;
     text-align: center;
@@ -180,8 +180,8 @@ li a {
 #touchPosition {position: absolute; opacity: 0; height: 0px; }
 #touchPosition:checked + .menu {height: auto; }
 
-#touchAge {position: absolute; opacity: 0; height: 0px; }
-#touchAge:checked + .menu {height: auto; }
+#touchSession {position: absolute; opacity: 0; height: 0px; }
+#touchSession:checked + .menu {height: auto; }
 
 #touchYear {position: absolute; opacity: 0; height: 0px; }
 #touchYear:checked + .menu {height: auto; }

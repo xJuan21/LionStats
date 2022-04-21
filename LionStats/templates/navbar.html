@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     {% block css %}
     {% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
-<!--    <link rel="stylesheet" type="text/css" href="{% static 'team-filter.css' %}"/>-->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/navbar.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/dropdown.js' %}"></script>
 <!--    <link href="{% static 'styles/navbar.css' %}" rel="stylesheet" />-->
+<!--    <link href="navbar.css" rel="stylesheet" type="text/css" >-->
     {% block title %}
     {% endblock %}
 </head>
+
 <body>
 <div class="TeamDropdown">
         <div class="TDropdown">
             <nav>
-                <label for="touchTeam"><span>Team</span></label>
-                <input type="checkbox" id="touchTeam">
+<!--                <label for="touchTeam" id = "td"><span>Team</span></label>-->
+<!--                <input type="checkbox" id="touchTeam">-->
+                <h3>Teams</h3>
+                <select name = "team" class="menu" id = "dropdown" onchange="val()">
 
-                <ul class="menu">
-                <li><a href="#">Team 1</a></li>
-                <li><a href="#">Team 2</a></li>
-                <li><a href="#">Team 3</a></li>
-                <li><a href="#">Team 4</a></li>
-                </ul>
+<!--                <li><a href="#">Team 1</a></li>-->
+<!--                <li><a href="#">Team 2</a></li>-->
+<!--                <li><a href="#">Team 3</a></li>-->
+<!--                <li><a href="#">Team 4</a></li>-->
+<!--                    <option>Team 1</option>-->
+                </select>
             </nav>
         </div>
     </div>
@@ -30,6 +36,10 @@
 <div class="GreyArea">
     {% block content %}
     {% endblock %}
+    <script>
+    {% block jquery %}
+    {% endblock %}
+</script>
     <div class="LindenwoodLogo">
         {% block notitle %}
         <div class="TopYellowBar">
@@ -50,6 +60,21 @@
             </div>
 <!--                <span class="LionStats">LionsStats</span>-->
                 <div class="LindenwoodLogo2">
+                    <style>
+                          .LindenwoodLogo2 {
+                          width: 164px;
+                          height: 150px;
+                          background: url({% static 'images/Logo.png' %});
+                          background-repeat: no-repeat;
+                          background-position: center center;
+                          background-size: cover;
+                          opacity: 1;
+                          position: absolute;
+                          top: 20px;
+                          left: 28px;
+                          overflow: hidden;
+                        }
+                    </style>
 
                 </div>
             </div>
@@ -115,685 +140,604 @@
     <a href="http://localhost:8000"><span class="Logout">Logout</span></a>
 </body>
 </html>
+<!--<style>-->
+<!--* {-->
+<!--  box-sizing: border-box;-->
+<!--}-->
+<!--body {-->
+<!--  font-size: 14px;-->
+<!--}-->
+<!--.GreyArea {-->
+<!--  width: 100%;-->
+<!--  height: 100%;/*1831px;*/-->
+<!--  background: rgba(68,68,68,1);-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.LindenwoodLogo {-->
+<!--  width: 100%;-->
+<!--  height: 177px;-->
+<!--  background: url("https://drive.google.com/file/d/1vXg98ZWC641V2IHz8SpkQp6dBtgZEPvO/view?usp=sharing");-->
+<!--  background-repeat: no-repeat;-->
+<!--  background-position: center center;-->
+<!--  background-size: cover;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 242px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.TopYellowBar {-->
+<!--  width: 100%;-->
+<!--  height: 162px;-->
+<!--  background: rgba(252,181,37,1);-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 15px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.TopBlackBar {-->
+<!--  width: 100%;-->
+<!--  height: 162px;-->
+<!--  background: rgba(0,0,0,1);-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.TopBar {-->
+<!--  width: 100%;-->
+<!--  color: rgba(255,255,255,1);-->
+<!--  position: absolute;-->
+<!--  top: 21px;-->
+<!--  left: 0px;-->
+<!--  font-family: Zen Dots;-->
+<!--  font-weight: Regular;-->
+<!--  font-size: 75px;-->
+<!--  opacity: 1;-->
+<!--  text-align: center;-->
+<!--}-->
+<!--.name {-->
+<!--  color: #fff;-->
+<!--}-->
 
-<style>
-* {
-  box-sizing: border-box;
-}
-body {
-  font-size: 14px;
-}
-.GreyArea {
-  width: 100%;
-  height: 100%;/*1831px;*/
-  background: rgba(68,68,68,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.LindenwoodLogo {
-  width: 100%;
-  height: 177px;
-  background: url("https://drive.google.com/file/d/1vXg98ZWC641V2IHz8SpkQp6dBtgZEPvO/view?usp=sharing");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 242px;
-  overflow: hidden;
-}
-.TopYellowBar {
-  width: 100%;
-  height: 162px;
-  background: rgba(252,181,37,1);
-  opacity: 1;
-  position: absolute;
-  top: 15px;
-  left: 0px;
-  overflow: hidden;
-}
-.TopBlackBar {
-  width: 100%;
-  height: 162px;
-  background: rgba(0,0,0,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.TopBar {
-  width: 100%;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 21px;
-  left: 0px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 75px;
-  opacity: 1;
-  text-align: center;
-}
-.name {
-  color: #fff;
-}
+<!--.NavBarBackground {-->
+<!--  width: 242px;-->
+<!--  height: 100%;-->
+<!--  background: rgba(252,181,37,1);-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.NavBarBackground2 {-->
+<!--  width: 220px;-->
+<!--  height: 243px;-->
+<!--  background: url("../images/v64_527.png");-->
+<!--  background-repeat: no-repeat;-->
+<!--  background-position: center center;-->
+<!--  background-size: cover;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 15px;-->
+<!--  left: 11px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.name {-->
+<!--  color: #fff;-->
+<!--}-->
+<!--.LionStats {-->
+<!--  width: 220px;-->
+<!--  color: rgba(0,0,0,1);-->
+<!--  position: absolute;-->
+<!--  top: 109px;-->
+<!--  left: 0px;-->
+<!--  font-family: Zen Dots;-->
+<!--  font-weight: Regular;-->
+<!--  font-size: 32px;-->
+<!--  opacity: 1;-->
+<!--  text-align: center;-->
+<!--}-->
+<!--.LindenwoodLogo2 {-->
+<!--  width: 164px;-->
+<!--  height: 150px;-->
+<!--  background: url("https://drive.google.com/uc?export=view&id=1vXg98ZWC641V2IHz8SpkQp6dBtgZEPvO");-->
+<!--  background-repeat: no-repeat;-->
+<!--  background-position: center center;-->
+<!--  background-size: cover;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 20px;-->
+<!--  left: 28px;-->
+<!--  overflow: hidden;-->
+<!--  z-index: 4;-->
+<!--}-->
+<!--.LogoArea {-->
+<!--  width: 242px;-->
+<!--  height: 392px;-->
+<!--  background: url("../images/v64_532.png");-->
+<!--  background-repeat: no-repeat;-->
+<!--  background-position: center center;-->
+<!--  background-size: cover;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 375px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.TeamButton {-->
+<!--  width: 241px;-->
+<!--  height: 78px;-->
+<!--  background: url("../images/v64_561.png");-->
+<!--  background-repeat: no-repeat;-->
+<!--  background-position: center center;-->
+<!--  background-size: cover;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 314px;-->
+<!--  left: 1px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.TeamRectangle{-->
+<!--  width: 241px;-->
+<!--  height: 78px;-->
+<!--  background: rgba(252,181,37,1);-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.Team{-->
+<!--  width: 105px;-->
+<!--  color: rgba(0,0,0,1);-->
+<!--  position: absolute;-->
+<!--  top: 23px;-->
+<!--  left: 68px;-->
+<!--  font-family: Zen Dots;-->
+<!--  font-weight: Regular;-->
+<!--  font-size: 30px;-->
+<!--  opacity: 1;-->
+<!--  text-align: center;-->
+<!--}-->
+<!--.IndividualButton{-->
+<!--  width: 242px;-->
+<!--  height: 84px;-->
+<!--  background: url("../images/v64_533.png");-->
+<!--  background-repeat: no-repeat;-->
+<!--  background-position: center center;-->
+<!--  background-size: cover;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 155px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.IndividualRectangle {-->
+<!--  width: 242px;-->
+<!--  height: 84px;-->
+<!--  background: rgba(252,181,37,1);-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.Individual {-->
+<!--  width: 165px;-->
+<!--  color: rgba(0,0,0,1);-->
+<!--  position: absolute;-->
+<!--  top: 27px;-->
+<!--  left: 39px;-->
+<!--  font-family: Zen Dots;-->
+<!--  font-weight: Regular;-->
+<!--  font-size: 30px;-->
+<!--  opacity: 1;-->
+<!--  text-align: center;-->
+<!--}-->
+<!--.SummaryButton {-->
+<!--  width: 242px;-->
+<!--  height: 78px;-->
+<!--  background: url("../images/v64_536.png");-->
+<!--  background-repeat: no-repeat;-->
+<!--  background-position: center center;-->
+<!--  background-size: cover;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 77px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.SummaryRectangle {-->
+<!--  width: 242px;-->
+<!--  height: 78px;-->
+<!--  background: rgba(252,181,37,1);-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.Summary {-->
+<!--  width: 170px;-->
+<!--  color: rgba(0,0,0,1);-->
+<!--  position: absolute;-->
+<!--  top: 22px;-->
+<!--  left: 35px;-->
+<!--  font-family: Zen Dots;-->
+<!--  font-weight: Regular;-->
+<!--  font-size: 30px;-->
+<!--  opacity: 1;-->
+<!--  text-align: center;-->
+<!--}-->
+<!--.HomeButton {-->
+<!--  width: 242px;-->
+<!--  height: 78px;-->
+<!--  background: url("../images/v64_539.png");-->
+<!--  background-repeat: no-repeat;-->
+<!--  background-position: center center;-->
+<!--  background-size: cover;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
 
-.NavBarBackground {
-  width: 242px;
-  height: 100%;
-  background: rgba(252,181,37,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.NavBarBackground2 {
-  width: 220px;
-  height: 243px;
-  background: url("../images/v64_527.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 15px;
-  left: 11px;
-  overflow: hidden;
-}
-.name {
-  color: #fff;
-}
-.LionStats {
-  width: 220px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 109px;
-  left: 0px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 32px;
-  opacity: 1;
-  text-align: center;
-}
-.LindenwoodLogo2 {
-  width: 164px;
-  height: 150px;
-  background: url("https://drive.google.com/uc?export=view&id=1vXg98ZWC641V2IHz8SpkQp6dBtgZEPvO");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 20px;
-  left: 28px;
-  overflow: hidden;
-  z-index: 4;
-}
-.LogoArea {
-  width: 242px;
-  height: 392px;
-  background: url("../images/v64_532.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 375px;
-  left: 0px;
-  overflow: hidden;
-}
-.TeamButton {
-  width: 241px;
-  height: 78px;
-  background: url("../images/v64_561.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 314px;
-  left: 1px;
-  overflow: hidden;
-}
-.TeamRectangle{
-  width: 241px;
-  height: 78px;
-  background: rgba(252,181,37,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.Team{
-  width: 105px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 23px;
-  left: 68px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 30px;
-  opacity: 1;
-  text-align: center;
-}
-.IndividualButton{
-  width: 242px;
-  height: 84px;
-  background: url("../images/v64_533.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 155px;
-  left: 0px;
-  overflow: hidden;
-}
-.IndividualRectangle {
-  width: 242px;
-  height: 84px;
-  background: rgba(252,181,37,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.Individual {
-  width: 165px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 27px;
-  left: 39px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 30px;
-  opacity: 1;
-  text-align: center;
-}
-.SummaryButton {
-  width: 242px;
-  height: 78px;
-  background: url("../images/v64_536.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 77px;
-  left: 0px;
-  overflow: hidden;
-}
-.SummaryRectangle {
-  width: 242px;
-  height: 78px;
-  background: rgba(252,181,37,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.Summary {
-  width: 170px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 22px;
-  left: 35px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 30px;
-  opacity: 1;
-  text-align: center;
-}
-.HomeButton {
-  width: 242px;
-  height: 78px;
-  background: url("../images/v64_539.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
+<!--.HomeRectangle {-->
+<!--  width: 242px;-->
+<!--  height: 78px;-->
+<!--  background: rgba(252,181,37,1);-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
 
-.HomeRectangle {
-  width: 242px;
-  height: 78px;
-  background: rgba(252,181,37,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
+<!--.Home {-->
+<!--  width: 106px;-->
+<!--  color: rgba(0,0,0,1);-->
+<!--  position: absolute;-->
+<!--  top: 22px;-->
+<!--  left: 68px;-->
+<!--  font-family: Zen Dots;-->
+<!--  font-weight: Regular;-->
+<!--  font-size: 30px;-->
+<!--  opacity: 1;-->
+<!--  text-align: center;-->
+<!--}-->
+<!--.ComparisonButton {-->
+<!--  width: 242px;-->
+<!--  height: 75px;-->
+<!--  background: url("../images/v64_542.png");-->
+<!--  background-repeat: no-repeat;-->
+<!--  background-position: center center;-->
+<!--  background-size: cover;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 239px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.ComparisonRectangle {-->
+<!--  width: 242px;-->
+<!--  height: 75px;-->
+<!--  background: rgba(252,181,37,1);-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
+<!--.Comparison {-->
+<!--  width: 220px;-->
+<!--  color: rgba(0,0,0,1);-->
+<!--  position: absolute;-->
+<!--  top: 16px;-->
+<!--  left: 11px;-->
+<!--  font-family: Zen Dots;-->
+<!--  font-weight: Regular;-->
+<!--  font-size: 30px;-->
+<!--  opacity: 1;-->
+<!--  text-align: center;-->
+<!--}-->
+<!--.name {-->
+<!--  color: #fff;-->
+<!--}-->
+<!--.name {-->
+<!--  color: #fff;-->
+<!--}-->
+<!--.name {-->
+<!--  color: #fff;-->
+<!--}-->
+<!--.name {-->
+<!--  color: #fff;-->
+<!--}-->
+<!--.name {-->
+<!--  color: #fff;-->
+<!--}-->
+<!--.name {-->
+<!--  color: #fff;-->
+<!--}-->
+<!--.Logout {-->
+<!--  width: 161px;-->
+<!--  color: rgba(208,0,0,1);-->
+<!--  position: absolute;-->
+<!--  top: 805px;-->
+<!--  left: 39px;-->
+<!--  font-family: Zen Dots;-->
+<!--  font-weight: Regular;-->
+<!--  font-size: 32px;-->
+<!--  opacity: 1;-->
+<!--  text-align: center;-->
+<!--}-->
 
-.Home {
-  width: 106px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 22px;
-  left: 68px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 30px;
-  opacity: 1;
-  text-align: center;
-}
-.ComparisonButton {
-  width: 242px;
-  height: 75px;
-  background: url("../images/v64_542.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 239px;
-  left: 0px;
-  overflow: hidden;
-}
-.ComparisonRectangle {
-  width: 242px;
-  height: 75px;
-  background: rgba(252,181,37,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.Comparison {
-  width: 220px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 16px;
-  left: 11px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 30px;
-  opacity: 1;
-  text-align: center;
-}
-.name {
-  color: #fff;
-}
-.name {
-  color: #fff;
-}
-.name {
-  color: #fff;
-}
-.name {
-  color: #fff;
-}
-.name {
-  color: #fff;
-}
-.name {
-  color: #fff;
-}
-.Logout {
-  width: 161px;
-  color: rgba(208,0,0,1);
-  position: absolute;
-  top: 805px;
-  left: 39px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 32px;
-  opacity: 1;
-  text-align: center;
-}
+<!--.current {-->
+<!--  width: 242px;-->
+<!--  height: 78px;-->
+<!--  background: #DB9C1D;-->
+<!--  opacity: 1;-->
+<!--  position: absolute;-->
+<!--  top: 0px;-->
+<!--  left: 0px;-->
+<!--  overflow: hidden;-->
+<!--}-->
 
-.current {
-  width: 242px;
-  height: 78px;
-  background: #DB9C1D;
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
+<!--.menu{-->
+<!--    clear:both;-->
+<!--    width:100%;-->
+<!--    height:0px;-->
+<!--    overflow: hidden;-->
+<!--    text-align: center;-->
+<!--    transition: height .4s ease;-->
+<!--    z-index: 5;-->
+<!--}-->
 
-.menu{
-    clear:both;
-    width:100%;
-    height:0px;
-    overflow: hidden;
-    text-align: center;
-    transition: height .4s ease;
-    z-index: 5;
-}
+<!--.TDropdown span{-->
+<!--    padding : 30px;-->
+<!--    background : white;-->
+<!--    color : black;-->
+<!--    font-size : 1.8em;-->
+<!--    font-family: 'Zen Dots';-->
+<!--    cursor : pointer;-->
+<!--    display: block;-->
+<!--    z-index: 100;-->
+<!--}-->
 
-.TDropdown span{
-    padding : 30px;
-    background : white;
-    color : black;
-    font-size : 1.8em;
-    font-family: 'Zen Dots';
-    cursor : pointer;
-    display: block;
-    z-index: 100;
-}
+<!--.TDropdown span::after {-->
+<!--  position: absolute;-->
+<!--  float: right;-->
+<!--  right: 10%;-->
+<!--  content: "+";-->
+<!--  z-index: 5;-->
+<!--}-->
 
-.TDropdown span::after {
-  position: absolute;
-  float: right;
-  right: 10%;
-  content: "+";
-  z-index: 5;
-}
+<!--li a {-->
+<!--    font-family: 'Zen Dots';-->
+<!--    font-style: normal;-->
+<!--    font-weight: 400;-->
+<!--    font-size: 20px;-->
+<!--    line-height: 24px;-->
+<!--    z-index: 100;-->
+<!--    /* identical to box height */-->
+<!--    text-align: center;-->
 
-li a {
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    z-index: 100;
-    /* identical to box height */
-    text-align: center;
+<!--    color: black;-->
+<!--}-->
+<!--.TDropdown nav {-->
+<!--  z-index: 100;-->
+<!--  width : auto;-->
+<!--  background: #d9d9d9;-->
+<!--  margin : 40px auto;-->
+<!--}-->
 
-    color: black;
-}
-.TDropdown nav {
-  z-index: 100;
-  width : auto;
-  background: #d9d9d9;
-  margin : 40px auto;
-}
+<!--.menu li {padding : 30px;}-->
 
-.menu li {padding : 30px;}
+<!--#touchTeam {position: absolute; opacity: 0; height: 0px; }-->
+<!--#touchTeam:checked + .menu {height: auto; }-->
 
-#touchTeam {position: absolute; opacity: 0; height: 0px; }
-#touchTeam:checked + .menu {height: auto; }
+<!--.TeamDropdown{-->
+<!--    position: absolute;-->
+<!--    width: 200px;-->
+<!--    height: 0px;-->
+<!--    left: 22px;-->
+<!--    top: 150px;-->
+<!--    z-index: 5;-->
+<!--    background: #FFFFFF;-->
+<!--}-->
 
-.TeamDropdown{
-    position: absolute;
-    width: 200px;
-    height: 0px;
-    left: 22px;
-    top: 150px;
-    z-index: 5;
-    background: #FFFFFF;
-}
+<!--.content{-->
+<!--    position: absolute;-->
+<!--    left: 23%;-->
+<!--    top: 5%;-->
+<!--    transform: translate(-50%, -50%);-->
+<!--}-->
 
-.content{
-    position: absolute;
-    left: 23%;
-    top: 5%;
-    transform: translate(-50%, -50%);
-}
+<!--.SelectSport {-->
+<!--    position: absolute;-->
+<!--    width: 275px;-->
+<!--    height: 36px;-->
+<!--    left: 307px;-->
+<!--    top: 210px;-->
+<!--    z-index: 5;-->
+<!--    font-family: 'Zen Dots';-->
+<!--    font-style: normal;-->
+<!--    font-weight: 400;-->
+<!--    font-size: 30px;-->
+<!--    line-height: 36px;-->
 
-.SelectSport {
-    position: absolute;
-    width: 275px;
-    height: 36px;
-    left: 307px;
-    top: 210px;
-    z-index: 5;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
+<!--    /* identical to box height */-->
+<!--    text-align: center;-->
 
-    /* identical to box height */
-    text-align: center;
+<!--    color: #FFFFFF;-->
+<!--}-->
 
-    color: #FFFFFF;
-}
+<!--.Position {-->
+<!--    position: absolute;-->
+<!--    width: 469.59px;-->
+<!--    height: 36px;-->
+<!--    left: 649px;-->
+<!--    top: 210px;-->
+<!--    z-index: 5;-->
+<!--    font-family: 'Zen Dots';-->
+<!--    font-style: normal;-->
+<!--    font-weight: 400;-->
+<!--    font-size: 30px;-->
+<!--    line-height: 36px;-->
 
-.Position {
-    position: absolute;
-    width: 469.59px;
-    height: 36px;
-    left: 649px;
-    top: 210px;
-    z-index: 5;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
+<!--    /* identical to box height */-->
+<!--    text-align: center;-->
 
-    /* identical to box height */
-    text-align: center;
+<!--    color: #FFFFFF;-->
+<!--}-->
 
-    color: #FFFFFF;
-}
+<!--.Age {-->
+<!--    position: absolute;-->
+<!--    width: 184px;-->
+<!--    height: 36px;-->
+<!--    left: 1186px;-->
+<!--    top: 210px;-->
+<!--    z-index: 5;-->
+<!--    font-family: 'Zen Dots';-->
+<!--    font-style: normal;-->
+<!--    font-weight: 400;-->
+<!--    font-size: 30px;-->
+<!--    line-height: 36px;-->
 
-.Age {
-    position: absolute;
-    width: 184px;
-    height: 36px;
-    left: 1186px;
-    top: 210px;
-    z-index: 5;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
+<!--    /* identical to box height */-->
+<!--    text-align: center;-->
 
-    /* identical to box height */
-    text-align: center;
+<!--    color: #FFFFFF;-->
+<!--}-->
 
-    color: #FFFFFF;
-}
+<!--.AcademicYear {-->
+<!--    position: absolute;-->
+<!--    width: 493px;-->
+<!--    height: 36px;-->
+<!--    left: 200px;-->
+<!--    top: 589px;-->
+<!--    z-index: 1;-->
+<!--    font-family: 'Zen Dots';-->
+<!--    font-style: normal;-->
+<!--    font-weight: 400;-->
+<!--    font-size: 30px;-->
+<!--    line-height: 36px;-->
 
-.AcademicYear {
-    position: absolute;
-    width: 493px;
-    height: 36px;
-    left: 200px;
-    top: 589px;
-    z-index: 1;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
+<!--    /* identical to box height */-->
+<!--    text-align: center;-->
 
-    /* identical to box height */
-    text-align: center;
+<!--    color: #FFFFFF;-->
+<!--}-->
 
-    color: #FFFFFF;
-}
+<!--.StatisticType {-->
+<!--    position: absolute;-->
+<!--    width: 653px;-->
+<!--    height: 35.21px;-->
+<!--    left: 756px;-->
+<!--    top: 589px;-->
+<!--    z-index: 1;-->
+<!--    font-family: 'Zen Dots';-->
+<!--    font-style: normal;-->
+<!--    font-weight: 400;-->
+<!--    font-size: 30px;-->
+<!--    line-height: 36px;-->
 
-.StatisticType {
-    position: absolute;
-    width: 653px;
-    height: 35.21px;
-    left: 756px;
-    top: 589px;
-    z-index: 1;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
+<!--    /* identical to box height */-->
+<!--    text-align: center;-->
 
-    /* identical to box height */
-    text-align: center;
+<!--    color: #FFFFFF;-->
+<!--}-->
 
-    color: #FFFFFF;
-}
+<!--.menu{-->
+<!--    clear:both;-->
+<!--    width:auto;-->
+<!--    height:0px;-->
+<!--    overflow: hidden;-->
+<!--    text-align: center;-->
+<!--    transition: height .4s ease;-->
+<!--    z-index: 5;-->
+<!--}-->
 
-.menu{
-    clear:both;
-    width:auto;
-    height:0px;
-    overflow: hidden;
-    text-align: center;
-    transition: height .4s ease;
-    z-index: 5;
-}
+<!--.Dropdown span{-->
+<!--    padding : 30px;-->
+<!--    background : white;-->
+<!--    color : black;-->
+<!--    font-size : 1.2em;-->
+<!--    font-family: 'Zen Dots';-->
+<!--    cursor : pointer;-->
+<!--    display: block;-->
+<!--    z-index: 100;-->
+<!--}-->
 
-.Dropdown span{
-    padding : 30px;
-    background : white;
-    color : black;
-    font-size : 1.2em;
-    font-family: 'Zen Dots';
-    cursor : pointer;
-    display: block;
-    z-index: 100;
-}
+<!--.Dropdown span::after {-->
+<!--  float: right;-->
+<!--  right: 10%;-->
+<!--  content: "+";-->
+<!--  z-index: 5;-->
+<!--}-->
 
-.Dropdown span::after {
-  float: right;
-  right: 10%;
-  content: "+";
-  z-index: 5;
-}
+<!--li a {-->
+<!--    font-family: 'Zen Dots';-->
+<!--    font-style: normal;-->
+<!--    font-weight: 400;-->
+<!--    font-size: 20px;-->
+<!--    line-height: 24px;-->
+<!--    z-index: 100;-->
+<!--    /* identical to box height */-->
+<!--    text-align: center;-->
 
-li a {
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    z-index: 100;
-    /* identical to box height */
-    text-align: center;
+<!--    color: black;-->
+<!--}-->
+<!--.Dropdown nav {-->
+<!--  z-index: 100;-->
+<!--  width : auto;-->
+<!--  background: #d9d9d9;-->
+<!--  margin : 40px auto;-->
+<!--}-->
 
-    color: black;
-}
-.Dropdown nav {
-  z-index: 100;
-  width : auto;
-  background: #d9d9d9;
-  margin : 40px auto;
-}
+<!--.menu li {padding : 30px;}-->
 
-.menu li {padding : 30px;}
+<!--#touch {position: absolute; opacity: 0; height: 0px; }-->
+<!--#touch:checked + .menu {height: auto; }-->
 
-#touch {position: absolute; opacity: 0; height: 0px; }
-#touch:checked + .menu {height: auto; }
+<!--#touchPosition {position: absolute; opacity: 0; height: 0px; }-->
+<!--#touchPosition:checked + .menu {height: auto; }-->
 
-#touchPosition {position: absolute; opacity: 0; height: 0px; }
-#touchPosition:checked + .menu {height: auto; }
+<!--#touchAge {position: absolute; opacity: 0; height: 0px; }-->
+<!--#touchAge:checked + .menu {height: auto; }-->
 
-#touchAge {position: absolute; opacity: 0; height: 0px; }
-#touchAge:checked + .menu {height: auto; }
+<!--#touchYear {position: absolute; opacity: 0; height: 0px; }-->
+<!--#touchYear:checked + .menu {height: auto; }-->
 
-#touchYear {position: absolute; opacity: 0; height: 0px; }
-#touchYear:checked + .menu {height: auto; }
+<!--#touchType {position: absolute; opacity: 0; height: 0px; }-->
+<!--#touchType:checked + .menu {height: auto; }-->
 
-#touchType {position: absolute; opacity: 0; height: 0px; }
-#touchType:checked + .menu {height: auto; }
+<!--    .first-heading {-->
+<!--        position: absolute;-->
+<!--        width: 1198px;-->
+<!--        height: 118px;-->
+<!--        left: 242px;-->
+<!--        top: 209px;-->
 
-/* Individual *///////////////////////////////////////////////////////////
-.indvPeriod
-{
-position: absolute;
-width: 234.06px;
-height: 48.43px;
-left: 835.13px;
-top: 510.57px;
+<!--        font-family: 'Zen Dots';-->
+<!--        font-style: normal;-->
+<!--        font-weight: 400;-->
+<!--        font-size: 75px;-->
+<!--        line-height: 90px;-->
+<!--        display: flex;-->
+<!--        align-items: center;-->
+<!--        text-align: center;-->
 
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
+<!--        color: #FFFFFF;-->
 
-color: #FFFFFF;
-}
-
-.indvPosition
-{
-position: absolute;
-width: 227.3px;
-height: 48.43px;
-left: 834px;
-top: 446.01px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-}
-
-.indvJersey
-{
-position: absolute;
-width: 247.56px;
-height: 48.43px;
-left: 835.13px;
-top: 381.44px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-}
-
-.indvSport
-{
-position: absolute;
-width: 169.92px;
-height: 48.43px;
-left: 835.13px;
-top: 315.72px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-
-}
-
-.indvName
-{
-position: absolute;
-width: 162.04px;
-height: 48.43px;
-left: 835.13px;
-top: 250px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-}
-
-.indvDropdown
-{
-position: absolute;
-width: 200px;
-height: 178px;
-left: 1069px;
-top: calc(50% - 178px/2 - 315.5px);
-
-background: #FFFFFF;
-border: 1px solid #707070;
-box-sizing: border-box;
-border-radius: 4px;
-}
-
-</style>
+<!--        border: 1px solid #000000;-->
+<!--        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);-->
+<!--    }-->
+<!--</style>-->

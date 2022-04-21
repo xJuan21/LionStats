@@ -4,11 +4,11 @@ from __future__ import print_function
 import requests
 from flask import Flask, request, redirect
 
-from utils import load_config, save_config
+from APIutils import load_config, save_config
 from teampro import TeamPro
 
 
-CALLBACK_PORT = 8000
+CALLBACK_PORT = 7000
 CALLBACK_ENDPOINT = "/dashboard"
 
 CONFIG_FILENAME = "config.yml"
@@ -58,7 +58,7 @@ def callback():
     save_config(config, CONFIG_FILENAME)
 
     shutdown()
-    return "Client authorized! You can now close this page."
+    return redirect("http://localhost:8000/dashboard", code=302)
 
 
 def shutdown():

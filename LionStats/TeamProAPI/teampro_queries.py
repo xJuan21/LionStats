@@ -33,7 +33,10 @@ class TeamProExample(object):
 
         # queries tests
         #print(self.get_teams_list())
-        pretty_print_json(self.get_metrics_by_date(team_id, "03/29/2021", "04/03/2022"))
+        #players = self.get_players(team_id)
+        #print(self.get_player_names(players))
+        metrics_by_date = self.get_team_metrics_by_date(team_id, "03/31/2022", "04/01/2022")
+        pretty_print_json(self.summarize_by_month(team_id, metrics_by_date))
 
     # functions that return .json data
     # vist https://www.polar.com/teampro-api/#teampro-api for example responses
@@ -209,11 +212,31 @@ class TeamProExample(object):
 
         return teams_list
 
+    # returns a json string of players on a specific team given a team_id
+    def get_players(self, team_id):
+        team_details = self.get_team_details(team_id)
+        players = {"players": []}
+
+        for keyval in team_details['data']['players']:
+            players["players"].append(keyval)
+
+        return players
+
+    # returns a list of player names given a json string of players (call get_players method first)
+    def get_player_names(self, players):
+        players_list = []
+
+        for keyval in players['players']:
+            players_list.append(keyval['first_name'] + " " + keyval['last_name'])
+
+        return players_list
+
+
     # WORK IN PROGRESS!!!
     # within a specified time frame, return a json string of the calculated metrics for every player team session
     # this can take a while to run... it seems to take about a second to make one get request from the API, and this
     # begins to add up very quickly since we will be accessing many player sessions at once
-    def get_metrics_by_date(self, team_id, start_date, end_date):
+    def get_team_metrics_by_date(self, team_id, start_date, end_date):
         # get all training sessions for a specific team
         training_sessions = self.get_team_training_sessions(team_id)
 
@@ -229,27 +252,30 @@ class TeamProExample(object):
 
         # get all player session ids from every session that exists within specified time frame
         player_session_ids = []
-        for item in session_ids:
+        player_ids = []
+        for item in (session_ids):
             team_training_session_details = self.get_team_training_session_details(item)['data']
 
             for keyval in team_training_session_details['participants']:
                 player_session_ids.append(keyval['player_session_id'])
+                player_ids.append(keyval['player_id'])
 
         # append all calculated metrics from every player and session during specified time frame to a json string
-        all_metrics = {"Metrics": []}
-        for item in player_session_ids:
+        all_metrics = {"metrics": []}
+        for i, item in enumerate(player_session_ids):
             summary = self.get_player_team_training_session_summary(item)['data']
-            metrics = self.calculate_metrics(summary, summary['created'][0:10])
-            all_metrics["Metrics"].append(metrics)
+            metrics = self.calculate_metrics(summary, summary['created'][0:10], player_ids[i])
+            all_metrics["metrics"].append(metrics)
 
         return all_metrics
 
     # WORK IN PROGRESS!!!
     # given a player team training session summary, as well as the date for that session, calculate metrics needed for
     # dashboard and return a json string with the date as well as those metrics
-    def calculate_metrics(self, summary, start_date):
-        # calculations
+    def calculate_metrics(self, summary, start_date, player_id):
+        player = player_id
         date = start_date
+        # calculations
         duration = int(summary['duration_ms'])/6000
         e_trimp = ''
         s_trimp = ''
@@ -265,17 +291,53 @@ class TeamProExample(object):
         r_spnt = ''
 
         # create the objects to be appended
-        date_obj = {"Date": date}
-        duration_obj = {"Duration": duration}
+        player_id_obj = {"player_id": player}
+        date_obj = {"date": date}
+        duration_obj = {"duration": duration}
 
         # append objects into json string
         json_metrics = '{}'
         json_str = json.loads(json_metrics)
 
+        json_str.update(player_id_obj)
         json_str.update(date_obj)
         json_str.update(duration_obj)
 
         return json_str
+
+    # given team_id and a list of metrics, return summaries by month for each metric
+    def summarize_by_month(self, team_id, metrics):
+        months = []
+        count = 0
+        duration = 0
+        months_json = '{}'
+        months_json = json.loads(months_json)
+        duration_sum = 0
+        duration_avg = 0
+
+        for keyval in metrics['metrics']:
+            curr_month = keyval['date'][5:7]
+            if curr_month not in months:
+                if len(months) > 0:
+                    month_to_add = {"{}".format(len(months) - 1): []}
+                    duration_obj = {"duration": duration_avg}
+                    month_to_add["{}".format(months[count - 1])].append(duration_obj)
+                    months_json.update(month_to_add)
+
+                months.append(curr_month)
+                duration_sum = keyval['duration']
+            else:
+                count += 1
+                duration_sum += keyval['duration']
+                duration_avg = duration_sum/count
+
+            month_to_add = {"{}".format(len(months)-1): []}
+            duration_obj = {"duration": duration_avg}
+            month_to_add["{}".format(months[count - 1])].append(duration_obj)
+            months_json.update(month_to_add)
+
+        return months_json
+
     ##################################
 
 

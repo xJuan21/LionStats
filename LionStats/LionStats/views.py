@@ -1,4 +1,6 @@
 import os
+import subprocess
+import sys
 import webbrowser
 
 from rest_framework.views import APIView
@@ -8,13 +10,26 @@ from django.contrib.auth.models import User
 from urllib import request
 from django.shortcuts import render
 from teamproAPI import teampro_test
+from teamproAPI import authorization
 
 def delete_product(request):
     if request.method == "GET":
-        url = ' http://127.0.0.1:7000/'
+        url = 'http://127.0.0.1:8080/'
         browser_path = '"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" %s'
-        webbrowser.get(browser_path).open(url)
-        os.system("cd teamproAPI && py authorization.py runserver")
+        firefox_path = '"C:/Program Files/Mozilla Firefox/firefox.exe" %s'
+        webbrowser.get(browser_path).open(url, new=2)
+        # if getattr(sys, 'frozen', False):
+        #      app_path = os.path.dirname(sys.executable)
+        #      os.chdir(app_path)
+        #      os.system("cd teamproAPI && py authorization.py runserver")
+        # else:
+        #     os.system("cd teamproAPI && py authorization.py runserver")
+
+        authorization.main()
+        authorization.setup()
+        authorization.authorize()
+        authorization.callback()
+
         return render(request, "dashboard.html")
       
 class TeamData(APIView):

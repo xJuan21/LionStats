@@ -1,6 +1,7 @@
 from __future__ import print_function
 import sys
-sys.path.append('/Users/maddietalley/PycharmProjects/LionStats/LionStats/teamproAPI')
+# sys.path.append('C:/LionStats/LionStats/teamproAPI')
+sys.path.append('C:/LionStats/dist/manage/teamproAPI')
 from APIutils import load_config, pretty_print_json
 
 import requests

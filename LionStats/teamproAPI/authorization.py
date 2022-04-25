@@ -8,7 +8,7 @@ from APIutils import load_config, save_config
 from teampro import TeamPro
 
 
-CALLBACK_PORT = 7000
+CALLBACK_PORT = 8080
 CALLBACK_ENDPOINT = "/dashboard"
 
 CONFIG_FILENAME = "config.yml"

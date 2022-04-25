@@ -11,10 +11,10 @@ from teamproAPI import teampro_test
 
 def delete_product(request):
     if request.method == "GET":
-        url = ' http://127.0.0.1:7000/'
-        browser_path = '"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" %s'
-        webbrowser.get(browser_path).open(url)
-        os.system("cd teamproAPI && py authorization.py runserver")
+        url = 'http://127.0.0.1:8080/'
+        browser_path = 'open -a /Applications/Chrome.app %s'
+        webbrowser.get(browser_path).open(url, new=2)
+        os.system("cd teamproAPI && python authorization.py runserver")
         return render(request, "dashboard.html")
       
 class TeamData(APIView):

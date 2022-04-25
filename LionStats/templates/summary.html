@@ -83,8 +83,18 @@ const stat1 = new Chart(ctx, {
 
     <h1 class="session"> Session 04/04/2022 </h1>
 
+    <div class="date-start">
+<input type="date" id="myDate" value="2014-02-09">
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDate").value;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
 </div>
 
+</div>
 {% endblock %}
 
 {% block topbar %}

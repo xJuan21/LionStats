@@ -1,20 +1,20 @@
 from __future__ import print_function
-
-from utils import load_config, pretty_print_json
+import sys
+sys.path.append('C:/LionStats/LionStats/teamproAPI')
+from APIutils import load_config, pretty_print_json
 
 import requests
 import json
-
+import yaml
 CONFIG_FILENAME = "config.yml"
-
 
 class TeamProExample(object):
 
     def __init__(self):
         self.config = load_config(CONFIG_FILENAME)
-        self.get_team_details("Women's Lacrosse")
+        # self.get_team_details("Women's Lacrosse")
 
-    # get json data
+    #get json data
     ##################################
     def get_teams(self):
         headers = {
@@ -47,7 +47,7 @@ class TeamProExample(object):
         team_details = requests.get('https://teampro.api.polar.com/v1/teams/{}'.format(team_id),
                                     params={}, headers=headers)
 
-        pretty_print_json(team_details.json())
+        # pretty_print_json(team_details.json())
         return team_details.json()
 
     def get_team_training_sessions(self, team_name):
@@ -61,7 +61,7 @@ class TeamProExample(object):
         team_training_sessions = requests.get('https://teampro.api.polar.com/v1/teams/{}/training_sessions'
                                               .format(team_id), params={}, headers=headers)
 
-        pretty_print_json(team_training_sessions.json())
+        # pretty_print_json(team_training_sessions.json())
         return team_training_sessions.json()
     ##################################
 

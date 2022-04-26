@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/team-filter.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>
+<!--    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>-->
 <!--    <script src="{% static 'js/.js' %}"></script>-->
     {% endblock %}
     {% block title %}
@@ -95,8 +95,15 @@ $.ajax({
     <div class="Position">
         <h4> Position </h4>
         <div class="Dropdown">
-            <select name = "position" class="menu" id = "dropdownPosition">
-            </select>
+            <nav>
+                <select name = "position" class="menu" id = "dropdownPosition">
+                </select>
+                <script type="text/javascript">
+                        $(document).ready(()=>{
+                        $("#dropdownPosition option[value=3]").attr('selected', 'selected');
+                        });
+                </script>
+            </nav>
 
         </div>
     </div>
@@ -105,15 +112,8 @@ $.ajax({
         <h4> Session </h4>
         <div class="Dropdown">
             <nav>
-                <label for="touchSession"><span>Session</span></label>
-                <input type="checkbox" id="touchSession">
-
-                <ul class="menu">
-                <li><a href="#">04/04/2022</a></li>
-                <li><a href="#">04/05/2022</a></li>
-                <li><a href="#">04/06/2022</a></li>
-                <li><a href="#">04/06/2022</a></li>
-                </ul>
+                <select name = "session" class="menu" id = "dropdownSession">
+                </select>
             </nav>
         </div>
     </div>
@@ -122,15 +122,8 @@ $.ajax({
         <h4> Academic Year </h4>
         <div class="Dropdown">
             <nav>
-                <label for="touchYear"><span>Academic Year</span></label>
-                <input type="checkbox" id="touchYear">
-
-                <ul class="menu">
-                <li><a href="#">2019-2020</a></li>
-                <li><a href="#">2020-2021</a></li>
-                <li><a href="#">2021-2022</a></li>
-<!--                <li><a href="#">Senior</a></li>-->
-                </ul>
+               <select name = "year" class="menu" id = "dropdownYear">
+                </select>
             </nav>
         </div>
     </div>

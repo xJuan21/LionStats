@@ -18,7 +18,8 @@ def delete_product(request):
         url = 'http://127.0.0.1:8080/'
         browser_path = '"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" %s'
         firefox_path = '"C:/Program Files/Mozilla Firefox/firefox.exe" %s'
-        webbrowser.get(browser_path).open(url, new=2)
+        #webbrowser.get(browser_path).open(url, new=2)
+        webbrowser.open(url, new=2, autoraise=True)
         # if getattr(sys, 'frozen', False):
         #      app_path = os.path.dirname(sys.executable)
         #      os.chdir(app_path)

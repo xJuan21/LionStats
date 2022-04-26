@@ -97,10 +97,10 @@ $("select[name='position'] > option").each(function () {
 window.onload = function()
 {
     let btn = document.getElementById("dropdown");
-    let athBtn = document.getElementById("dropdownAthlete");
-    let posBtn = document.getElementById("dropdownPosition");
-    btn.onclick = dropdown;
-    athBtn.onclick = dropdownAthlete;
-    posBtn.onclick = dropdownPosition;
+//    let athBtn = document.getElementById("dropdownAthlete");
+//    let posBtn = document.getElementById("dropdownPosition");
+    dropdown();
+    btn.onclick = dropdownAthlete;
+    btn.onclick = dropdownPosition;
 }
 

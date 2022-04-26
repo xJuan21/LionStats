@@ -27,7 +27,7 @@
 
 <script>
 {% block jquery %}
-var endpoint = '/api/team/data/'
+var endpoint = '/api/dropdown/team/'
 var teamData = []
 var labels = []
 $.ajax({
@@ -83,16 +83,11 @@ $.ajax({
     <div class="Athlete">
         <h4> Athletes </h4>
         <div class="Dropdown">
-            <nav>
-                <label for="touch"><span>Athlete</span></label>
-                <input type="checkbox" id="touch">
+            <nav></nav>
+                <select name = "team" class="menu" id = "dropdownTeam" onchange="val(dropdown)">
 
-                <ul class="menu">
-                <li><a href="#">Smith, John</a></li>
-                <li><a href="#">Skywalker, Anakin</a></li>
-                <li><a href="#">Bolt, Usain</a></li>
-<!--                <li><a href="#">Sport 4</a></li>-->
-                </ul>
+                </select>
+                </form>
             </nav>
         </div>
     </div>

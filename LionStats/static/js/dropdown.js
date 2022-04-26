@@ -32,20 +32,48 @@ while(dropdown.firstChild)
 for (var i = 0; i < teamData.data.length; i++)
 {
     option = document.createElement("option");
-    option.text = teamData.data[i].name;
+    option.value = teamData.data[i].name;
     dropdown.appendChild(option);
 }
 }
 
-function val()
-{
-    var selected = document.getElementById('dropdown').value;
+//function val(dropdown)
+//{
+//    var selected = document.getElementById(dropdown).value;
+//    console.log(selected);
+//}
 
+function dropdownTeam()
+{
+var teamData;
+$.ajax({
+    async: false,
+    url: 'http://localhost:8000/api/dropdown/team',
+    success: function(data)
+    {
+        teamData = data;
+    }
+});
+let dropdown = document.getElementById('dropdownTeam')
+let option;
+while(dropdown.firstChild)
+{
+    dropdown.removeChild(dropdown.firstChild);
+}
+
+for (var i = 0; i < teamData.data.length; i++)
+{
+    option = document.createElement("option");
+    option.value = teamData.data[i].name;
+    dropdown.appendChild(option);
+}
 }
 
 window.onload = function()
 {
     let btn = document.getElementById("dropdown");
+    let athBtn = document.getElementById("dropdownTeam");
     btn.onclick = dropdown;
+    athBtn.onclick = dropdownTeam;
 }
 

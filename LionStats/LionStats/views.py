@@ -2,15 +2,18 @@ import os
 import subprocess
 import sys
 import webbrowser
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
-from urllib import request
+from django.http import HttpResponse
 from django.shortcuts import render
+from selenium import webdriver
+from selenium.webdriver.support.select import Select
 from teamproAPI import teampro_test
 from teamproAPI import authorization
+from rest_framework import generics
+
 
 def delete_product(request):
     if request.method == "GET":
@@ -31,7 +34,12 @@ def delete_product(request):
         authorization.callback()
 
         return render(request, "dashboard.html")
-      
+
+def getData(request):
+    global team_name
+    team_name = request.POST.get('value')
+    return HttpResponse(team_name)
+
 class TeamData(APIView):
     """
     View to list all users in the system.
@@ -64,12 +72,25 @@ class Dropdown(APIView):
         return Response(dropData)
 
 
+# class GetData(APIView):
+#
+#     def get(self, request):
+#         dataT = request.GET.get('value', "")
+#         return Response(dataT)
+#
+#     # def post(self, request):
+#     #     dataT = request.POST.get('value', "")
+#     #     return Response(dataT)
+
 class TeamDetails(APIView):
 
     def get(self, request, format=None):
-        name = request.POST.get('dropdown', False)
+        # name = self.getTeams(request)
+        # print(name)
+        # name = self.data(request)
+        # print(name)
+        # name = getData(request).teamName;
         teampro = teampro_test.TeamProExample()
-        teamID = teampro.get_team_id("Women's Lacrosse")
-        teamDetails = teampro.get_team_details(teamID)
+        teamDetails = teampro.get_team_details(team_name)
         return Response(teamDetails)
 

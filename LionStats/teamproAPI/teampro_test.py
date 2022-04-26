@@ -1,7 +1,7 @@
 from __future__ import print_function
 import sys
-# sys.path.append('C:/LionStats/LionStats/teamproAPI')
-sys.path.append('C:/LionStats/dist/manage/teamproAPI')
+sys.path.append('C:/LionStats/LionStats/teamproAPI')
+#sys.path.append('C:/LionStats/dist/manage/teamproAPI')
 from APIutils import load_config, pretty_print_json
 
 import requests
@@ -44,7 +44,7 @@ class TeamProExample(object):
         }
 
         team_id = self.get_team_id(team_name)
-
+        #team_id = "zEvdWN1K"
         team_details = requests.get('https://teampro.api.polar.com/v1/teams/{}'.format(team_id),
                                     params={}, headers=headers)
 
@@ -80,3 +80,4 @@ class TeamProExample(object):
 
 if __name__ == "__main__":
     TeamProExample()
+

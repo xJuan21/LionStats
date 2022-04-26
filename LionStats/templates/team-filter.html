@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/team-filter.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>
 <!--    <script src="{% static 'js/.js' %}"></script>-->
     {% endblock %}
     {% block title %}
@@ -84,7 +85,7 @@ $.ajax({
         <h4> Athletes </h4>
         <div class="Dropdown">
             <nav></nav>
-                <select name = "team" class="menu" id = "dropdownTeam" onchange="val(dropdown)">
+                <select name = "team" class="menu" id = "dropdownAthlete">
 
                 </select>
                 </form>

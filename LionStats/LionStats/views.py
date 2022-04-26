@@ -90,6 +90,7 @@ class TeamDetails(APIView):
         # name = self.data(request)
         # print(name)
         # name = getData(request).teamName;
+        print(team_name)
         teampro = teampro_test.TeamProExample()
         teamDetails = teampro.get_team_details(team_name)
         return Response(teamDetails)

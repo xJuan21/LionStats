@@ -1,15 +1,3 @@
-//var PythonShell = require('python-shell');
-
-//function dropdown()
-//{
-//const {PythonShell} = require('python-shell');
-//var data;
-//PythonShell.run('teamdropdown', null, function (err, results)
-//{
-//    data = results;
-//    console.log(data);
-//});
-
 
 function dropdown()
 {
@@ -32,7 +20,7 @@ while(dropdown.firstChild)
 for (var i = 0; i < teamData.data.length; i++)
 {
     option = document.createElement("option");
-    option.value = teamData.data[i].name;
+    option.text = teamData.data[i].name;
     dropdown.appendChild(option);
 }
 }
@@ -43,7 +31,7 @@ for (var i = 0; i < teamData.data.length; i++)
 //    console.log(selected);
 //}
 
-function dropdownTeam()
+function dropdownAthlete()
 {
 var teamData;
 $.ajax({
@@ -54,7 +42,7 @@ $.ajax({
         teamData = data;
     }
 });
-let dropdown = document.getElementById('dropdownTeam')
+let dropdown = document.getElementById('dropdownAthlete')
 let option;
 while(dropdown.firstChild)
 {
@@ -64,7 +52,9 @@ while(dropdown.firstChild)
 for (var i = 0; i < teamData.data.length; i++)
 {
     option = document.createElement("option");
-    option.value = teamData.data[i].name;
+    console.log(teamData.players[i].first_name);
+    option.value = teamData.data.players[i].first_name;
+    //option.value = teamData.data.players[i].last_name;
     dropdown.appendChild(option);
 }
 }
@@ -72,8 +62,8 @@ for (var i = 0; i < teamData.data.length; i++)
 window.onload = function()
 {
     let btn = document.getElementById("dropdown");
-    let athBtn = document.getElementById("dropdownTeam");
+    let athBtn = document.getElementById("dropdownAthlete");
     btn.onclick = dropdown;
-    athBtn.onclick = dropdownTeam;
+    athBtn.onclick = dropdownAthlete;
 }
 

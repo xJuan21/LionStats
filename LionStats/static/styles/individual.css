@@ -1,39 +1,101 @@
-.Position {
-    position: absolute;
-    width: 470px;
-    height: 36px;
-    left: 649px;
-    top: 210px;
-    z-index: 5;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
+{% load static %}
 
-    /* identical to box height */
-    text-align: center;
+.Period
+{
+position: absolute;
+width: 234.06px;
+height: 48.43px;
+left: 835.13px;
+top: 510.57px;
 
-    color: #FFFFFF;
+font-family: 'Zen Dots';
+font-style: normal;
+font-weight: 400;
+font-size: 35px;
+line-height: 42px;
+
+color: #FFFFFF;
 }
 
-.SelectSport {
-    position: absolute;
-    width: 275px;
-    height: 36px;
-    left: 307px;
-    top: 210px;
-    z-index: 5;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
+.Position
+{
+position: absolute;
+width: 227.3px;
+height: 48.43px;
+left: 834px;
+top: 446.01px;
 
-    /* identical to box height */
-    text-align: center;
+font-family: 'Zen Dots';
+font-style: normal;
+font-weight: 400;
+font-size: 35px;
+line-height: 42px;
 
-    color: #FFFFFF;
+color: #FFFFFF;
+}
+
+.Jersey
+{
+position: absolute;
+width: 247.56px;
+height: 48.43px;
+left: 835.13px;
+top: 381.44px;
+
+font-family: 'Zen Dots';
+font-style: normal;
+font-weight: 400;
+font-size: 35px;
+line-height: 42px;
+
+color: #FFFFFF;
+}
+
+.Sport
+{
+position: absolute;
+width: 169.92px;
+height: 48.43px;
+left: 835.13px;
+top: 315.72px;
+
+font-family: 'Zen Dots';
+font-style: normal;
+font-weight: 400;
+font-size: 35px;
+line-height: 42px;
+
+color: #FFFFFF;
 
 }
 
+.Name
+{
+position: absolute;
+width: 162.04px;
+height: 48.43px;
+left: 835.13px;
+top: 250px;
+
+font-family: 'Zen Dots';
+font-style: normal;
+font-weight: 400;
+font-size: 35px;
+line-height: 42px;
+
+color: #FFFFFF;
+}
+
+.Dropdown
+{
+position: absolute;
+width: 200px;
+height: 178px;
+left: 1069px;
+top: calc(50% - 178px/2 - 315.5px);
+
+background: #FFFFFF;
+border: 1px solid #707070;
+box-sizing: border-box;
+border-radius: 4px;
+}

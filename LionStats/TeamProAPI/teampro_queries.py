@@ -21,7 +21,7 @@ class TeamProExample(object):
         # note: these aren't very efficient
         team_id = self.get_team_id("Women's Lacrosse")
         #training_session_id = self.get_training_session_id(team_id, "2022-01-10")
-        #player_id = self.get_player_id(team_id, "Meg", "Rea")
+        player_id = self.get_player_id(team_id, "Meg", "Rea")
         #player_session_id = self.get_player_session_id(training_session_id, player_id)
 
         # test runs of each function that returns .json data
@@ -37,9 +37,11 @@ class TeamProExample(object):
         #print(self.get_teams_list())
         #players = self.get_players(team_id)
         #print(self.get_player_names(players))
-        metrics_by_date = self.get_team_metrics_by_date(team_id, "03/20/2022", "04/03/2022")
+        #metrics_by_date = self.get_team_metrics_by_date(team_id, "03/29/2022", "04/03/2022")
         #pretty_print_json(metrics_by_date)
-        pretty_print_json(self.summarize_by_month(metrics_by_date))
+        #pretty_print_json(self.summarize_by_month(metrics_by_date))
+        individual_metrics = self.get_individual_metrics_by_date(team_id, player_id, "03/29/2022", "04/03/2022")
+        pretty_print_json(individual_metrics)
 
     # functions that return .json data
     # vist https://www.polar.com/teampro-api/#teampro-api for example responses
@@ -543,11 +545,79 @@ class TeamProExample(object):
 
     # given a list of metrics (most likely from get_team_metrics_by_date() method), return team averages by week for
     # each metric (WORK IN PROGRESS)
-    #def summarize_by_week(self, metrics):
+    def summarize_by_week(self, metrics):
+        weeks = []
+        count = 0
+        weeks_json = '{}'
+        months_json = json.loads(weeks_json)
+
+        # metrics sums
+        duration_sum = 0
+        e_trimp_sum = 0
+        s_trimp_sum = 0
+        exp_sum = 0
+        hr90_sum = 0
+        dist_sum = 0
+        hsr_sum = 0
+        spnt_sum = 0
+        hsr_div_sp_sum = 0
+        r_exp_sum = 0
+        r_dist_sum = 0
+        r_hsr_sum = 0
+        r_spnt_sum = 0
+
+        # metrics averages
+        duration_avg = 0
+        e_trimp_avg = 0
+        s_trimp_avg = 0
+        exp_avg = 0
+        hr90_avg = 0
+        dist_avg = 0
+        hsr_avg = 0
+        spnt_avg = 0
+        hsr_div_sp_avg = 0
+        r_exp_avg = 0
+        r_dist_avg = 0
+        r_hsr_avg = 0
+        r_spnt_avg = 0
+
+        #for keyval in metrics['metrics']:
 
     # given a list of metrics (most likely from get_team_metrics_by_date() method), return team averages by day for
     # each metric (WORK IN PROGRESS)
     #def summarize_by_day(self, metrics):
+
+    def get_individual_metrics_by_date(self, team_id, player_id, start_date, end_date):
+        # get all training sessions for a specific team
+        training_sessions = self.get_team_training_sessions(team_id)
+
+        # format start and end dates for easy access from API
+        formatted_start_date = start_date[6:10] + "-" + start_date[0:2] + "-" + start_date[3:5]
+        formatted_end_date = end_date[6:10] + "-" + end_date[0:2] + "-" + end_date[3:5]
+
+        # get all session ids that exist within specified time frame
+        session_ids = []
+        for keyval in training_sessions['data']:
+            if formatted_start_date <= keyval['start_time'][0:10] <= formatted_end_date:
+                session_ids.append(keyval['id'])
+
+        # get all player session ids from every session that exists within specified time frame
+        player_session_ids = []
+        for item in session_ids:
+            team_training_session_details = self.get_team_training_session_details(item)['data']
+
+            for keyval in team_training_session_details['participants']:
+                if keyval['player_id'] == player_id:
+                    player_session_ids.append(keyval['player_session_id'])
+
+        # append all calculated metrics from every player and session during specified time frame to a json string
+        all_metrics = {"metrics": []}
+        for i, item in enumerate(player_session_ids):
+            summary = self.get_player_team_training_session_summary(item)['data']
+            metrics = self.calculate_metrics(summary, summary['created'][0:10], player_id)
+            all_metrics["metrics"].append(metrics)
+
+        return all_metrics
 
     ##################################
 

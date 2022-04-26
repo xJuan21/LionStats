@@ -8,8 +8,6 @@ from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
-from selenium import webdriver
-from selenium.webdriver.support.select import Select
 from teamproAPI import teampro_test
 from teamproAPI import authorization
 from rest_framework import generics

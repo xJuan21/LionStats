@@ -4,6 +4,8 @@ from utils import load_config, pretty_print_json
 
 import requests
 import json
+import isodate
+import datetime
 
 CONFIG_FILENAME = "config.yml"
 
@@ -18,8 +20,8 @@ class TeamProExample(object):
         # hardcoded ids for examples; uncomment to test functions
         # note: these aren't very efficient
         team_id = self.get_team_id("Women's Lacrosse")
-        #training_session_id = self.get_training_session_id(team_id, "2022-04-03")
-        #player_id = self.get_player_id(team_id, "Alyssa", "Kneedler")
+        #training_session_id = self.get_training_session_id(team_id, "2022-01-10")
+        #player_id = self.get_player_id(team_id, "Meg", "Rea")
         #player_session_id = self.get_player_session_id(training_session_id, player_id)
 
         # test runs of each function that returns .json data
@@ -35,8 +37,9 @@ class TeamProExample(object):
         #print(self.get_teams_list())
         #players = self.get_players(team_id)
         #print(self.get_player_names(players))
-        metrics_by_date = self.get_team_metrics_by_date(team_id, "03/31/2022", "04/01/2022")
-        pretty_print_json(self.summarize_by_month(team_id, metrics_by_date))
+        metrics_by_date = self.get_team_metrics_by_date(team_id, "03/20/2022", "04/03/2022")
+        #pretty_print_json(metrics_by_date)
+        pretty_print_json(self.summarize_by_month(metrics_by_date))
 
     # functions that return .json data
     # vist https://www.polar.com/teampro-api/#teampro-api for example responses
@@ -77,10 +80,27 @@ class TeamProExample(object):
             'Authorization': 'Bearer {}'.format(self.config["access_token"])
         }
 
-        team_training_sessions = requests.get('https://teampro.api.polar.com/v1/teams/{}/training_sessions'
-                                              .format(team_id), params={}, headers=headers)
+        team_training_sessions = \
+            requests.get('https://teampro.api.polar.com/v1/teams/{}/training_sessions?page=0&per_page=100'
+                         .format(team_id), params={}, headers=headers)
+        str_sessions = team_training_sessions.json()
 
-        return team_training_sessions.json()
+        sessions = {"data": []}
+        for keyval in str_sessions['data']:
+            sessions["data"].append(keyval)
+
+        total_pages = str_sessions['page']['total_pages']
+
+        for i in range(total_pages-1):
+            team_training_sessions = \
+                requests.get('https://teampro.api.polar.com/v1/teams/{}/training_sessions?page={}&per_page=100'
+                             .format(team_id, i), params={}, headers=headers)
+            str_sessions = team_training_sessions.json()
+
+            for keyval in str_sessions['data']:
+                sessions["data"].append(keyval)
+
+        return sessions
 
     # description: details of a training session, given the training_session_id
     # 'data': id, team_id, name, type, note, created, modified, record_start_time,
@@ -111,7 +131,24 @@ class TeamProExample(object):
         player_training_sessions = requests.get('https://teampro.api.polar.com/v1/players/{}/training_sessions'
                                                 .format(player_id), params={}, headers=headers)
 
-        return player_training_sessions.json()
+        str_sessions = player_training_sessions.json()
+
+        sessions = {"data": []}
+        for keyval in str_sessions['data']:
+            sessions["data"].append(keyval)
+
+        total_pages = str_sessions['page']['total_pages']
+
+        for i in range(total_pages - 1):
+            player_training_sessions = \
+                requests.get('https://teampro.api.polar.com/v1/teams/{}/training_sessions?page={}&per_page=100'
+                             .format(player_id, i), params={}, headers=headers)
+            str_sessions = player_training_sessions.json()
+
+            for keyval in str_sessions['data']:
+                sessions["data"].append(keyval)
+
+        return sessions
 
     # description: details of a player's training session, given the player_session_id
     # 'data': id, type, created, modified, name, feeling, note, latitude, longitude, start_time, stop_time, duration_ms,
@@ -231,8 +268,6 @@ class TeamProExample(object):
 
         return players_list
 
-
-    # WORK IN PROGRESS!!!
     # within a specified time frame, return a json string of the calculated metrics for every player team session
     # this can take a while to run... it seems to take about a second to make one get request from the API, and this
     # begins to add up very quickly since we will be accessing many player sessions at once
@@ -269,31 +304,61 @@ class TeamProExample(object):
 
         return all_metrics
 
-    # WORK IN PROGRESS!!!
-    # given a player team training session summary, as well as the date for that session, calculate metrics needed for
+    # given a player team training session summary, a date, and a player ID, calculate metrics needed for
     # dashboard and return a json string with the date as well as those metrics
     def calculate_metrics(self, summary, start_date, player_id):
         player = player_id
         date = start_date
+
+        # heart rate zones
+        hr_zones = []
+        for keyval in summary['heart_rate_zones']:
+            hr_zones.append(datetime.timedelta.total_seconds(isodate.parse_duration(keyval['in_zone'])) / 60)
+
+        # speed zones
+        speed_zones = []
+        for keyval in summary['speed_zones_kmh']:
+            speed_zones.append(keyval['in_zone_meters'])
+
+        # acceleration zones
+        accel_zones = []
+        for keyval in summary['acceleration_zones_ms2']:
+            accel_zones.append(keyval['count'])
+
         # calculations
-        duration = int(summary['duration_ms'])/6000
-        e_trimp = ''
-        s_trimp = ''
-        exp = ''
-        hr90 = ''
-        dist = ''
-        hsr = ''
-        spnt = ''
-        hsr_div_sp = ''
-        r_exp = ''
-        r_dist = ''
-        r_hsr = ''
-        r_spnt = ''
+        duration = int(summary['duration_ms'])/60000
+        e_trimp = (hr_zones[0] * 1) + (hr_zones[1] * 2) + ((hr_zones[2]) * 3) + (hr_zones[3] * 4) + (hr_zones[4] * 5)
+        s_trimp = ((speed_zones[0] * 1) + (speed_zones[1] * 2) + ((speed_zones[2]) * 3) + (speed_zones[3] * 4)
+                   + (speed_zones[4] * 5))/100
+        exp = accel_zones[0] + accel_zones[1] + accel_zones[-2] + accel_zones[-1]
+        hr90 = hr_zones[4]
+        dist = summary['distance_meters']
+        hsr = speed_zones[-2] + speed_zones[-1]
+        spnt = speed_zones[-1]
+        hsr_div_sp = 0
+        if summary['sprint_counter'] != 0:
+            hsr_div_sp = hsr/summary['sprint_counter']
+        r_exp = exp/duration
+        r_dist = dist/duration
+        r_hsr = hsr/duration
+        r_spnt = spnt/duration
 
         # create the objects to be appended
         player_id_obj = {"player_id": player}
-        date_obj = {"date": date}
-        duration_obj = {"duration": duration}
+        date_obj = {"Date": date}
+        duration_obj = {"Duration": duration}
+        e_trimp_obj = {"eTrimp": e_trimp}
+        s_trimp_obj = {"sTrimp": s_trimp}
+        exp_obj = {"EXP": exp}
+        hr90_obj = {"HR90": hr90}
+        dist_obj = {"DIST": dist}
+        hsr_obj = {"HSR": hsr}
+        spnt_obj = {"SPNT": spnt}
+        hsr_div_sp_obj = {"HSR/SP": hsr_div_sp}
+        r_exp_obj = {"rEXP": r_exp}
+        r_dist_obj = {"rDIST": r_dist}
+        r_hsr_obj = {"rHSR": r_hsr}
+        r_spnt_obj = {"rSPNT": r_spnt}
 
         # append objects into json string
         json_metrics = '{}'
@@ -302,41 +367,187 @@ class TeamProExample(object):
         json_str.update(player_id_obj)
         json_str.update(date_obj)
         json_str.update(duration_obj)
+        json_str.update(e_trimp_obj)
+        json_str.update(s_trimp_obj)
+        json_str.update(exp_obj)
+        json_str.update(hr90_obj)
+        json_str.update(dist_obj)
+        json_str.update(hsr_obj)
+        json_str.update(spnt_obj)
+        json_str.update(hsr_div_sp_obj)
+        json_str.update(r_exp_obj)
+        json_str.update(r_dist_obj)
+        json_str.update(r_hsr_obj)
+        json_str.update(r_spnt_obj)
 
         return json_str
 
-    # given team_id and a list of metrics, return summaries by month for each metric
-    def summarize_by_month(self, team_id, metrics):
+    # given a list of metrics (most likely from get_team_metrics_by_date() method), return team averages by month for
+    # each metric
+    def summarize_by_month(self, metrics):
         months = []
         count = 0
-        duration = 0
         months_json = '{}'
         months_json = json.loads(months_json)
+
+        # metrics sums
         duration_sum = 0
+        e_trimp_sum = 0
+        s_trimp_sum = 0
+        exp_sum = 0
+        hr90_sum = 0
+        dist_sum = 0
+        hsr_sum = 0
+        spnt_sum = 0
+        hsr_div_sp_sum = 0
+        r_exp_sum = 0
+        r_dist_sum = 0
+        r_hsr_sum = 0
+        r_spnt_sum = 0
+
+        # metrics averages
         duration_avg = 0
+        e_trimp_avg = 0
+        s_trimp_avg = 0
+        exp_avg = 0
+        hr90_avg = 0
+        dist_avg = 0
+        hsr_avg = 0
+        spnt_avg = 0
+        hsr_div_sp_avg = 0
+        r_exp_avg = 0
+        r_dist_avg = 0
+        r_hsr_avg = 0
+        r_spnt_avg = 0
 
         for keyval in metrics['metrics']:
-            curr_month = keyval['date'][5:7]
+            curr_month = keyval['Date'][0:7]
             if curr_month not in months:
                 if len(months) > 0:
-                    month_to_add = {"{}".format(len(months) - 1): []}
-                    duration_obj = {"duration": duration_avg}
-                    month_to_add["{}".format(months[count - 1])].append(duration_obj)
+                    month_to_add = {"{}".format(months[len(months) - 1]): []}
+
+                    duration_obj = {"Duration": duration_avg}
+                    e_trimp_obj = {"eTrimp": e_trimp_avg}
+                    s_trimp_obj = {"sTrimp": s_trimp_avg}
+                    exp_obj = {"EXP": exp_avg}
+                    hr90_obj = {"HR90": hr90_avg}
+                    dist_obj = {"DIST": dist_avg}
+                    hsr_obj = {"HSR": hsr_avg}
+                    spnt_obj = {"SPNT": spnt_avg}
+                    hsr_div_sp_obj = {"HSR/SP": hsr_div_sp_avg}
+                    r_exp_obj = {"rEXP": r_exp_avg}
+                    r_dist_obj = {"rDIST": r_dist_avg}
+                    r_hsr_obj = {"rHSR": r_hsr_avg}
+                    r_spnt_obj = {"rSPNT": r_spnt_avg}
+
+                    json_metrics = '{}'
+                    json_str = json.loads(json_metrics)
+                    json_str.update(duration_obj)
+                    json_str.update(e_trimp_obj)
+                    json_str.update(s_trimp_obj)
+                    json_str.update(exp_obj)
+                    json_str.update(hr90_obj)
+                    json_str.update(dist_obj)
+                    json_str.update(hsr_obj)
+                    json_str.update(spnt_obj)
+                    json_str.update(hsr_div_sp_obj)
+                    json_str.update(r_exp_obj)
+                    json_str.update(r_dist_obj)
+                    json_str.update(r_hsr_obj)
+                    json_str.update(r_spnt_obj)
+
+                    month_to_add["{}".format(months[len(months) - 1])].append(json_str)
                     months_json.update(month_to_add)
 
                 months.append(curr_month)
-                duration_sum = keyval['duration']
+                duration_sum = keyval['Duration']
+                e_trimp_sum = keyval['eTrimp']
+                s_trimp_sum = keyval['sTrimp']
+                exp_sum = keyval['EXP']
+                hr90_sum = keyval['HR90']
+                dist_sum = keyval['DIST']
+                hsr_sum = keyval['HSR']
+                spnt_sum = keyval['SPNT']
+                hsr_div_sp_sum = keyval['HSR/SP']
+                r_exp_sum = keyval['rEXP']
+                r_dist_sum = keyval['rDIST']
+                r_hsr_sum = keyval['rHSR']
+                r_spnt_sum = keyval['rSPNT']
             else:
                 count += 1
-                duration_sum += keyval['duration']
-                duration_avg = duration_sum/count
 
-            month_to_add = {"{}".format(len(months)-1): []}
-            duration_obj = {"duration": duration_avg}
-            month_to_add["{}".format(months[count - 1])].append(duration_obj)
-            months_json.update(month_to_add)
+                duration_sum += keyval['Duration']
+                e_trimp_sum += keyval['eTrimp']
+                s_trimp_sum += keyval['sTrimp']
+                exp_sum += keyval['EXP']
+                hr90_sum += keyval['HR90']
+                dist_sum += keyval['DIST']
+                hsr_sum += keyval['HSR']
+                spnt_sum += keyval['SPNT']
+                hsr_div_sp_sum += keyval['HSR/SP']
+                r_exp_sum += keyval['rEXP']
+                r_dist_sum += keyval['rDIST']
+                r_hsr_sum += keyval['rHSR']
+                r_spnt_sum += keyval['rSPNT']
+
+                duration_avg = duration_sum / count
+                e_trimp_avg = e_trimp_sum / count
+                s_trimp_avg = s_trimp_sum / count
+                exp_avg = exp_sum / count
+                hr90_avg = hr90_sum / count
+                dist_avg = dist_sum / count
+                hsr_avg = hsr_sum / count
+                spnt_avg = spnt_sum / count
+                hsr_div_sp_avg = hsr_div_sp_sum / count
+                r_exp_avg = r_exp_sum / count
+                r_dist_avg = r_dist_sum / count
+                r_hsr_avg = r_hsr_sum / count
+                r_spnt_avg = r_spnt_sum / count
+
+        month_to_add = {"{}".format(months[len(months) - 1]): []}
+
+        duration_obj = {"Duration": duration_avg}
+        e_trimp_obj = {"eTrimp": e_trimp_avg}
+        s_trimp_obj = {"sTrimp": s_trimp_avg}
+        exp_obj = {"EXP": exp_avg}
+        hr90_obj = {"HR90": hr90_avg}
+        dist_obj = {"DIST": dist_avg}
+        hsr_obj = {"HSR": hsr_avg}
+        spnt_obj = {"SPNT": spnt_avg}
+        hsr_div_sp_obj = {"HSR/SP": hsr_div_sp_avg}
+        r_exp_obj = {"rEXP": r_exp_avg}
+        r_dist_obj = {"rDIST": r_dist_avg}
+        r_hsr_obj = {"rHSR": r_hsr_avg}
+        r_spnt_obj = {"rSPNT": r_spnt_avg}
+
+        json_metrics = '{}'
+        json_str = json.loads(json_metrics)
+        json_str.update(duration_obj)
+        json_str.update(e_trimp_obj)
+        json_str.update(s_trimp_obj)
+        json_str.update(exp_obj)
+        json_str.update(hr90_obj)
+        json_str.update(dist_obj)
+        json_str.update(hsr_obj)
+        json_str.update(spnt_obj)
+        json_str.update(hsr_div_sp_obj)
+        json_str.update(r_exp_obj)
+        json_str.update(r_dist_obj)
+        json_str.update(r_hsr_obj)
+        json_str.update(r_spnt_obj)
+
+        month_to_add["{}".format(months[len(months) - 1])].append(json_str)
+        months_json.update(month_to_add)
 
         return months_json
+
+    # given a list of metrics (most likely from get_team_metrics_by_date() method), return team averages by week for
+    # each metric (WORK IN PROGRESS)
+    #def summarize_by_week(self, metrics):
+
+    # given a list of metrics (most likely from get_team_metrics_by_date() method), return team averages by day for
+    # each metric (WORK IN PROGRESS)
+    #def summarize_by_day(self, metrics):
 
     ##################################
 

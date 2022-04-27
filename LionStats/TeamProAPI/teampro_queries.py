@@ -1,6 +1,9 @@
 from __future__ import print_function
-
-from utils import load_config, pretty_print_json
+import sys
+sys.path.append('C:/LionStats/LionStats/teamproAPI/')
+#sys.path.append('C:/LionStats/dist/manage/teamproAPI')
+# sys.path.append('/Users/connor/PycharmProjects/LionStats2.0/LionStats/teamproAPI')
+from APIutils import load_config, pretty_print_json
 
 import requests
 import json
@@ -19,9 +22,9 @@ class TeamProExample(object):
 
         # hardcoded ids for examples; uncomment to test functions
         # note: these aren't very efficient
-        team_id = self.get_team_id("Women's Lacrosse")
-        #training_session_id = self.get_training_session_id(team_id, "2022-01-10")
-        player_id = self.get_player_id(team_id, "Meg", "Rea")
+        # team_id = self.get_team_id("Women's Lacrosse")
+        # #training_session_id = self.get_training_session_id(team_id, "2022-01-10")
+        # player_id = self.get_player_id(team_id, "Meg", "Rea")
         #player_session_id = self.get_player_session_id(training_session_id, player_id)
 
         # test runs of each function that returns .json data
@@ -40,8 +43,8 @@ class TeamProExample(object):
         #metrics_by_date = self.get_team_metrics_by_date(team_id, "03/29/2022", "04/03/2022")
         #pretty_print_json(metrics_by_date)
         #pretty_print_json(self.summarize_by_month(metrics_by_date))
-        individual_metrics = self.get_individual_metrics_by_date(team_id, player_id, "03/29/2022", "04/03/2022")
-        pretty_print_json(individual_metrics)
+        # individual_metrics = self.get_individual_metrics_by_date(team_id, player_id, "03/29/2022", "04/03/2022")
+        # pretty_print_json(individual_metrics)
 
     # functions that return .json data
     # vist https://www.polar.com/teampro-api/#teampro-api for example responses
@@ -61,11 +64,12 @@ class TeamProExample(object):
     # description: details of a specific team, given the team_id
     # 'data': id, name, organization, created, modified, players
     # 'players' list attributes: player_id, player_number, role, first_name, last_name
-    def get_team_details(self, team_id):
+    def get_team_details(self, team_name):
         headers = {
             'Accept': 'application/json',
             'Authorization': 'Bearer {}'.format(self.config["access_token"])
         }
+        team_id = self.get_team_id(team_name)
 
         team_details = requests.get('https://teampro.api.polar.com/v1/teams/{}'.format(team_id),
                                     params={}, headers=headers)

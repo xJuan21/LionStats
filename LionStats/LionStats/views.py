@@ -8,7 +8,7 @@ from rest_framework import authentication, permissions
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
-from teamproAPI import teampro_test
+from teamproAPI import teampro_queries
 from teamproAPI import authorization
 from rest_framework import generics
 
@@ -65,8 +65,8 @@ class TeamData(APIView):
 class Dropdown(APIView):
 
     def get(self, request, format=None):
-        teampro_test.TeamProExample.__init__(self)
-        dropData = teampro_test.TeamProExample.get_teams(self)
+        teampro_queries.TeamProExample.__init__(self)
+        dropData = teampro_queries.TeamProExample.get_teams(self)
 
         return Response(dropData)
 
@@ -90,7 +90,7 @@ class TeamDetails(APIView):
         # print(name)
         # name = getData(request).teamName;
         print(team_name)
-        teampro = teampro_test.TeamProExample()
+        teampro = teampro_queries.TeamProExample()
         teamDetails = teampro.get_team_details(team_name)
         return Response(teamDetails)
 

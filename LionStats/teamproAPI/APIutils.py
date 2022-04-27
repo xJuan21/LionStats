@@ -8,7 +8,9 @@ import yaml
 
 def load_config(filename):
     """Load configuration from a yaml file"""
-    BASE = os.path.dirname(os.path.abspath(__file__))
+    #BASE = os.path.dirname(os.path.abspath(__file__))
+    BASE = "C:\LionStats\LionStats"
+    print(BASE)
     with open(os.path.join(BASE, "config.yml")) as f:
         return yaml.safe_load(f)
 

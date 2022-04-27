@@ -18,8 +18,9 @@ REDIRECT_URL = "http://localhost:{}{}".format(CALLBACK_PORT, CALLBACK_ENDPOINT)
 config = load_config(CONFIG_FILENAME)
 
 teampro = TeamPro(client_id=config['client_id'],
-                      client_secret=config['client_secret'],
-                      redirect_url=REDIRECT_URL)
+                  client_secret=config['client_secret'],
+                  redirect_url=REDIRECT_URL)
+
 
 app = Flask(__name__)
 
@@ -48,12 +49,14 @@ def callback():
     # should be fetched immediately after the authorization step.
     #
     token_response = teampro.get_access_token(authorization_code)
+
     #
     # Save the user's id and access token to the configuration file.
     #
     # config["user_id"] = token_response["x_user_id"]
     config["access_token"] = token_response["access_token"]
     save_config(config, CONFIG_FILENAME)
+
     shutdown()
     return redirect("http://localhost:8000/dashboard", code=302)
 

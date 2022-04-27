@@ -1,12 +1,15 @@
 # Install and run application
 
+REPO CLONED FROM Binary Athlete's https://github.com/ConnorWMcClellan/LionStats We will test database functionality here. 
+- 03/20 UPDATED version I pulled.
+
 ## Steps to follow
 
 In order to install the application for development this steps must be followed
 
 ### `Clone the repository inside our folder`
 
-For this point you can use a code editor like visual studio code or pycharm and clone the repository using the following link 'https://github.com/ConnorWMcClellan/LionStats.git'
+For this point you can use a code editor like visual studio code or pycharm and clone the repository using the following link 'https://github.com/DankDoritos/AthleticsDatabase.git'
 
 in Visual Studio Code there is an option in the side menu which gives us the option to clone it into our computer and it keeps it conected. 
 

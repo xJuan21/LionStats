@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/summary.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script type="application/javascript" src="{% static 'js/dropdownSummary.js' %}"></script>
+
     {% endblock %}
 
     {% block title %}
@@ -26,8 +28,8 @@
 
 <script>
 {% block jquery %}
-const ctx = document.getElementById('stat1').getContext('2d');
-const stat1 = new Chart(ctx, {
+ctx = document.getElementById('stat1').getContext('2d');
+stat1 = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ['Average', 'Athlete #1', 'Athlete #2', 'Athlete #3'],
@@ -51,11 +53,13 @@ const stat1 = new Chart(ctx, {
             borderWidth: 0
         }]
     },
-    options: {
+      options: {
         scales: {
-            y: {
-                beginAtZero: true
-            }
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
         }
     }
 });
@@ -68,15 +72,9 @@ const stat1 = new Chart(ctx, {
         <h4> Position </h4>
         <div class="Dropdown">
             <nav>
-                <label for="touchPosition"><span>Position</span></label>
-                <input type="checkbox" id="touchPosition">
+                <select name = "position" class="menu" id = "dropdownPosition">
 
-                <ul class="menu">
-                <li><a href="#">Position 1</a></li>
-                <li><a href="#">Position 2</a></li>
-                <li><a href="#">Position 3</a></li>
-                <li><a href="#">Position 4</a></li>
-                </ul>
+                </select>
             </nav>
         </div>
     </div>

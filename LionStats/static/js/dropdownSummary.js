@@ -25,40 +25,6 @@ for (var i = 0; i < teamData.data.length; i++)
 }
 }
 
-//function val(dropdown)
-//{
-//    var selected = document.getElementById(dropdown).value;
-//    console.log(selected);
-//}
-
-function dropdownAthlete()
-{
-var teamData;
-$.ajax({
-    async: false,
-    url: 'http://localhost:8000/api/dropdown/team',
-    success: function(data)
-    {
-        teamData = data;
-    }
-});
-let dropdown = document.getElementById('dropdownAthlete')
-let option;
-while(dropdown.firstChild)
-{
-    dropdown.removeChild(dropdown.firstChild);
-}
-
-for (var i = 0; i < teamData.data.players.length; i++)
-{
-    option = document.createElement("option");
-    let first = teamData.data.players[i].first_name;
-    let last  = teamData.data.players[i].last_name;
-    option.text = first.concat(" ", last);
-    dropdown.appendChild(option);
-}
-}
-
 function dropdownPosition()
 {
 var teamData;
@@ -97,9 +63,8 @@ $("select[name='position'] > option").each(function () {
 window.onload = function()
 {
     let btn = document.getElementById("dropdown");
-//    let athBtn = document.getElementById("dropdownAthlete");
-//    let posBtn = document.getElementById("dropdownPosition");
+
     dropdown();
-    btn.onclick = dropdownAthlete(), dropdownPosition();
+    btn.onclick = dropdownPosition();
 }
 

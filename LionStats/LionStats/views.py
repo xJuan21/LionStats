@@ -10,7 +10,6 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from teamproAPI import teampro_queries
 from teamproAPI import authorization
-from rest_framework import generics
 
 
 def delete_product(request):
@@ -37,13 +36,18 @@ def delete_product(request):
 def getData(request):
     global team_name
     team_name = request.POST.get('value')
+    print(team_name)
     return HttpResponse(team_name)
 
 def getStartDate(request):
     global startDate
-    startDate = request.get('http://localhost:8000/startdate')
-    print(startDate)
+    startDate = request.POST.get('value')
     return HttpResponse(startDate)
+
+def getEndDate(request):
+    global endDate
+    endDate = request.POST.get('value')
+    return HttpResponse(endDate)
 
 
 class TeamData(APIView):
@@ -101,10 +105,25 @@ class TeamDetails(APIView):
         teamDetails = teampro.get_team_details(team_name)
         return Response(teamDetails)
 
-class TeamMetricsDate(APIView):
+class TeamSessionDate(APIView):
 
     def get(self, request, format=None):
+
+        strEndDate = str(endDate)
+        strStartDate = str(startDate)
+        print(strStartDate)
+        print(strEndDate)
         teampro = teampro_queries.TeamProExample()
-        id = teampro.get_team_id(team_name)
-        teamMetrics = teampro.get_team_metrics_by_date(id, startDate, "10")
+        teamSessions = teampro.get_session_dates_from_timeframe(team_name, strStartDate, strEndDate)
+        return Response(teamSessions)
+
+class TeamMetrics(APIView):
+
+    def get(self,request, format=None):
+        teampro = teampro_queries.TeamProExample()
+        teamID = teampro.get_team_id(team_name)
+        strEndDate = str(endDate)
+        strStartDate = str(startDate)
+        teamMetrics = teampro.get_team_metrics_by_date(teamID, strStartDate, strEndDate)
+
         return Response(teamMetrics)

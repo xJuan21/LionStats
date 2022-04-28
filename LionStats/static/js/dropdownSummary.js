@@ -50,7 +50,7 @@ for (var i = 0; i < teamData.data.players.length; i++)
     dropdown.appendChild(option);
 }
 var usedNames = {};
-$("select[name='position'] > option").each(function () {
+$("select[name='summaryPosition'] > option").each(function () {
     if(usedNames[this.text]) {
         $(this).remove();
     } else {

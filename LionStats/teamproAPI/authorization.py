@@ -11,7 +11,7 @@ from teampro import TeamPro
 CALLBACK_PORT = 8080
 CALLBACK_ENDPOINT = "/dashboard"
 
-CONFIG_FILENAME = "config.yml"
+CONFIG_FILENAME = "../config.yml"
 
 REDIRECT_URL = "http://localhost:{}{}".format(CALLBACK_PORT, CALLBACK_ENDPOINT)
 

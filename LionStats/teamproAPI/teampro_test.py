@@ -9,7 +9,7 @@ from APIutils import load_config, pretty_print_json
 import requests
 import json
 import yaml
-CONFIG_FILENAME = "config.yml"
+CONFIG_FILENAME = "../config.yml"
 
 class TeamProExample(object):
 

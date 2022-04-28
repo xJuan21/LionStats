@@ -103,8 +103,8 @@ window.onload = function()
     btn.onclick = dropdownAthlete(), dropdownPosition();
 }
 
-////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////
+//
 //function sumDropDown()
 //{
 //var teamData;
@@ -142,9 +142,9 @@ window.onload = function()
 //    let btn = document.getElementById("sumDropDown");
 //    btn.onclick = dropdown;
 //}
-
-/////////////////////////////////////////////////////////////////////
-
+//
+///////////////////////////////////////////////////////////////////////
+//
 //function inNamedropdown()
 //{
 //var teamData;
@@ -182,4 +182,4 @@ window.onload = function()
 //    let btn = document.getElementById("inNamedropdown");
 //    btn.onclick = dropdown;
 //}
-//
+

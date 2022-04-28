@@ -27,7 +27,7 @@ def delete_product(request):
         #     os.system("cd teamproAPI && py authorization.py runserver")
 
         authorization.main()
-        authorization.setup()
+        #authorization.setup()
         authorization.authorize()
         authorization.callback()
 

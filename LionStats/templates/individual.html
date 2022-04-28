@@ -3,20 +3,17 @@
 {% load static %}
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     {% block css %}
-    <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/individual.css' %}">
+    <link rel="stylesheet" type="text/css" href="LionStats/individual.css">
+    <link href="{% static 'styles/individual.css' %}" rel="stylesheet" />
     {% endblock %}
+
     {% block title %}
     <title>Individual</title>
     {% endblock %}
 </head>
-
 <body>
-{% block Individual %}
-<div class="current"></div>
-{% endblock %}
-
 {% block content %}
     <div class="info">
         <h5 class="name">Name:</h5>
@@ -55,11 +52,11 @@
                 }
             </script>
     </div>
+
 {% endblock %}
 
 {% block topbar %}
-<span class="TopBar">Individual</span>
+<span class="TopBar">Individual Stats</span>
 {% endblock %}
 </body>
-
 </html>

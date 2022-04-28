@@ -16,7 +16,7 @@ from rest_framework import generics
 def delete_product(request):
     if request.method == "GET":
         url = 'http://127.0.0.1:8080/'
-        browser_path = '"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" %s'
+        browser_path = 'open -a /Applications/Chrome.app %s'
         firefox_path = '"C:/Program Files/Mozilla Firefox/firefox.exe" %s'
         #webbrowser.get(browser_path).open(url, new=2)
         webbrowser.open(url, new=2, autoraise=True)
@@ -84,6 +84,7 @@ class Dropdown(APIView):
 class TeamDetails(APIView):
 
     def get(self, request, format=None):
+
         # name = self.getTeams(request)
         # print(name)
         # name = self.data(request)

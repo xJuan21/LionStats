@@ -15,40 +15,44 @@
 </head>
 <body>
 {% block content %}
-<div class="current">
+    <div class="info">
+        <h5 class="name">Name:</h5>
+        <h5 class="sport">Sport:</h5>
+        <h5 class="jersey">Jersey:</h5>
+        <h5 class="pos">Position:</h5>
+    </div>
 
-<div class="indvName">
-  <h2> Name : </h2>
-</div>
-<div class="indvSport">
-  <h2> Sport : </h2>
-</div>
-<div class="indvJersey">
-  <h2> Jersey # : </h2>
-</div>
-<div class="indvPosition">
-  <h2> Position : </h2>
-</div>
+    <div class="Dropdown">
+            <nav>
+                <select name = "team" class="menu" id = "inNameDropDown" onchange="val()">
+                </select>
+            </nav>
+    </div>
 
-<div class="content">
-  <div class="indvPeriod">
-      <h2> Period : </h2>
-      <div class="indvDropdown">
-          <nav>
-              <label for="touch"><span>Period</span></label>
-              <input type="checkbox" id="touch">
+<h1 class="start">Start Date</h1>
+    <div class="date-start">
+        <input type="date" id="start" value="">
 
-              <ul class="menu">
-              <li><a href="#">Period</a></li>
-              <li><a href="#">Daily</a></li>
-              <li><a href="#">Weekly</a></li>
-              <li><a href="#">Monthly</a></li>
-              </ul>
-          </nav>
-      </div>
-  </div>
+            <script>
+                function myFunction() {
+                var s = document.getElementById("myDate").value;
+                document.getElementById("demo").innerHTML = s;
+                }
+            </script>
+    </div>
 
-</div>
+    <h1 class="finish">Finish Date</h1>
+    <div class="date-finish">
+        <input type="date" id="myDate" value="">
+
+            <script>
+                function myFunction() {
+                var f = document.getElementById("myDate").value;
+                document.getElementById("demo").innerHTML = f;
+                }
+            </script>
+    </div>
+
 {% endblock %}
 
 {% block topbar %}

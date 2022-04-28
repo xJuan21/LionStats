@@ -1,101 +1,166 @@
-{% load static %}
 
-.Period
-{
-position: absolute;
-width: 234.06px;
-height: 48.43px;
-left: 835.13px;
-top: 510.57px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
+.GreyArea {
+  width: 100%;
+  height: 300%;
+  background: rgba(68,68,68,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
 }
 
-.Position
-{
-position: absolute;
-width: 227.3px;
-height: 48.43px;
-left: 834px;
-top: 446.01px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
+.name{
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 300px;
+    top: 210px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    color: #FFFFFF;
 }
 
-.Jersey
-{
-position: absolute;
-width: 247.56px;
-height: 48.43px;
-left: 835.13px;
-top: 381.44px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
+.sport{
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 300px;
+    top: 285px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    color: #FFFFFF;
 }
 
-.Sport
-{
-position: absolute;
-width: 169.92px;
-height: 48.43px;
-left: 835.13px;
-top: 315.72px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
-
+.jersey{
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 300px;
+    top: 360px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    color: #FFFFFF;
 }
 
-.Name
-{
-position: absolute;
-width: 162.04px;
-height: 48.43px;
-left: 835.13px;
-top: 250px;
-
-font-family: 'Zen Dots';
-font-style: normal;
-font-weight: 400;
-font-size: 35px;
-line-height: 42px;
-
-color: #FFFFFF;
+.pos{
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 300px;
+    top: 435px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    color: #FFFFFF;
 }
 
-.Dropdown
-{
-position: absolute;
-width: 200px;
-height: 178px;
-left: 1069px;
-top: calc(50% - 178px/2 - 315.5px);
-
-background: #FFFFFF;
-border: 1px solid #707070;
-box-sizing: border-box;
-border-radius: 4px;
+.start {
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 920px;
+    top: 237px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    text-align: center;
+    color: #FFFFFF;
 }
+
+.date-start{
+    position: absolute;
+    left: 1000px;
+    top: 350px;
+}
+
+.finish {
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 1418px;
+    top: 237px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.date-finish{
+    position: absolute;
+    left: 1500px;
+    top: 350px;
+}
+
+input[type="date"]{
+    height: 52px;
+    width: 110%;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.Dropdown span{
+    padding : 30px;
+    background : white;
+    color : black;
+    font-size : 1.2em;
+    font-family: 'Zen Dots';
+    cursor : pointer;
+    display: block;
+    z-index: 100;
+}
+
+.Dropdown span::after {
+  float: right;
+  right: 10%;
+  content: "+";
+  z-index: 5;
+}
+
+.Dropdown nav {
+  z-index: 100;
+  width : auto;
+  background: #d9d9d9;
+  margin : 40px auto;
+}
+
+.menu{
+    clear:both;
+    width:1000px;
+    height:0px;
+    overflow: hidden;
+    text-align: center;
+    transition: height .4s ease;
+    z-index: 5;
+}
+
+.menu li {padding : 30px;}
+
+#touch {position: absolute; opacity: 0; height: 0px; }
+#touch:checked + .menu {height: auto; }
+
+#touchPosition {position: absolute; opacity: 0; height: 0px; }
+#touchPosition:checked + .menu {height: auto; }
+

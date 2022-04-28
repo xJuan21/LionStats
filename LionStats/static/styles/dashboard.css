@@ -8,3 +8,40 @@
   left: 0px;
   overflow: hidden;
 }
+
+.welcome {
+    position: absolute;
+    width: 3000px;
+    height: 100%;
+    left: 420px;
+    top: 10px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 100px;
+    color: #FFFFFF;
+}
+
+.last {
+    position: absolute;
+    width: 3000px;
+    height: 100%;
+    left: 420px;
+    top: 275px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 70px;
+    color: #FFFFFF;
+}
+
+.chart1 {
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 450px;
+    left: 390px;
+    z-index: 5;
+}

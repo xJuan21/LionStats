@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/summary.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>
     {% endblock %}
 
     {% block title %}
@@ -14,15 +17,91 @@
 </head>
 <body>
 {% block content %}
+<div class ="chart1">
+    <canvas id="stat1" width="1000" height="600"></canvas>
+</div>
+
+<div class ="chart2">
+    <canvas id="stat2" width="1000" height="600"></canvas>
+</div>
+
+<script>
+{% block jquery %}
+const ctx = document.getElementById('stat1').getContext('2d');
+const stat1 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Average', 'Athlete #1', 'Athlete #2', 'Athlete #3'],
+        datasets: [{
+            label: 'Distance',
+            data: [70, 60, 50, 100],
+            backgroundColor: [
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.7)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+{% endblock %}
+</script>
+
 <div class="Summarycontent">
 
-    <h1 class="first-heading"> Session/Sport 1 </h1>
+    <div class="Position">
+        <h4> Position </h4>
+        <div class="Dropdown">
+            <nav>
+                <select name = "team" class="menu" id = "sumDropDown" onchange="val()">
+                </select>
+            </nav>
+        </div>
+    </div>
 
-    <p class="s1-stat-1"> Statistic #1 </p>
+    <h1 class="start">Start Date</h1>
+    <div class="date-start">
+        <input type="date" id="start" value="">
 
-    <h2 class="second-heading"> Session/Sport 2</h2>
+            <script>
+                function myFunction() {
+                var s = document.getElementById("myDate").value;
+                document.getElementById("demo").innerHTML = s;
+                }
+            </script>
+    </div>
 
-    <p class="s2-stat-1"> Statistic #1 </p>
+    <h1 class="finish">Finish Date</h1>
+    <div class="date-finish">
+        <input type="date" id="myDate" value="">
+
+            <script>
+                function myFunction() {
+                var f = document.getElementById("myDate").value;
+                document.getElementById("demo").innerHTML = f;
+                }
+            </script>
+    </div>
+
+    <h1 class="session"> Session Team Average </h1>
 
 </div>
 {% endblock %}
@@ -32,3 +111,5 @@
 {% endblock %}
 </body>
 </html>
+
+

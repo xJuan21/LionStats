@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/team-filter.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>-->
 <!--    <script src="{% static 'js/.js' %}"></script>-->
     {% endblock %}
     {% block title %}
@@ -27,7 +28,7 @@
 
 <script>
 {% block jquery %}
-var endpoint = '/api/team/data/'
+var endpoint = '/api/dropdown/team/'
 var teamData = []
 var labels = []
 $.ajax({
@@ -83,16 +84,10 @@ $.ajax({
     <div class="Athlete">
         <h4> Athletes </h4>
         <div class="Dropdown">
-            <nav>
-                <label for="touch"><span>Athlete</span></label>
-                <input type="checkbox" id="touch">
+                <select name = "dropdown" class="menu" id = "dropdownAthlete">
 
-                <ul class="menu">
-                <li><a href="#">Smith, John</a></li>
-                <li><a href="#">Skywalker, Anakin</a></li>
-                <li><a href="#">Bolt, Usain</a></li>
-<!--                <li><a href="#">Sport 4</a></li>-->
-                </ul>
+                </select>
+                </form>
             </nav>
         </div>
     </div>
@@ -101,16 +96,15 @@ $.ajax({
         <h4> Position </h4>
         <div class="Dropdown">
             <nav>
-                <label for="touchPosition"><span>Position</span></label>
-                <input type="checkbox" id="touchPosition">
-
-                <ul class="menu">
-                <li><a href="#">Position 1</a></li>
-                <li><a href="#">Position 2</a></li>
-                <li><a href="#">Position 3</a></li>
-                <li><a href="#">Position 4</a></li>
-                </ul>
+                <select name = "position" class="menu" id = "dropdownPosition">
+                </select>
+                <script type="text/javascript">
+                        $(document).ready(()=>{
+                        $("#dropdownPosition option[value=3]").attr('selected', 'selected');
+                        });
+                </script>
             </nav>
+
         </div>
     </div>
 
@@ -118,15 +112,8 @@ $.ajax({
         <h4> Session </h4>
         <div class="Dropdown">
             <nav>
-                <label for="touchSession"><span>Session</span></label>
-                <input type="checkbox" id="touchSession">
-
-                <ul class="menu">
-                <li><a href="#">04/04/2022</a></li>
-                <li><a href="#">04/05/2022</a></li>
-                <li><a href="#">04/06/2022</a></li>
-                <li><a href="#">04/06/2022</a></li>
-                </ul>
+                <select name = "session" class="menu" id = "dropdownSession">
+                </select>
             </nav>
         </div>
     </div>
@@ -135,15 +122,8 @@ $.ajax({
         <h4> Academic Year </h4>
         <div class="Dropdown">
             <nav>
-                <label for="touchYear"><span>Academic Year</span></label>
-                <input type="checkbox" id="touchYear">
-
-                <ul class="menu">
-                <li><a href="#">2019-2020</a></li>
-                <li><a href="#">2020-2021</a></li>
-                <li><a href="#">2021-2022</a></li>
-<!--                <li><a href="#">Senior</a></li>-->
-                </ul>
+               <select name = "year" class="menu" id = "dropdownYear">
+                </select>
             </nav>
         </div>
     </div>

@@ -1,22 +1,75 @@
 <!DOCTYPE html>
 {% extends 'navbar.html' %}
 {% load static %}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     {% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" href="LionStats/dashboard.css">
+    <link href="{% static 'styles/dashboard.css' %}" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
     {% endblock %}
 
     {% block title %}
     <title>Home</title>
     {% endblock %}
 </head>
+
 <body>
 {% block notitle %}
+
 {% endblock %}
 
 {% block content %}
+
+<div class ="chart1">
+    <canvas id="stat1" width="1000" height="600"></canvas>
+</div>
+
+<script>
+{% block jquery %}
+const ctx = document.getElementById('stat1').getContext('2d');
+const stat1 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Duration', 'E_Trimp', 'S_Trimp', 'Exp', 'HR90', 'Dist', 'HSR',
+        'SPNT', 'HSR_DIV_SP'],
+        datasets: [{
+            label: 'Average Team Summary',
+            data: [140, 60, 50, 100, 80, 33, 57, 28, 60],
+            backgroundColor: [
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.4)',
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.4)',
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.4)',
+                'rgba(253, 181, 37, 0.7)',
+                'rgba(253, 181, 37, 0.4)',
+                'rgba(253, 181, 37, 0.7)',
+            ],
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+{% endblock %}
+</script>
+
+<h1 class="welcome"> Welcome to LionStats </h1>
+<h2 class="last"> Last Session Summary: </h2>
+
+{% endblock  %}
+
+{% block dashboard %}
 <div class="current"></div>
 {% endblock %}
 

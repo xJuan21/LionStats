@@ -3,48 +3,60 @@
 {% load static %}
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     {% block css %}
-    <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/individual.css' %}">
+    <link rel="stylesheet" type="text/css" href="LionStats/individual.css">
+    <link href="{% static 'styles/individual.css' %}" rel="stylesheet" />
     {% endblock %}
+
     {% block title %}
     <title>Individual</title>
     {% endblock %}
 </head>
-
 <body>
-{% block Individual %}
-<div class="current"></div>
-{% endblock %}
-
 {% block content %}
-<div class="content">
-    <div class="SelectSport">
-        <h4> Individual </h4>
-        <button onclick="myFunction()"><img src="../static/images/Individual.jpg" height="300px"></button>
-        
+    <div class="info">
+        <h5 class="name">Name:</h5>
+        <h5 class="sport">Sport:</h5>
+        <h5 class="jersey">Jersey:</h5>
+        <h5 class="pos">Position:</h5>
     </div>
 
-    <div class="Position">
-        <h4> Stats </h4>
-        <h5>name</h5>
-        <h5>sport</h5>
-        <h5>jersey</h5>
-        <h5>position</h5>
-        <select name="Period" id="Period" size="1" style="width: 150px; height: 50px; font-size: 30px; font-family: 'Zen Dots';">
-            <option value="volvo">Week</option>
-            <option value="saab">Month</option>
-            <option value="opel">Day</option>
-            <option value="audi">Semester</option>
-          </select>
+    <div class="Dropdown">
+            <nav>
+                <select name = "team" class="menu" id = "inNameDropDown" onchange="val()">
+                </select>
+            </nav>
     </div>
 
-    
-</div>
+<h1 class="start">Start Date</h1>
+    <div class="date-start">
+        <input type="date" id="start" value="">
+
+            <script>
+                function myFunction() {
+                var s = document.getElementById("myDate").value;
+                document.getElementById("demo").innerHTML = s;
+                }
+            </script>
+    </div>
+
+    <h1 class="finish">Finish Date</h1>
+    <div class="date-finish">
+        <input type="date" id="myDate" value="">
+
+            <script>
+                function myFunction() {
+                var f = document.getElementById("myDate").value;
+                document.getElementById("demo").innerHTML = f;
+                }
+            </script>
+    </div>
+
 {% endblock %}
+
 {% block topbar %}
-<span class="TopBar">Individual</span>
+<span class="TopBar">Individual Stats</span>
 {% endblock %}
 </body>
-
 </html>

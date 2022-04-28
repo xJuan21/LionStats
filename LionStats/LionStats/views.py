@@ -15,7 +15,7 @@ from teamproAPI import authorization
 def delete_product(request):
     if request.method == "GET":
         url = 'http://127.0.0.1:8080/'
-        browser_path = '"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" %s'
+        browser_path = 'open -a /Applications/Chrome.app %s'
         firefox_path = '"C:/Program Files/Mozilla Firefox/firefox.exe" %s'
         webbrowser.get(browser_path).open(url, new=2)
         # if getattr(sys, 'frozen', False):
@@ -69,7 +69,7 @@ class TeamDetails(APIView):
     def get(self, request, format=None):
         name = request.POST.get('dropdown', False)
         teampro = teampro_test.TeamProExample()
-        teamID = teampro.get_team_id("Women's Lacrosse")
-        teamDetails = teampro.get_team_details(teamID)
+        teamname="Women's Lacrosse"
+        teamDetails = teampro.get_team_training_sessions(teamname)
         return Response(teamDetails)
 

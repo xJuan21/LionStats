@@ -1,39 +1,165 @@
-.Position {
+.GreyArea {
+  width: 100%;
+  height: 300%;
+  background: rgba(68,68,68,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+
+.name{
     position: absolute;
     width: 470px;
     height: 36px;
-    left: 649px;
+    left: 300px;
     top: 210px;
     z-index: 5;
     font-family: 'Zen Dots';
     font-style: normal;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 40px;
     line-height: 36px;
-
-    /* identical to box height */
-    text-align: center;
-
     color: #FFFFFF;
 }
 
-.SelectSport {
+.sport{
     position: absolute;
-    width: 275px;
+    width: 470px;
     height: 36px;
-    left: 307px;
-    top: 210px;
+    left: 300px;
+    top: 285px;
     z-index: 5;
     font-family: 'Zen Dots';
     font-style: normal;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 40px;
     line-height: 36px;
-
-    /* identical to box height */
-    text-align: center;
-
     color: #FFFFFF;
-
 }
+
+.jersey{
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 300px;
+    top: 360px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    color: #FFFFFF;
+}
+
+.pos{
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 300px;
+    top: 435px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    color: #FFFFFF;
+}
+
+.start {
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 920px;
+    top: 237px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.date-start{
+    position: absolute;
+    left: 1000px;
+    top: 350px;
+}
+
+.finish {
+    position: absolute;
+    width: 470px;
+    height: 36px;
+    left: 1418px;
+    top: 237px;
+    z-index: 5;
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 36px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.date-finish{
+    position: absolute;
+    left: 1500px;
+    top: 350px;
+}
+
+input[type="date"]{
+    height: 52px;
+    width: 110%;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.Dropdown span{
+    padding : 30px;
+    background : white;
+    color : black;
+    font-size : 1.2em;
+    font-family: 'Zen Dots';
+    cursor : pointer;
+    display: block;
+    z-index: 100;
+}
+
+.Dropdown span::after {
+  float: right;
+  right: 10%;
+  content: "+";
+  z-index: 5;
+}
+
+.Dropdown nav {
+  z-index: 100;
+  width : auto;
+  background: #d9d9d9;
+  margin : 40px auto;
+}
+
+.menu{
+    clear:both;
+    width:1000px;
+    height:0px;
+    overflow: hidden;
+    text-align: center;
+    transition: height .4s ease;
+    z-index: 5;
+}
+
+.menu li {padding : 30px;}
+
+#touch {position: absolute; opacity: 0; height: 0px; }
+#touch:checked + .menu {height: auto; }
+
+#touchPosition {position: absolute; opacity: 0; height: 0px; }
+#touchPosition:checked + .menu {height: auto; }
 

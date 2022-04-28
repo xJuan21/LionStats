@@ -51,9 +51,11 @@ urlpatterns = [
     path('team/', team),
     path('api/dropdown/', Dropdown.as_view()),
     path('api/team/data/', TeamData.as_view()),
-    path('api/dropdownnumber2', TeamDetails.as_view()),
+    path('api/dropdown/team', TeamDetails.as_view()),
     path('delete_product', views.delete_product, name='delete_product'),
     path('JSendpoint/', views.getData, name='getData'),
+    path('startdate/', views.getData, name='startdate'),
+    path('enddate/', views.getData, name='enddate'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

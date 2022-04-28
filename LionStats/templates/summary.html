@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/summary.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>
+    <script type="application/javascript" src="{% static 'js/dropdownSummary.js' %}"></script>
     {% endblock %}
 
     {% block title %}
@@ -71,7 +71,7 @@ const stat1 = new Chart(ctx, {
         <h4> Position </h4>
         <div class="Dropdown">
             <nav>
-                <select name = "team" class="menu" id = "sumDropDown" onchange="val()">
+                <select name = "summaryPosition" class="menu" id = "dropdownPosition" onchange="val()">
                 </select>
             </nav>
         </div>

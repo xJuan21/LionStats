@@ -43,11 +43,12 @@ body {
   width: 100%;
   color: rgba(255,255,255,1);
   position: absolute;
-  top: 21px;
-  left: 0px;
+  top: 25%;
+  padding-left: 21%;
+  padding-right: 36%;
   font-family: Zen Dots;
   font-weight: Regular;
-  font-size: 75px;
+  font-size: 60px;
   opacity: 1;
   text-align: center;
 }

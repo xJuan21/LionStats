@@ -2,6 +2,13 @@
     height: 200%
 }
 
+.content{
+    padding-left: 1%;
+    padding-right: 20%;
+    padding-top: 5%;
+    padding-bottom: 5%
+}
+
 .chart {
     height: 100%;
     display: block;
@@ -69,6 +76,9 @@
     color: #FFFFFF;
 }
 
+.sessionBtn{
+
+}
 .Session {
     position: absolute;
     width: 400px;

@@ -1,4 +1,6 @@
-
+.myStartDate{
+    height: 200%
+}
 
 .chart {
     height: 100%;
@@ -6,6 +8,7 @@
     position: absolute;
     top: 50%;
     left: 40%;
+    z-index: 10;
 }
 
 .teamChart {
@@ -133,6 +136,18 @@
     text-align: center;
     transition: height .4s ease;
     z-index: 5;
+}
+
+input{
+    height: 50px;
+    width: 200px;
+    font-size: 18px;
+    font-family: 'Zen Dots';
+}
+
+.content select{
+    font-size: 25px;
+    font-family: 'Zen Dots';
 }
 
 .Dropdown span{

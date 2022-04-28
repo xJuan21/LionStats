@@ -39,6 +39,13 @@ def getData(request):
     team_name = request.POST.get('value')
     return HttpResponse(team_name)
 
+def getStartDate(request):
+    global startDate
+    startDate = request.get('http://localhost:8000/startdate')
+    print(startDate)
+    return HttpResponse(startDate)
+
+
 class TeamData(APIView):
     """
     View to list all users in the system.
@@ -94,3 +101,10 @@ class TeamDetails(APIView):
         teamDetails = teampro.get_team_details(team_name)
         return Response(teamDetails)
 
+class TeamMetricsDate(APIView):
+
+    def get(self, request, format=None):
+        teampro = teampro_queries.TeamProExample()
+        id = teampro.get_team_id(team_name)
+        teamMetrics = teampro.get_team_metrics_by_date(id, startDate, "10")
+        return Response(teamMetrics)

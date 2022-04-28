@@ -22,6 +22,7 @@ from LionStats import views
 from .views import TeamData
 from .views import Dropdown
 from .views import TeamDetails
+from .views import TeamMetricsDate
 
 def login(request):
     return render(request, 'login.html')
@@ -52,6 +53,7 @@ urlpatterns = [
     path('api/dropdown/', Dropdown.as_view()),
     path('api/team/data/', TeamData.as_view()),
     path('api/dropdown/team', TeamDetails.as_view()),
+    path('api/metrics', TeamMetricsDate.as_view()),
     path('delete_product', views.delete_product, name='delete_product'),
     path('JSendpoint/', views.getData, name='getData'),
     path('startdate/', views.getData, name='startdate'),

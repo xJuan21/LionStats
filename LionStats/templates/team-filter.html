@@ -103,6 +103,7 @@ $.ajax({
 
     <div class="Session">
         <h4> Session </h4>
+        <button type="button" id = "sessionBtn">Load Sessions</button>
         <div class="Dropdown">
 <!--            <nav>-->
                 <select name = "session" class="menu" id = "dropdownSession">
@@ -117,11 +118,12 @@ $.ajax({
 <!--            <nav>-->
 <!--               <select name = "year" class="menu" id = "dropdownYear">-->
 <!--                </select>-->
-                <input type="date" id="myStartDate">
+                <input type="date" name = "start" id="myStartDate" onchange="startDateTeam()">
             <script>
-                    function dataTeam()
+                    function startDateTeam()
                     {
-                        var selected = $("#myStartDate).datepicker('getDate');;
+                        var selected = $('#myStartDate').val()
+                        console.log(selected);
                         let csrftoken = '{{ csrf_token }}';
                         $.ajax({
                         url:'/startdate/',
@@ -132,11 +134,12 @@ $.ajax({
                         });
                     }
                 </script>
-                <input type="date" id="myEndDate">
+                <input type="date" id="myEndDate" onchange="endDateTeam()">
             <script>
-                    function dataTeam()
+                    function endDateTeam()
                     {
-                        var selected = $("#dropdown option:selected").text();
+                        var selected = $('#myEndDate').val()
+                        console.log(selected);
                         let csrftoken = '{{ csrf_token }}';
                         $.ajax({
                         url:'/enddate/',

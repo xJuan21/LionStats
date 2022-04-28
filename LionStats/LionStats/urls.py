@@ -19,9 +19,8 @@ from django.urls import path
 from django.shortcuts import render
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from LionStats import views
-from .views import TeamData
-from .views import Dropdown
-from .views import TeamDetails
+from .views import *
+
 
 def login(request):
     return render(request, 'login.html')
@@ -52,10 +51,12 @@ urlpatterns = [
     path('api/dropdown/', Dropdown.as_view()),
     path('api/team/data/', TeamData.as_view()),
     path('api/dropdown/team', TeamDetails.as_view()),
+    path('api/dropdown/sessions', TeamSessionDate.as_view()),
+    path('api/metrics', TeamMetrics.as_view()),
     path('delete_product', views.delete_product, name='delete_product'),
     path('JSendpoint/', views.getData, name='getData'),
-    path('startdate/', views.getData, name='startdate'),
-    path('enddate/', views.getData, name='enddate'),
+    path('startdate/', views.getStartDate, name='startdate'),
+    path('enddate/',views.getEndDate, name='enddate'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

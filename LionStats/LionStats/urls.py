@@ -56,7 +56,8 @@ urlpatterns = [
     path('delete_product', views.delete_product, name='delete_product'),
     path('JSendpoint/', views.getData, name='getData'),
     path('startdate/', views.getStartDate, name='startdate'),
-    path('enddate/',views.getEndDate, name='enddate'),
+    path('enddate/', views.getEndDate, name='enddate'),
+    path('athlete/', views.getAthlete, name='atheltes'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

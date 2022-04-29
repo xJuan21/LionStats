@@ -53,14 +53,29 @@ while(dropdown.firstChild)
     dropdown.removeChild(dropdown.firstChild);
 }
 
+var lst = [];
 for (var i = 0; i < teamData.data.players.length; i++)
 {
-    option = document.createElement("option");
+//    option = document.createElement("option");
     let first = teamData.data.players[i].first_name;
     let last  = teamData.data.players[i].last_name;
-    option.text = first.concat(" ", last);
-    dropdown.appendChild(option);
+    let pos = teamData.data.players[i].role;
+    let combo = first.concat(" ", last, " (", pos, ")")
+    lst.push(combo);
+//    dropdown.appendChild(option);
 }
+
+$(document).ready(function() {
+var select2 = $('#dropdownAthlete').select2({
+    placeholder: "Select",
+    width: '500px',
+    data:lst,
+    multiple: true,
+    closeOnSelect: false,
+})
+
+select2.trigger("change");
+});
 }
 
 function dropdownPosition()

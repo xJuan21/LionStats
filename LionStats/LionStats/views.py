@@ -1,6 +1,6 @@
 import os
 import subprocess
-import sys
+import json
 import webbrowser
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -36,7 +36,6 @@ def delete_product(request):
 def getData(request):
     global team_name
     team_name = request.POST.get('value')
-    print(team_name)
     return HttpResponse(team_name)
 
 def getStartDate(request):
@@ -49,6 +48,11 @@ def getEndDate(request):
     endDate = request.POST.get('value')
     return HttpResponse(endDate)
 
+def getAthlete(request):
+    global athletes
+    athletes = request.POST.get('value')
+    return HttpResponse(athletes)
+
 
 class TeamData(APIView):
     """
@@ -57,15 +61,28 @@ class TeamData(APIView):
     * Requires token authentication.
     * Only admin users are able to access this view.
     """
-    authentication_classes = []
-    permission_classes = []
+
+    def metrics(self):
+        teampro = teampro_queries.TeamProExample()
+        team_id = teampro.get_team_id(team_name)
+        athleteFirst, athleteSecond = athletes.split(" ", 1)
+        playerID = teampro.get_player_id(team_id, athleteFirst, athleteSecond)
+        metrics = teampro.get_individual_metrics_by_date(team_id, playerID, startDate, endDate)
+        metricsJson = json.loads(metrics)
+        metricsList = []
+        for i in range(1, metricsJson.length):
+            metricsList.append(i)
+
+
+        return metricsList
 
     def get(self, request, format=None):
         """
         Return a list of all users.
         """
-        labels = ["DIST", "HR90"]
-        teamData = [5000, 15]
+
+        labels = []
+        teamData = self.metrics()
         data = {
             "labels": labels,
             "default": teamData,
@@ -113,6 +130,7 @@ class TeamSessionDate(APIView):
         strStartDate = str(startDate)
         print(strStartDate)
         print(strEndDate)
+        print(TeamData.metrics(self))
         teampro = teampro_queries.TeamProExample()
         teamSessions = teampro.get_session_dates_from_timeframe(team_name, strStartDate, strEndDate)
         return Response(teamSessions)

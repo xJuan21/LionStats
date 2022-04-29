@@ -282,8 +282,8 @@ class TeamProExample(object):
         training_sessions = self.get_team_training_sessions(team_id)
 
         # format start and end dates for easy access from API
-        formatted_start_date = start_date[6:10] + "-" + start_date[0:2] + "-" + start_date[3:5]
-        formatted_end_date = end_date[6:10] + "-" + end_date[0:2] + "-" + end_date[3:5]
+        formatted_start_date = start_date[0:4] + "-" + start_date[5:7] + "-" + start_date[8:10]
+        formatted_end_date = end_date[0:4] + "-" + end_date[5:7] + "-" + end_date[8:10]
 
         # get all session ids that exist within specified time frame
         session_ids = []
@@ -596,8 +596,8 @@ class TeamProExample(object):
         training_sessions = self.get_team_training_sessions(team_id)
 
         # format start and end dates for easy access from API
-        formatted_start_date = start_date[6:10] + "-" + start_date[0:2] + "-" + start_date[3:5]
-        formatted_end_date = end_date[6:10] + "-" + end_date[0:2] + "-" + end_date[3:5]
+        formatted_start_date = start_date[0:4] + "-" + start_date[5:7] + "-" + start_date[8:10]
+        formatted_end_date = end_date[0:4] + "-" + end_date[5:7] + "-" + end_date[8:10]
 
         # get all session ids that exist within specified time frame
         session_ids = []
@@ -629,8 +629,8 @@ class TeamProExample(object):
         training_sessions = self.get_team_training_sessions(team_id)
 
         # format start and end dates for easy access from API
-        formatted_start_date = start_date[6:10] + "-" + start_date[0:2] + "-" + start_date[3:5]
-        formatted_end_date = end_date[6:10] + "-" + end_date[0:2] + "-" + end_date[3:5]
+        formatted_start_date = start_date[0:4] + "-" + start_date[5:7] + "-" + start_date[8:10]
+        formatted_end_date = end_date[0:4] + "-" + end_date[5:7] + "-" + end_date[8:10]
 
         # get all session dates that exist within specified time frame and store them in a json object and array
         session_dates_array = []

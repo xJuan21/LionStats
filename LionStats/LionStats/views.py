@@ -50,9 +50,34 @@ def getEndDate(request):
 
 def getAthlete(request):
     global athletes
-    athletes = request.POST.get('value')
+    global firstName
+    global lastName
+    athletes = []
+    athletes.append(request.POST.getlist('value[]'))
+
+    list = str(athletes[0]).split(',')
+    first, lastName, position = list[0].split(' ')
+
+    junk, firstName = first.split("'")
+    # firstName, lastName = athletes.split(" ", 2)
+
     return HttpResponse(athletes)
 
+
+class Metrics:
+
+    def metrics(self):
+        teampro = teampro_queries.TeamProExample()
+        team_id = teampro.get_team_id(team_name)
+        player_id = teampro.get_player_id(team_name, firstName, lastName)
+        metrics = teampro.get_individual_metrics_by_date(team_id, player_id, startDate, endDate)
+        # metricsJson = json.loads(metrics)
+        # metricsList = []
+        # for i in range(1, metricsJson.length):
+        #    metricsList.append(i)
+        # print(metrics)
+
+        return metrics
 
 class TeamData(APIView):
     """
@@ -62,32 +87,27 @@ class TeamData(APIView):
     * Only admin users are able to access this view.
     """
 
-    def metrics(self):
-        teampro = teampro_queries.TeamProExample()
-        team_id = teampro.get_team_id(team_name)
-        athleteFirst, athleteSecond = athletes.split(" ", 1)
-        playerID = teampro.get_player_id(team_id, athleteFirst, athleteSecond)
-        metrics = teampro.get_individual_metrics_by_date(team_id, playerID, startDate, endDate)
-        metricsJson = json.loads(metrics)
-        metricsList = []
-        for i in range(1, metricsJson.length):
-            metricsList.append(i)
-
-
-        return metricsList
-
     def get(self, request, format=None):
         """
         Return a list of all users.
         """
 
+        teampro = teampro_queries.TeamProExample()
+        playerID = teampro.get_player_id(team_name, firstName, lastName)
+        metrics = Metrics.metrics(self)
+        print(metrics)
+        # for item in metrics['players']:
+        #     if item['player_id'] == playerID:
+        #         print()
+
+
         labels = []
-        teamData = self.metrics()
+        teamData = []
         data = {
             "labels": labels,
             "default": teamData,
         }
-        return Response(data)
+        return Response(metrics)
 
 
 class Dropdown(APIView):
@@ -120,6 +140,7 @@ class TeamDetails(APIView):
         # name = getData(request).teamName;
         teampro = teampro_queries.TeamProExample()
         teamDetails = teampro.get_team_details(team_name)
+
         return Response(teamDetails)
 
 class TeamSessionDate(APIView):
@@ -128,20 +149,19 @@ class TeamSessionDate(APIView):
 
         strEndDate = str(endDate)
         strStartDate = str(startDate)
-        print(strStartDate)
-        print(strEndDate)
-        print(TeamData.metrics(self))
+
         teampro = teampro_queries.TeamProExample()
         teamSessions = teampro.get_session_dates_from_timeframe(team_name, strStartDate, strEndDate)
         return Response(teamSessions)
 
-class TeamMetrics(APIView):
-
-    def get(self,request, format=None):
-        teampro = teampro_queries.TeamProExample()
-        teamID = teampro.get_team_id(team_name)
-        strEndDate = str(endDate)
-        strStartDate = str(startDate)
-        teamMetrics = teampro.get_team_metrics_by_date(teamID, strStartDate, strEndDate)
-
-        return Response(teamMetrics)
+# class TeamMetrics(APIView):
+#
+#     def get(self,request, format=None):
+#         teampro = teampro_queries.TeamProExample()
+#         teamID = teampro.get_team_id(team_name)
+#         strEndDate = str(endDate)
+#         strStartDate = str(startDate)
+#         # teamMetrics = teampro.get_team_metrics_by_date(teamID, strStartDate, strEndDate)
+#         playerID = teampro.get_player_id(teamID, firstName, lastName)
+#         print(playerID)
+#         return Response(playerID)

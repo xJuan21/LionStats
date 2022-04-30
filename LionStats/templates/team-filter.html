@@ -92,30 +92,32 @@ $.ajax({
                 <script>
                 function athletes()
                 {
-                    var selected = $('#dropdownAthlete').val()
+                    var selected = $('#dropdownAthlete').val();
+<!--                    var myJson = JSON.stringify(selected);-->
+<!--                    console.log(selected);-->
                     console.log(selected);
                     let csrftoken = '{{ csrf_token }}';
                     $.ajax({
                     url:'/athlete/',
                     type: "POST",
+                    dataType: "json",
                     headers:{'X-CSRFToken': csrftoken},
                     data: {'value' : selected,},
-                    dataType: "json",
                     });
                 }
                 </script>
         </div>
     </div>
 
-    <div class="Position">
-        <h4> Position </h4>
-        <div class="Dropdown">
-<!--            <nav>-->
-                <select name = "position" class="menu" id = "dropdownPosition">
-                </select>
-<!--            </nav>-->
-        </div>
-    </div>
+<!--    <div class="Position">-->
+<!--        <h4> Position </h4>-->
+<!--        <div class="Dropdown">-->
+<!--&lt;!&ndash;            <nav>&ndash;&gt;-->
+<!--                <select name = "position" class="menu" id = "dropdownPosition">-->
+<!--                </select>-->
+<!--&lt;!&ndash;            </nav>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="Session">
         <h4> Session </h4>
@@ -138,7 +140,7 @@ $.ajax({
             <script>
                     function startDateTeam()
                     {
-                        var selected = $('#myStartDate').val()
+                        var selected = $('#myStartDate').val();
                         console.log(selected);
                         let csrftoken = '{{ csrf_token }}';
                         $.ajax({
@@ -154,7 +156,7 @@ $.ajax({
             <script>
                     function endDateTeam()
                     {
-                        var selected = $('#myEndDate').val()
+                        var selected = $('#myEndDate').val();
                         console.log(selected);
                         let csrftoken = '{{ csrf_token }}';
                         $.ajax({

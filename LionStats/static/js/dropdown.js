@@ -58,7 +58,8 @@ for (var i = 0; i < teamData.data.players.length; i++)
     option = document.createElement("option");
     let first = teamData.data.players[i].first_name;
     let last  = teamData.data.players[i].last_name;
-    option.text = first.concat(" ", last);
+    let pos = teamData.data.players[i].role;
+    option.text = first.concat(" ", last, " (", pos, ")");
     dropdown.appendChild(option);
 }
 }

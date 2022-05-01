@@ -83,9 +83,8 @@ $.ajax({
     <div class="Athlete">
         <h4> Athletes </h4>
         <div class="Dropdown">
-                <select name = "dropdown" class="menu" id = "dropdownAthlete">
-
-                </select>
+            <script>$('select').select2({ width: '100%', placeholder: "Select an Option", allowClear: true });</script>
+                <select name = "dropdown" class="menu" id = "dropdownAthlete"></select>
 <!--                </form>-->
 <!--            </nav>-->
         </div>
@@ -175,6 +174,8 @@ $.ajax({
 <!--<canvas id="teamStats">-->
 
 <!--</canvas>-->
+
+<!-- see an average of all the stats for selected athletes during the selected time period-->
 {% endblock %}
 </body>
 

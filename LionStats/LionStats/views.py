@@ -50,7 +50,7 @@ def getEndDate(request):
 
 def getSession(request):
     global session
-    session = request.Post.get('value')
+    session = request.POST.get('value')
     return HttpResponse(session)
 
 def getAthlete(request):
@@ -96,17 +96,43 @@ class TeamData(APIView):
         """
         Return a list of all users.
         """
-
+        athleteMetrics = []
         teampro = teampro_queries.TeamProExample()
-        playerID = teampro.get_player_id(team_name, firstName, lastName)
-        print(playerID)
-        metrics = Metrics.metrics(self)
+        # playerID = teampro.get_player_id(team_name, firstName, lastName)
+        # print(playerID)
+        team_id = teampro.get_team_id(team_name)
+        player_id = teampro.get_player_id(team_name, firstName, lastName)
+        metrics = teampro.get_individual_metrics_by_date(team_id, player_id, startDate, endDate)
         print(metrics)
-        for item in metrics['players']:
-            if item['player_id'] == playerID:
-                print()
+        print(session)
+        convertData = json.dumps(metrics)
+        data = json.loads(convertData)
+        for item in data["metrics"]:
+            print(item['Date'])
+            populated = False
+            if item['Date'] == session:
+                print("FOUND:" + item['Date'])
+                athleteMetrics.append((item["Duration"]))
+                athleteMetrics.append((item["eTrimp"]))
+                athleteMetrics.append((item["sTrimp"]))
+                athleteMetrics.append((item["EXP"]))
+                athleteMetrics.append((item["HR90"]))
+                athleteMetrics.append((item["DIST"]))
+                athleteMetrics.append((item["HSR"]))
+                athleteMetrics.append((item["SPNT"]))
+                athleteMetrics.append((item["HSR/SP"]))
+                athleteMetrics.append((item["rEXP"]))
+                athleteMetrics.append((item["rDIST"]))
+                athleteMetrics.append((item["rHSR"]))
+                athleteMetrics.append((item["rSPNT"]))
+                populated = True
+
+            if populated == True:
+                break
 
 
+
+        print(athleteMetrics)
         labels = ["Duration",
                     "eTrimp",
                     "sTrimp",
@@ -120,7 +146,7 @@ class TeamData(APIView):
                     "rDIST",
                     "rHSR" ,
                     "rSPNT"]
-        teamData = [5, 5, 1, 2, 4, 8, 8, 1, 5, 4, 6, 7, 9]
+        teamData = athleteMetrics
         data = {
             "labels": labels,
             "default": teamData,

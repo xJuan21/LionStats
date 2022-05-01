@@ -23,12 +23,15 @@
 {% endblock %}
 
 {% block content %}
+
+
 <div class ="chart">
+    <button type="button" id = "chartBtn" onclick="chart()">Load Chart</button>
     <canvas id ="teamChart" width="800px" height="500px"></canvas>
 </div>
-
 <script>
 {% block jquery %}
+function chart(){
 var endpoint = '/api/team/data'
 var teamData = []
 var labels = []
@@ -36,39 +39,86 @@ $.ajax({
     method: "GET",
     url: endpoint,
     success: function(data){
-        labels = data.labels
+<!--        labels = data.labels-->
         teamData = data.default
-        //console.log(data)
+        console.log(teamData[0])
         var ctx = document.getElementById('teamChart').getContext('2d');
         var teamChart = new Chart(ctx, {
           type: 'bar',
           data:{
           labels: labels,
           datasets: [{
-            data: teamData,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 205, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(201, 203, 207, 0.2)'
-            ],
-            borderColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(75, 192, 192)',
-              'rgb(54, 162, 235)',
-              'rgb(153, 102, 255)',
-              'rgb(201, 203, 207)'
-            ],
+            label: 'Duration',
+            data: [teamData[0]],
+            backgroundColor: "Red",
+            borderWidth: 1
+          }, {
+            label: 'eTrimp',
+            data: [teamData[1]],
+            backgroundColor: "Orange",
+            borderWidth: 1
+          }, {
+            label: 'sTrimp',
+            data: [teamData[2]],
+            backgroundColor: "Yellow",
+            borderWidth: 1
+          }, {
+            label: 'EXP',
+            data: [teamData[3]],
+            backgroundColor: "Green",
+            borderWidth: 1
+          }, {
+            label: 'HR90',
+            data: [teamData[4]],
+            backgroundColor: "Blue",
+            borderWidth: 1
+          }, {
+            label: 'DIST',
+            data: [teamData[5]],
+            backgroundColor: "Purple",
+            borderWidth: 1
+          }, {
+            label: 'HSR',
+            data: [teamData[6]],
+            backgroundColor: "Indigo",
+            borderWidth: 1
+          }, {
+            label: 'SPNT',
+            data: [teamData[7]],
+            backgroundColor: "Pink",
+            borderWidth: 1
+          }, {
+            label: 'HSR/SP',
+            data: [teamData[8]],
+            backgroundColor: "LightBlue",
+            borderWidth: 1
+          }, {
+            label: 'rEXP',
+            data: [teamData[9]],
+            backgroundColor: "DarkRed",
+            borderWidth: 1
+          }, {
+            label: 'rDIST',
+            data: [teamData[10]],
+            backgroundColor: "DarkOrange",
+            borderWidth: 1
+          }, {
+            label: 'rHSR',
+            data: [teamData[11]],
+            backgroundColor: "Aquamarine",
+            borderWidth: 1
+          }, {
+            label: 'rSPNT',
+            data: [teamData[12]],
+            backgroundColor: "DarkOrchid",
             borderWidth: 1
           }]
           },
            options: {
-                responsive: false
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
             }
         });
 
@@ -78,7 +128,7 @@ $.ajax({
         console.log(error_data)
     }
 })
-
+}
 {% endblock %}
 </script>
 <div class="content">
@@ -127,19 +177,21 @@ $.ajax({
                 <select name = "session" class="menu" id = "dropdownSession" onchange="session()">
                 </select>
 <!--            </nav>-->
+                <script>
                 function session()
                     {
                         var selected = $('#dropdownSession').val();
                         console.log(selected);
                         let csrftoken = '{{ csrf_token }}';
                         $.ajax({
-                        url:'/startdate/',
+                        url:'/session/',
                         type: "POST",
                         headers:{'X-CSRFToken': csrftoken},
                         data: {'value' : selected,},
                         dataType: "json",
                         });
                     }
+                </script>
         </div>
     </div>
 

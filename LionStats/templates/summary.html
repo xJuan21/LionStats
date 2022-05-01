@@ -79,25 +79,43 @@ const stat1 = new Chart(ctx, {
 
     <h1 class="start">Start Date</h1>
     <div class="date-start">
-        <input type="date" id="start" value="">
+        <input type="date" id="myStartDate" onchange="startDateTeam()">
 
             <script>
-                function myFunction() {
-                var s = document.getElementById("myDate").value;
-                document.getElementById("demo").innerHTML = s;
-                }
+                function startDateTeam()
+                    {
+                        var selected = $('#myStartDate').val();
+                        console.log(selected);
+                        let csrftoken = '{{ csrf_token }}';
+                        $.ajax({
+                        url:'/startdate/',
+                        type: "POST",
+                        headers:{'X-CSRFToken': csrftoken},
+                        data: {'value' : selected,},
+                        dataType: "json",
+                        });
+                    }
             </script>
     </div>
 
     <h1 class="finish">Finish Date</h1>
     <div class="date-finish">
-        <input type="date" id="myDate" value="">
+        <input type="date" id="myEndDate" onchange="endDateTeam()">
 
             <script>
-                function myFunction() {
-                var f = document.getElementById("myDate").value;
-                document.getElementById("demo").innerHTML = f;
-                }
+                function endDateTeam()
+                    {
+                        var selected = $('#myEndDate').val();
+                        console.log(selected);
+                        let csrftoken = '{{ csrf_token }}';
+                        $.ajax({
+                        url:'/enddate/',
+                        type: "POST",
+                        headers:{'X-CSRFToken': csrftoken},
+                        data: {'value' : selected,},
+                        dataType: "json",
+                        });
+                    }
             </script>
     </div>
 

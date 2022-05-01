@@ -198,14 +198,13 @@ class TeamSessionDate(APIView):
         teamSessions = teampro.get_session_dates_from_timeframe(team_name, strStartDate, strEndDate)
         return Response(teamSessions)
 
-# class TeamMetrics(APIView):
-#
-#     def get(self,request, format=None):
-#         teampro = teampro_queries.TeamProExample()
-#         teamID = teampro.get_team_id(team_name)
-#         strEndDate = str(endDate)
-#         strStartDate = str(startDate)
-#         # teamMetrics = teampro.get_team_metrics_by_date(teamID, strStartDate, strEndDate)
-#         playerID = teampro.get_player_id(teamID, firstName, lastName)
-#         print(playerID)
-#         return Response(playerID)
+class TeamMetrics(APIView):
+
+    def get(self,request, format=None):
+        teampro = teampro_queries.TeamProExample()
+        teamID = teampro.get_team_id(team_name)
+        strEndDate = str(endDate)
+        strStartDate = str(startDate)
+        teamMetrics = teampro.get_team_metrics_by_date(teamID, strStartDate, strEndDate)
+
+        return Response(teamMetrics)

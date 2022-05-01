@@ -17,6 +17,10 @@ while(dropdown.firstChild)
     dropdown.removeChild(dropdown.firstChild);
 }
 
+option = document.createElement("option");
+option.value = "";
+dropdown.appendChild(option);
+
 for (var i = 0; i < teamData.data.length; i++)
 {
     option = document.createElement("option");

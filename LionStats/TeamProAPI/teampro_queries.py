@@ -1,6 +1,6 @@
 from __future__ import print_function
 import sys
-sys.path.append('/Users/maddietalley/PycharmProjects/LionStats/LionStats/teamproAPI')
+sys.path.append('C:/LionStats/LionStats/teamproAPI/')
 #sys.path.append('C:/LionStats/dist/manage/teamproAPI')
 # sys.path.append('/Users/connor/PycharmProjects/LionStats2.0/LionStats/teamproAPI')
 from APIutils import load_config, pretty_print_json
@@ -10,7 +10,7 @@ import json
 import isodate
 import datetime
 
-CONFIG_FILENAME = "../config.yml"
+CONFIG_FILENAME = "config.yml"
 
 # MAKE SURE TO AUTHORIZE BEFORE USING THIS CLASS BY RUNNING 'python authorization.py'!!!
 # YOU WILL GET AN ERROR IF YOU DON'T!
@@ -916,6 +916,37 @@ class TeamProExample(object):
                 session_dates_json["date"].append(keyval['start_time'][0:10])
 
         return session_dates_json
+
+        # Returns the player session metrics of the latest training session
+
+    def get_home(self, team_id):
+        all_session_data = self.get_team_training_sessions(team_id)
+        session_id = ''
+
+        for data in all_session_data['data']:
+            session_id = data['id']
+            break
+
+        # get training session details
+        latest_session_details = self.get_team_training_session_details(session_id)['data']
+
+        # get all player ids and player session ids
+        player_session_ids = []
+        player_ids = []
+        for keyval in latest_session_details['participants']:
+            player_session_ids.append(keyval['player_session_id'])
+            player_ids.append(keyval['player_id'])
+
+        # append all calculated metrics from every player to a json string
+        all_metrics = {"metrics": []}
+        for i, item in enumerate(player_session_ids):
+            summary = self.get_player_team_training_session_summary(item)['data']
+            metrics = self.calculate_metrics(summary, summary['trimmed_start_time'][0:10], player_ids[i])
+            all_metrics["metrics"].append(metrics)
+
+        return all_metrics
+
+
 
     ##################################
 

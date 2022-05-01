@@ -10,27 +10,13 @@
   overflow: hidden;
 }
 
+
 .name{
     position: absolute;
     width: 470px;
     height: 36px;
     left: 300px;
-    top: 210px;
-    z-index: 5;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 36px;
-    color: #FFFFFF;
-}
-
-.sport{
-    position: absolute;
-    width: 470px;
-    height: 36px;
-    left: 300px;
-    top: 285px;
+    top: 295px;
     z-index: 5;
     font-family: 'Zen Dots';
     font-style: normal;
@@ -55,26 +41,11 @@
     color: #FFFFFF;
 }
 
-.pos{
-    position: absolute;
-    width: 470px;
-    height: 36px;
-    left: 300px;
-    top: 435px;
-    z-index: 5;
-    font-family: 'Zen Dots';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 36px;
-    color: #FFFFFF;
-}
-
 .start {
     position: absolute;
     width: 470px;
     height: 36px;
-    left: 920px;
+    left: 1170px;
     top: 237px;
     z-index: 5;
     font-family: 'Zen Dots';
@@ -88,7 +59,7 @@
 
 .date-start{
     position: absolute;
-    left: 1000px;
+    left: 1200px;
     top: 350px;
 }
 
@@ -96,7 +67,7 @@
     position: absolute;
     width: 470px;
     height: 36px;
-    left: 1418px;
+    left: 1670px;
     top: 237px;
     z-index: 5;
     font-family: 'Zen Dots';
@@ -110,7 +81,7 @@
 
 .date-finish{
     position: absolute;
-    left: 1500px;
+    left: 1700px;
     top: 350px;
 }
 
@@ -121,29 +92,23 @@ input[type="date"]{
     padding-left: 20px;
 }
 
-.Dropdown span{
-    padding : 30px;
-    background : white;
-    color : black;
-    font-size : 1.2em;
+.Athlete {
+    position: absolute;
+    width: 600px;
+    height: 36px;
+    left: 10px;
+    top: 165px;
+
     font-family: 'Zen Dots';
-    cursor : pointer;
-    display: block;
-    z-index: 100;
-}
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
 
-.Dropdown span::after {
-  float: right;
-  right: 10%;
-  content: "+";
-  z-index: 5;
-}
+    /* identical to box height */
+    text-align: center;
 
-.Dropdown nav {
-  z-index: 100;
-  width : auto;
-  background: #d9d9d9;
-  margin : 40px auto;
+    color: #FFFFFF;
 }
 
 .menu{
@@ -156,11 +121,47 @@ input[type="date"]{
     z-index: 5;
 }
 
+.content select{
+    font-size: 25px;
+    font-family: 'Zen Dots';
+}
+
+#dropdownAthlete{
+    height: 60px;
+}
+
+input{
+    height: 50px;
+    width: 200px;
+
+    font-size: 18px;
+    font-family: 'Zen Dots';
+}
+
+li a {
+    font-family: 'Zen Dots';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    z-index: 100;
+    /* identical to box height */
+    text-align: center;
+
+    color: black;
+}
+
+.Dropdown nav {
+  z-index: 100;
+  width : auto;
+  background: #d9d9d9;
+  margin : 40px auto;
+}
+
 .menu li {padding : 30px;}
 
 #touch {position: absolute; opacity: 0; height: 0px; }
 #touch:checked + .menu {height: auto; }
 
-#touchPosition {position: absolute; opacity: 0; height: 0px; }
-#touchPosition:checked + .menu {height: auto; }
-
+#touchType {position: absolute; opacity: 0; height: 0px; }
+#touchType:checked + .menu {height: auto; }

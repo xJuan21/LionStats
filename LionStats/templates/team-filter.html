@@ -124,9 +124,22 @@ $.ajax({
         <button type="button" id = "sessionBtn">Load Sessions</button>
         <div class="Dropdown">
 <!--            <nav>-->
-                <select name = "session" class="menu" id = "dropdownSession">
+                <select name = "session" class="menu" id = "dropdownSession" onchange="session()">
                 </select>
 <!--            </nav>-->
+                function session()
+                    {
+                        var selected = $('#dropdownSession').val();
+                        console.log(selected);
+                        let csrftoken = '{{ csrf_token }}';
+                        $.ajax({
+                        url:'/startdate/',
+                        type: "POST",
+                        headers:{'X-CSRFToken': csrftoken},
+                        data: {'value' : selected,},
+                        dataType: "json",
+                        });
+                    }
         </div>
     </div>
 

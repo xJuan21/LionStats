@@ -58,6 +58,7 @@ urlpatterns = [
     path('startdate/', views.getStartDate, name='startdate'),
     path('enddate/', views.getEndDate, name='enddate'),
     path('athlete/', views.getAthlete, name='atheltes'),
+    path('session/', views.getSession, name='session'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

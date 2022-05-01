@@ -48,6 +48,11 @@ def getEndDate(request):
     endDate = request.POST.get('value')
     return HttpResponse(endDate)
 
+def getSession(request):
+    global session
+    session = request.Post.get('value')
+    return HttpResponse(session)
+
 def getAthlete(request):
     global athletes
     global firstName
@@ -94,20 +99,33 @@ class TeamData(APIView):
 
         teampro = teampro_queries.TeamProExample()
         playerID = teampro.get_player_id(team_name, firstName, lastName)
+        print(playerID)
         metrics = Metrics.metrics(self)
         print(metrics)
-        # for item in metrics['players']:
-        #     if item['player_id'] == playerID:
-        #         print()
+        for item in metrics['players']:
+            if item['player_id'] == playerID:
+                print()
 
 
-        labels = []
-        teamData = []
+        labels = ["Duration",
+                    "eTrimp",
+                    "sTrimp",
+                    "EXP",
+                    "HR90",
+                    "DIST",
+                    "HSR",
+                    "SPNT",
+                    "HSR/SP",
+                    "rEXP",
+                    "rDIST",
+                    "rHSR" ,
+                    "rSPNT"]
+        teamData = [5, 5, 1, 2, 4, 8, 8, 1, 5, 4, 6, 7, 9]
         data = {
             "labels": labels,
             "default": teamData,
         }
-        return Response(metrics)
+        return Response(data)
 
 
 class Dropdown(APIView):

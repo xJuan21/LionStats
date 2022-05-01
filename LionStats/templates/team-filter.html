@@ -4,11 +4,13 @@
 <html lang="en">
 <head>
     {% block css %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>
     <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static 'styles/team-filter.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>
     {% endblock %}
     {% block title %}
     <title>Team Filter</title>
@@ -83,31 +85,61 @@ $.ajax({
     <div class="Athlete">
         <h4> Athletes </h4>
         <div class="Dropdown">
-            <script>$('select').select2({ width: '100%', placeholder: "Select an Option", allowClear: true });</script>
-                <select name = "dropdown" class="menu" id = "dropdownAthlete"></select>
-<!--                </form>-->
-<!--            </nav>-->
+
+                <select name = "dropdown" class="menu" id = "dropdownAthlete" multiple="multiple" onchange="athletes()">
+
+                </select>
+                <script>
+                function athletes()
+                {
+                    var selected = $('#dropdownAthlete').val();
+<!--                    var myJson = JSON.stringify(selected);-->
+<!--                    console.log(selected);-->
+                    console.log(selected);
+                    let csrftoken = '{{ csrf_token }}';
+                    $.ajax({
+                    url:'/athlete/',
+                    type: "POST",
+                    dataType: "json",
+                    headers:{'X-CSRFToken': csrftoken},
+                    data: {'value' : selected,},
+                    });
+                }
+                </script>
         </div>
     </div>
 
-    <div class="Position">
-        <h4> Position </h4>
-        <div class="Dropdown">
-<!--            <nav>-->
-                <select name = "position" class="menu" id = "dropdownPosition">
-                </select>
-<!--            </nav>-->
-        </div>
-    </div>
+<!--    <div class="Position">-->
+<!--        <h4> Position </h4>-->
+<!--        <div class="Dropdown">-->
+<!--&lt;!&ndash;            <nav>&ndash;&gt;-->
+<!--                <select name = "position" class="menu" id = "dropdownPosition">-->
+<!--                </select>-->
+<!--&lt;!&ndash;            </nav>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="Session">
         <h4> Session </h4>
         <button type="button" id = "sessionBtn">Load Sessions</button>
         <div class="Dropdown">
 <!--            <nav>-->
-                <select name = "session" class="menu" id = "dropdownSession">
+                <select name = "session" class="menu" id = "dropdownSession" onchange="session()">
                 </select>
 <!--            </nav>-->
+                function session()
+                    {
+                        var selected = $('#dropdownSession').val();
+                        console.log(selected);
+                        let csrftoken = '{{ csrf_token }}';
+                        $.ajax({
+                        url:'/startdate/',
+                        type: "POST",
+                        headers:{'X-CSRFToken': csrftoken},
+                        data: {'value' : selected,},
+                        dataType: "json",
+                        });
+                    }
         </div>
     </div>
 
@@ -121,7 +153,7 @@ $.ajax({
             <script>
                     function startDateTeam()
                     {
-                        var selected = $('#myStartDate').val()
+                        var selected = $('#myStartDate').val();
                         console.log(selected);
                         let csrftoken = '{{ csrf_token }}';
                         $.ajax({
@@ -137,7 +169,7 @@ $.ajax({
             <script>
                     function endDateTeam()
                     {
-                        var selected = $('#myEndDate').val()
+                        var selected = $('#myEndDate').val();
                         console.log(selected);
                         let csrftoken = '{{ csrf_token }}';
                         $.ajax({
@@ -174,8 +206,6 @@ $.ajax({
 <!--<canvas id="teamStats">-->
 
 <!--</canvas>-->
-
-<!-- see an average of all the stats for selected athletes during the selected time period-->
 {% endblock %}
 </body>
 

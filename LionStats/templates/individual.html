@@ -5,28 +5,48 @@
 <head>
     <meta charset="UTF-8">
     {% block css %}
-    <link rel="stylesheet" type="text/css" href="LionStats/individual.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <link href="{% static 'styles/individual.css' %}" rel="stylesheet" />
+    <script type="application/javascript" src="{% static 'js/indDropDown.js' %}"></script>
     {% endblock %}
 
     {% block title %}
     <title>Individual</title>
+    <div class="current"></div>
     {% endblock %}
 </head>
 <body>
 {% block content %}
     <div class="info">
         <h5 class="name">Name:</h5>
-        <h5 class="sport">Sport:</h5>
-        <h5 class="jersey">Jersey:</h5>
-        <h5 class="pos">Position:</h5>
     </div>
 
-    <div class="Dropdown">
-            <nav>
-                <select name = "team" class="menu" id = "inNameDropDown" onchange="val()">
-                </select>
-            </nav>
+    <div class="content">
+    <div class="Athlete">
+        <div class="Dropdown">
+
+                <select name ="dropdown" class="menu" id = "dropdownAthlete" onchange="athletes()"></select>
+                <script>
+                function athletes()
+                {
+                    var selected = $('#dropdownAthlete').val();
+<!--                    var myJson = JSON.stringify(selected);-->
+<!--                    console.log(selected);-->
+                    console.log(selected);
+                    let csrftoken = '{{ csrf_token }}';
+                    $.ajax({
+                    url:'/athlete/',
+                    type: "POST",
+                    dataType: "json",
+                    headers:{'X-CSRFToken': csrftoken},
+                    data: {'value' : selected,},
+                    });
+                }
+                </script>
+        </div>
+    </div>
     </div>
 
 <h1 class="start">Start Date</h1>
@@ -55,6 +75,47 @@
 
 <!-- Chart will pull an individuals stats over a specified period of time and will show all averages of
 stats from that period-->
+
+{% block jquery %}
+var ctx = document.getElementById("myChart").getContext("2d");
+
+var data = {
+    labels: ["Chocolate", "Vanilla", "Strawberry"],
+    datasets: [
+        {
+            label: "Blue",
+            backgroundColor: "blue",
+            data: [3,7,4]
+        },
+        {
+            label: "Red",
+            backgroundColor: "red",
+            data: [4,3,5]
+        },
+        {
+            label: "Green",
+            backgroundColor: "green",
+            data: [7,2,6]
+        }
+    ]
+};
+
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+        barValueSpacing: 20,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                }
+            }]
+        }
+    }
+});
+
+{% endblock %}
 
 {% endblock %}
 

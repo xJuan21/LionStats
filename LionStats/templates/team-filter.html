@@ -127,6 +127,7 @@ $.ajax({
                 <select name = "session" class="menu" id = "dropdownSession" onchange="session()">
                 </select>
 <!--            </nav>-->
+            <script>
                 function session()
                     {
                         var selected = $('#dropdownSession').val();
@@ -140,6 +141,7 @@ $.ajax({
                         dataType: "json",
                         });
                     }
+            </script>
         </div>
     </div>
 

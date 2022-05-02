@@ -53,6 +53,7 @@ urlpatterns = [
     path('api/dropdown/team', TeamDetails.as_view()),
     path('api/dropdown/sessions', TeamSessionDate.as_view()),
     path('api/metrics', TeamMetrics.as_view()),
+    path('api/home', HomeData.as_view()),
     path('delete_product', views.delete_product, name='delete_product'),
     path('JSendpoint/', views.getData, name='getData'),
     path('startdate/', views.getStartDate, name='startdate'),

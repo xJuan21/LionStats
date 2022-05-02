@@ -68,6 +68,14 @@ def getAthlete(request):
 
     return HttpResponse(athletes)
 
+class HomeMetrics:
+
+    def get(self, request, format=None):
+        teampro = teampro_queries.TeamProExample()
+        teamID = teampro.get_team_id(team_name)
+        homeMetrics = teampro.get_home(teamID)
+        summary = teampro.summarize_by_day(homeMetrics)
+        return summary
 
 class Metrics:
 
@@ -153,6 +161,80 @@ class TeamData(APIView):
         }
         return Response(data)
 
+class HomeData(APIView):
+    """
+    View to list all users in the system.
+
+    * Requires token authentication.
+    * Only admin users are able to access this view.
+    """
+
+    def get(self, request, format=None):
+        """
+        Return a list of all users.
+        """
+        # athleteMetrics = []
+        # teampro = teampro_queries.TeamProExample()
+        # # playerID = teampro.get_player_id(team_name, firstName, lastName)
+        # # print(playerID)
+        # team_id = teampro.get_team_id(team_name)
+        # player_id = teampro.get_player_id(team_name, firstName, lastName)
+        # metrics = teampro.get_individual_metrics_by_date(team_id, player_id, startDate, endDate)
+        # print(metrics)
+        # print(session)
+        # convertData = json.dumps(metrics)
+        # data = json.loads(convertData)
+        # for item in data["metrics"]:
+        #     print(item['Date'])
+        #     populated = False
+        #     if item['Date'] == session:
+        #         print("FOUND:" + item['Date'])
+        #         athleteMetrics.append((item["Duration"]))
+        #         athleteMetrics.append((item["eTrimp"]))
+        #         athleteMetrics.append((item["sTrimp"]))
+        #         athleteMetrics.append((item["EXP"]))
+        #         athleteMetrics.append((item["HR90"]))
+        #         athleteMetrics.append((item["DIST"]))
+        #         athleteMetrics.append((item["HSR"]))
+        #         athleteMetrics.append((item["SPNT"]))
+        #         athleteMetrics.append((item["HSR/SP"]))
+        #         athleteMetrics.append((item["rEXP"]))
+        #         athleteMetrics.append((item["rDIST"]))
+        #         athleteMetrics.append((item["rHSR"]))
+        #         athleteMetrics.append((item["rSPNT"]))
+        #         populated = True
+        #
+        #     if populated == True:
+        #         break
+
+        metrics = []
+        data = HomeMetrics.get(self, request)
+        jsonData = json.dumps(data)
+        # jsonStr = json.dumps(jsonData)
+        print(data)
+        for item in jsonData["metrics"]:
+            metrics.append(item.values())
+
+
+        labels = ["Duration",
+                    "eTrimp",
+                    "sTrimp",
+                    "EXP",
+                    "HR90",
+                    "DIST",
+                    "HSR",
+                    "SPNT",
+                    "HSR/SP",
+                    "rEXP",
+                    "rDIST",
+                    "rHSR" ,
+                    "rSPNT"]
+        teamData = metrics
+        data = {
+            "labels": labels,
+            "default": teamData,
+        }
+        return Response(data)
 
 class Dropdown(APIView):
 

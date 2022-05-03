@@ -54,6 +54,7 @@ urlpatterns = [
     path('api/dropdown/sessions', TeamSessionDate.as_view()),
     path('api/metrics', TeamMetrics.as_view()),
     path('api/home', HomeData.as_view()),
+    path('api/individual', Metrics.as_view()),
     path('delete_product', views.delete_product, name='delete_product'),
     path('JSendpoint/', views.getData, name='getData'),
     path('startdate/', views.getStartDate, name='startdate'),

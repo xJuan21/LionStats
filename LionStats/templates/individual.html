@@ -19,6 +19,113 @@
 </head>
 <body>
 {% block content %}
+
+    <div class ="chart">
+    <button type="button" id = "chartBtn" onclick="chart()">Load Chart</button>
+    <canvas id ="teamChart" width="800px" height="500px"></canvas>
+    </div>
+    <script>
+    {% block jquery %}
+    function chart(){
+    var endpoint = '/api/individual'
+    var teamData = []
+    var labels = []
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(data){
+    <!--        labels = data.labels-->
+            teamData = data.default
+            console.log(teamData);
+            var ctx = document.getElementById('teamChart').getContext('2d');
+            var teamChart = new Chart(ctx, {
+              type: 'bar',
+              data:{
+              labels: labels,
+              datasets: [{
+                label: 'Duration',
+                data: [teamData[0]],
+                backgroundColor: "Red",
+                borderWidth: 1
+              }, {
+                label: 'eTrimp',
+                data: [teamData[1]],
+                backgroundColor: "Orange",
+                borderWidth: 1
+              }, {
+                label: 'sTrimp',
+                data: [teamData[2]],
+                backgroundColor: "Yellow",
+                borderWidth: 1
+              }, {
+                label: 'EXP',
+                data: [teamData[3]],
+                backgroundColor: "Green",
+                borderWidth: 1
+              }, {
+                label: 'HR90',
+                data: [teamData[4]],
+                backgroundColor: "Blue",
+                borderWidth: 1
+              }, {
+                label: 'DIST',
+                data: [teamData[5]],
+                backgroundColor: "Purple",
+                borderWidth: 1
+              }, {
+                label: 'HSR',
+                data: [teamData[6]],
+                backgroundColor: "Indigo",
+                borderWidth: 1
+              }, {
+                label: 'SPNT',
+                data: [teamData[7]],
+                backgroundColor: "Pink",
+                borderWidth: 1
+              }, {
+                label: 'HSR/SP',
+                data: [teamData[8]],
+                backgroundColor: "LightBlue",
+                borderWidth: 1
+              }, {
+                label: 'rEXP',
+                data: [teamData[9]],
+                backgroundColor: "DarkRed",
+                borderWidth: 1
+              }, {
+                label: 'rDIST',
+                data: [teamData[10]],
+                backgroundColor: "DarkOrange",
+                borderWidth: 1
+              }, {
+                label: 'rHSR',
+                data: [teamData[11]],
+                backgroundColor: "Aquamarine",
+                borderWidth: 1
+              }, {
+                label: 'rSPNT',
+                data: [teamData[12]],
+                backgroundColor: "DarkOrchid",
+                borderWidth: 1
+              }]
+              },
+               options: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                }
+            });
+
+            },
+        error: function(error_data){
+            console.log("error")
+            console.log(error_data)
+        }
+    })
+    }
+    {% endblock %}
+    </script>
     <div class="info">
         <h5 class="name">Name:</h5>
     </div>
@@ -76,46 +183,6 @@
 <!-- Chart will pull an individuals stats over a specified period of time and will show all averages of
 stats from that period-->
 
-{% block jquery %}
-var ctx = document.getElementById("myChart").getContext("2d");
-
-var data = {
-    labels: ["Chocolate", "Vanilla", "Strawberry"],
-    datasets: [
-        {
-            label: "Blue",
-            backgroundColor: "blue",
-            data: [3,7,4]
-        },
-        {
-            label: "Red",
-            backgroundColor: "red",
-            data: [4,3,5]
-        },
-        {
-            label: "Green",
-            backgroundColor: "green",
-            data: [7,2,6]
-        }
-    ]
-};
-
-var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: {
-        barValueSpacing: 20,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    min: 0,
-                }
-            }]
-        }
-    }
-});
-
-{% endblock %}
 
 {% endblock %}
 

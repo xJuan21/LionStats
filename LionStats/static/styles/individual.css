@@ -14,11 +14,13 @@
     height: 100%;
     display: block;
     position: absolute;
-    top: 50%;
-    left: 40%;
+    top: 800px;
+    left: 700px;
     z-index: 10;
 }
-
+canvas {
+    background: white;
+}
 .name{
     position: absolute;
     width: 470px;

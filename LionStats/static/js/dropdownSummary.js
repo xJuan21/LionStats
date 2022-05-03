@@ -1,4 +1,3 @@
-
 function dropdown()
 {
 var teamData;
@@ -34,8 +33,5 @@ for (var i = 0; i < teamData.data.length; i++)
 window.onload = function()
 {
     let btn = document.getElementById("dropdown");
-
     dropdown();
-    btn.onclick = dropdownPosition();
 }
-

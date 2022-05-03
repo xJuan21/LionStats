@@ -41,7 +41,7 @@ $.ajax({
     success: function(data){
 <!--        labels = data.labels-->
         teamData = data.default
-        console.log(teamData[0])
+        console.log(teamData);
         var ctx = document.getElementById('teamChart').getContext('2d');
         var teamChart = new Chart(ctx, {
           type: 'bar',
@@ -198,11 +198,8 @@ $.ajax({
     <div class="AcademicYear">
         <h4> Start/End Date </h4>
         <div class="Dropdown">
-<!--            <nav>-->
-<!--               <select name = "year" class="menu" id = "dropdownYear">-->
-<!--                </select>-->
                 <input type="date" name = "start" id="myStartDate" onchange="startDateTeam()">
-            <script>
+                <script>
                     function startDateTeam()
                     {
                         var selected = $('#myStartDate').val();
@@ -233,31 +230,9 @@ $.ajax({
                         });
                     }
                 </script>
-<!--            </nav>-->
         </div>
     </div>
-
-<!--    <div class="StatisticType">-->
-<!--        <h4> Statistic Type </h4>-->
-<!--        <div class="Dropdown">-->
-<!--            <nav>-->
-<!--                <label for="touchType"><span>Type</span></label>-->
-<!--                <input type="checkbox" id="touchType">-->
-
-<!--                <ul class="menu">-->
-<!--                <li><a href="#">Type 1</a></li>-->
-<!--                <li><a href="#">Type 2</a></li>-->
-<!--                <li><a href="#">Type 3</a></li>-->
-<!--                <li><a href="#">Type 4</a></li>-->
-<!--                </ul>-->
-<!--            </nav>-->
-<!--        </div>-->
-<!--    </div>-->
 </div>
-
-<!--<canvas id="teamStats">-->
-
-<!--</canvas>-->
 {% endblock %}
 </body>
 

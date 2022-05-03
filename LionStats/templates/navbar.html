@@ -6,10 +6,6 @@
     {% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static 'styles/navbar.css' %}">
-<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<!--    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>-->
-<!--    <link href="{% static 'styles/navbar.css' %}" rel="stylesheet" />-->
-<!--    <link href="navbar.css" rel="stylesheet" type="text/css" >-->
     {% block title %}
     {% endblock %}
 </head>
@@ -18,15 +14,8 @@
 <div class="TeamDropdown">
         <div class="TDropdown">
             <nav>
-<!--                <label for="touchTeam" id = "td"><span>Team</span></label>-->
-<!--                <input type="checkbox" id="touchTeam">-->
                 <h3>Teams</h3>
                 <select name ="teamDrop" class="menu" id = "dropdown" onchange="dataTeam()">
-<!--                <li><a href="#">Team 1</a></li>-->
-<!--                <li><a href="#">Team 2</a></li>-->
-<!--                <li><a href="#">Team 3</a></li>-->
-<!--                <li><a href="#">Team 4</a></li>-->
-<!--                    <option>Team 1</option>-->
                 </select>
 
                 <script>
@@ -124,13 +113,13 @@
                 {% endblock %}
                 <a href="http://localhost:8000/dashboard"><span class="Home">Home</span></a>
             </div>
-            <div class="ComparisonButton">
-                {% block comparison %}
-                <div class="ComparisonRectangle">
-                </div>
-                {% endblock %}
-                <a href="http://localhost:8000/comparison"><span class="Comparison">Comparison</span></a>
-            </div>
+<!--            <div class="ComparisonButton">-->
+<!--                {% block comparison %}-->
+<!--                <div class="ComparisonRectangle">-->
+<!--                </div>-->
+<!--                {% endblock %}-->
+<!--                <a href="http://localhost:8000/comparison"><span class="Comparison">Comparison</span></a>-->
+<!--            </div>-->
             </nav>
             <div class="name">
 

@@ -143,8 +143,7 @@ window.onload = function()
 {
     let btn = document.getElementById("dropdown");
     let sessionBtn = document.getElementById("sessionBtn");
-//    let athBtn = document.getElementById("dropdownAthlete");
-//    let posBtn = document.getElementById("dropdownPosition");
+
     dropdown();
     btn.onclick = function(){dropdownAthlete(); dropdownPosition();};
     sessionBtn.onclick = function(){dropdownSession();};

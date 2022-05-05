@@ -77,20 +77,55 @@ class HomeMetrics:
         summary = teampro.summarize_by_day(homeMetrics)
         return summary
 
-class Metrics:
 
-    def metrics(self):
+class Metrics(APIView):
+
+    def get(self, request, format=None):
         teampro = teampro_queries.TeamProExample()
         team_id = teampro.get_team_id(team_name)
         player_id = teampro.get_player_id(team_name, firstName, lastName)
         metrics = teampro.get_individual_metrics_by_date(team_id, player_id, startDate, endDate)
-        # metricsJson = json.loads(metrics)
-        # metricsList = []
-        # for i in range(1, metricsJson.length):
-        #    metricsList.append(i)
-        # print(metrics)
+        summary = teampro.summarize_by_day(metrics)
 
-        return metrics
+        metrics = []
+        data = HomeMetrics.get(self, request)
+        # jsonData = json.loads(data)
+        # jsonStr = json.dumps(jsonData)
+        print(data)
+        metrics.append(data['metrics'][0]['Duration'])
+        metrics.append(data['metrics'][0]['eTrimp'])
+        metrics.append(data['metrics'][0]['sTrimp'])
+        metrics.append(data['metrics'][0]['EXP'])
+        metrics.append(data['metrics'][0]['HR90'])
+        metrics.append(data['metrics'][0]['DIST'])
+        metrics.append(data['metrics'][0]['HSR'])
+        metrics.append(data['metrics'][0]['SPNT'])
+        metrics.append(data['metrics'][0]['HSR/SP'])
+        metrics.append(data['metrics'][0]['rEXP'])
+        metrics.append(data['metrics'][0]['rDIST'])
+        metrics.append(data['metrics'][0]['rHSR'])
+        metrics.append(data['metrics'][0]['rSPNT'])
+
+        labels = ["Duration",
+                  "eTrimp",
+                  "sTrimp",
+                  "EXP",
+                  "HR90",
+                  "DIST",
+                  "HSR",
+                  "SPNT",
+                  "HSR/SP",
+                  "rEXP",
+                  "rDIST",
+                  "rHSR",
+                  "rSPNT"]
+        teamData = metrics
+        data = {
+            "labels": labels,
+            "default": teamData,
+        }
+
+        return Response(data)
 
 class TeamData(APIView):
     """
@@ -170,50 +205,25 @@ class HomeData(APIView):
     """
 
     def get(self, request, format=None):
-        """
-        Return a list of all users.
-        """
-        # athleteMetrics = []
-        # teampro = teampro_queries.TeamProExample()
-        # # playerID = teampro.get_player_id(team_name, firstName, lastName)
-        # # print(playerID)
-        # team_id = teampro.get_team_id(team_name)
-        # player_id = teampro.get_player_id(team_name, firstName, lastName)
-        # metrics = teampro.get_individual_metrics_by_date(team_id, player_id, startDate, endDate)
-        # print(metrics)
-        # print(session)
-        # convertData = json.dumps(metrics)
-        # data = json.loads(convertData)
-        # for item in data["metrics"]:
-        #     print(item['Date'])
-        #     populated = False
-        #     if item['Date'] == session:
-        #         print("FOUND:" + item['Date'])
-        #         athleteMetrics.append((item["Duration"]))
-        #         athleteMetrics.append((item["eTrimp"]))
-        #         athleteMetrics.append((item["sTrimp"]))
-        #         athleteMetrics.append((item["EXP"]))
-        #         athleteMetrics.append((item["HR90"]))
-        #         athleteMetrics.append((item["DIST"]))
-        #         athleteMetrics.append((item["HSR"]))
-        #         athleteMetrics.append((item["SPNT"]))
-        #         athleteMetrics.append((item["HSR/SP"]))
-        #         athleteMetrics.append((item["rEXP"]))
-        #         athleteMetrics.append((item["rDIST"]))
-        #         athleteMetrics.append((item["rHSR"]))
-        #         athleteMetrics.append((item["rSPNT"]))
-        #         populated = True
-        #
-        #     if populated == True:
-        #         break
 
         metrics = []
         data = HomeMetrics.get(self, request)
-        jsonData = json.dumps(data)
+        #jsonData = json.loads(data)
         # jsonStr = json.dumps(jsonData)
         print(data)
-        for item in jsonData["metrics"]:
-            metrics.append(item.values())
+        metrics.append(data['metrics'][0]['Duration'])
+        metrics.append(data['metrics'][0]['eTrimp'])
+        metrics.append(data['metrics'][0]['sTrimp'])
+        metrics.append(data['metrics'][0]['EXP'])
+        metrics.append(data['metrics'][0]['HR90'])
+        metrics.append(data['metrics'][0]['DIST'])
+        metrics.append(data['metrics'][0]['HSR'])
+        metrics.append(data['metrics'][0]['SPNT'])
+        metrics.append(data['metrics'][0]['HSR/SP'])
+        metrics.append(data['metrics'][0]['rEXP'])
+        metrics.append(data['metrics'][0]['rDIST'])
+        metrics.append(data['metrics'][0]['rHSR'])
+        metrics.append(data['metrics'][0]['rSPNT'])
 
 
         labels = ["Duration",
@@ -290,3 +300,100 @@ class TeamMetrics(APIView):
         teamMetrics = teampro.get_team_metrics_by_date(teamID, strStartDate, strEndDate)
 
         return Response(teamMetrics)
+
+
+class SumMetrics(APIView):
+
+    def get(self, request, format=None):
+        teampro = teampro_queries.TeamProExample()
+        teamID = teampro.get_team_id(team_name)
+        print(teamID)
+        strEndDate = str(endDate)
+        strStartDate = str(startDate)
+        summaryMetrics = teampro.get_team_metrics_by_date(teamID, strStartDate, strEndDate)
+        sum = teampro.summarize_by_day(summaryMetrics)
+
+        # convertData = json.dumps(sum)
+        # data = json.loads(convertData)
+        # for item in data["metrics"]:
+        #     print(item['Date'])
+        #     populated = False
+        #     if item['Date'] == session:
+        #         print("FOUND:" + item['Date'])
+        #         athleteMetrics.append((item["Duration"]))
+        #         athleteMetrics.append((item["eTrimp"]))
+        #         athleteMetrics.append((item["sTrimp"]))
+        #         athleteMetrics.append((item["EXP"]))
+        #         athleteMetrics.append((item["HR90"]))
+        #         athleteMetrics.append((item["DIST"]))
+        #         athleteMetrics.append((item["HSR"]))
+        #         athleteMetrics.append((item["SPNT"]))
+        #         athleteMetrics.append((item["HSR/SP"]))
+        #         athleteMetrics.append((item["rEXP"]))
+        #         athleteMetrics.append((item["rDIST"]))
+        #         athleteMetrics.append((item["rHSR"]))
+        #         athleteMetrics.append((item["rSPNT"]))
+        #         populated = True
+        #
+        #     if populated == True:
+        #         break
+        #
+        # print(athleteMetrics)
+        # labels = ["Duration",
+        #           "eTrimp",
+        #           "sTrimp",
+        #           "EXP",
+        #           "HR90",
+        #           "DIST",
+        #           "HSR",
+        #           "SPNT",
+        #           "HSR/SP",
+        #           "rEXP",
+        #           "rDIST",
+        #           "rHSR",
+        #           "rSPNT"]
+        # teamData = athleteMetrics
+        # data = {
+        #     "labels": labels,
+        #     "default": teamData,
+        # }
+        metrics = []
+        data = sum
+        # jsonData = json.loads(data)
+        # jsonStr = json.dumps(jsonData)
+        print(data)
+        metrics.append(data['metrics'][0]['Duration'])
+        metrics.append(data['metrics'][0]['eTrimp'])
+        metrics.append(data['metrics'][0]['sTrimp'])
+        metrics.append(data['metrics'][0]['EXP'])
+        metrics.append(data['metrics'][0]['HR90'])
+        metrics.append(data['metrics'][0]['DIST'])
+        metrics.append(data['metrics'][0]['HSR'])
+        metrics.append(data['metrics'][0]['SPNT'])
+        metrics.append(data['metrics'][0]['HSR/SP'])
+        metrics.append(data['metrics'][0]['rEXP'])
+        metrics.append(data['metrics'][0]['rDIST'])
+        metrics.append(data['metrics'][0]['rHSR'])
+        metrics.append(data['metrics'][0]['rSPNT'])
+
+        labels = ["Duration",
+                  "eTrimp",
+                  "sTrimp",
+                  "EXP",
+                  "HR90",
+                  "DIST",
+                  "HSR",
+                  "SPNT",
+                  "HSR/SP",
+                  "rEXP",
+                  "rDIST",
+                  "rHSR",
+                  "rSPNT"]
+        teamData = metrics
+        data = {
+            "labels": labels,
+            "default": teamData,
+        }
+
+        return Response(data)
+

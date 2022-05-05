@@ -7,8 +7,6 @@ REPO CLONED FROM Binary Athlete's https://github.com/ConnorWMcClellan/LionStats 
 
 In order to install the application for development this steps must be followed
 
-### `Clone the repository inside our folder` 
-
 ### `Warning`
 
 Make sure you are not on the master branch, to change branch use git checkout and create a new branch with this format (name.feauture)

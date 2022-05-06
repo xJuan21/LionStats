@@ -1,7 +1,8 @@
-
+//function for populating team dropdown
 function dropdown()
 {
 var teamData;
+//use ajax to get the data from the django rest framework into javascript
 $.ajax({
     async: false,
     url: 'http://localhost:8000/api/dropdown/',
@@ -12,15 +13,18 @@ $.ajax({
 });
 let dropdown = document.getElementById('dropdown')
 let option;
+//empty dropdown before populating
 while(dropdown.firstChild)
 {
     dropdown.removeChild(dropdown.firstChild);
 }
 
+//create and append empty option to dropdown
 option = document.createElement("option");
 option.value = "";
 dropdown.appendChild(option);
 
+//populate dropdown with data recieved
 for (var i = 0; i < teamData.data.length; i++)
 {
     option = document.createElement("option");
@@ -31,12 +35,12 @@ for (var i = 0; i < teamData.data.length; i++)
 
 window.onload = function()
 {
+    //when the team dropdown is clicked begin populating chart on home page
     let btn = document.getElementById("dropdown");
     dropdown();
 
     btn.onchange = async function(){
-
-//    await new Promise(r => setTimeout(r, 5000));
+    //populate chart
     $.get("http://localhost:8000/api/home",function(data) {
 
     var endpoint = '/api/home'
@@ -46,6 +50,7 @@ window.onload = function()
     method: "GET",
     url: endpoint,
     success: function(data){
+        //get labels and metric data and use in chart
         labels = data.labels
         teamData = data.default
     const ctx = document.getElementById('stat1').getContext('2d');

@@ -1,9 +1,21 @@
+<!--TEAM FILTER PAGE:-->
+<!--This page will show the statistics of a specific group of athletes selected by the user-->
+<!--The program needs 4 components to be selected by the User:-->
+<!--1. Start Date for the data to be shown-->
+<!--2. End Date for the data to be shown-->
+<!--3. Athlete(s) Selection (Which Athletes you want to be shown-->
+<!--4. Session Selection (Date)-->
+<!--After all of these options are selected, user can click on the "Load Chart" Button to prompt the Chart -->
 <!DOCTYPE html>
+<!--Implementation of the Navigation bar on the left side of the page-->
 {% extends 'navbar.html' %}
+<!-- Start loading styles and structure for the page-->
 {% load static %}
 <html lang="en">
 <head>
+    <!--Start loading css file -->
     {% block css %}
+    <!-- Import all the classes needed: Jquery.js, Chart.js, styles file, and dropdownSummary.js -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -12,25 +24,29 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/team-filter.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     {% endblock %}
+
+    <!--Title of the page-->
     {% block title %}
     <title>Team Filter</title>
     {% endblock %}
+
 </head>
 
+<!--All the content of the page enclosed here-->
 <body>
-{% block team-filter %}
-<div class="current"></div>
-{% endblock %}
-
 {% block content %}
-
-
+ <!--Area for the Chart and Data, along with its button to start loading it-->
 <div class ="chart">
+    <!--Load Chart button that will use a Javascript function to achieve it-->
     <button type="button" id = "chartBtn" onclick="chart()">Load Chart</button>
     <canvas id ="teamChart" width="800px" height="500px"></canvas>
 </div>
+
+<!--Implementation of the Javascript functions to load the charts and select items-->
+<!--from the Dropdown menus-->
 <script>
 {% block jquery %}
+//Function to create the chart
 function chart(){
 var endpoint = '/api/team/data'
 var teamData = []
@@ -38,8 +54,8 @@ var labels = []
 $.ajax({
     method: "GET",
     url: endpoint,
+    //Chart.js implementation
     success: function(data){
-<!--        labels = data.labels-->
         teamData = data.default
         console.log(teamData);
         var ctx = document.getElementById('teamChart').getContext('2d');
@@ -123,61 +139,58 @@ $.ajax({
         });
 
         },
-    error: function(error_data){
-        console.log("error")
-        console.log(error_data)
-    }
-})
+         <!--Error Case: Used for Debugging purposes-->
+        error: function(error_data){
+            console.log("error")
+            console.log(error_data)
+        }
+    })
 }
 {% endblock %}
 </script>
+
+<!--Right side (Grey Area) of the page, it contains all the content-->
+<!--Some text information and description-->
 <div class="content">
+    <!--Title for the Name Dropdown menu bar-->
     <div class="Athlete">
-        <h4> Athletes </h4>
-        <div class="Dropdown">
-
-                <select name = "dropdown" class="menu" id = "dropdownAthlete" multiple="multiple" onchange="athletes()">
-
-                </select>
+            <!--Title for Dropdown menu-->
+            <h4> Athletes </h4>
+            <div class="Dropdown">
+                <!--Use function defined below-->
+                <select name = "dropdown" class="menu" id = "dropdownAthlete" multiple="multiple" onchange="athletes()"></select>
+                <!--Definition of function, look for the specific input-->
                 <script>
-                function athletes()
-                {
-                    var selected = $('#dropdownAthlete').val();
-<!--                    var myJson = JSON.stringify(selected);-->
-<!--                    console.log(selected);-->
-                    console.log(selected);
-                    let csrftoken = '{{ csrf_token }}';
-                    $.ajax({
-                    url:'/athlete/',
-                    type: "POST",
-                    dataType: "json",
-                    headers:{'X-CSRFToken': csrftoken},
-                    data: {'value' : selected,},
-                    });
-                }
+                    <!-- Send selected value to the views.py -->
+                    function athletes()
+                    {
+                        var selected = $('#dropdownAthlete').val();
+
+                        console.log(selected);
+                        let csrftoken = '{{ csrf_token }}';
+                        $.ajax({
+                        url:'/athlete/',
+                        type: "POST",
+                        dataType: "json",
+                        headers:{'X-CSRFToken': csrftoken},
+                        data: {'value' : selected,},
+                        });
+                    }
                 </script>
-        </div>
+            </div>
     </div>
 
-<!--    <div class="Position">-->
-<!--        <h4> Position </h4>-->
-<!--        <div class="Dropdown">-->
-<!--&lt;!&ndash;            <nav>&ndash;&gt;-->
-<!--                <select name = "position" class="menu" id = "dropdownPosition">-->
-<!--                </select>-->
-<!--&lt;!&ndash;            </nav>&ndash;&gt;-->
-<!--        </div>-->
-<!--    </div>-->
-
+    <!--Second: Session Dropdown-->
     <div class="Session">
+        <!--Title for Dropdown Menu-->
         <h4> Session </h4>
+        <!--Load Sessions Button-->
         <button type="button" id = "sessionBtn">Load Sessions</button>
         <div class="Dropdown">
-<!--            <nav>-->
-                <select name = "session" class="menu" id = "dropdownSession" onchange="session()">
-                </select>
-<!--            </nav>-->
+                <!--Use function defined below-->
+                <select name = "session" class="menu" id = "dropdownSession" onchange="session()"></select>
                 <script>
+                     <!-- Send selected value to the views.py -->
                 function session()
                     {
                         var selected = $('#dropdownSession').val();
@@ -195,11 +208,15 @@ $.ajax({
         </div>
     </div>
 
+    <!--Third and Fourth Dropdown: Start and End Date-->
     <div class="AcademicYear">
         <h4> Start/End Date </h4>
         <div class="Dropdown">
+                <!--Use function defined below-->
                 <input type="date" name = "start" id="myStartDate" onchange="startDateTeam()">
+                <!--Definition of function, look for the specific input-->
                 <script>
+                    <!-- Send selected value to the views.py -->
                     function startDateTeam()
                     {
                         var selected = $('#myStartDate').val();
@@ -214,25 +231,30 @@ $.ajax({
                         });
                     }
                 </script>
+                <!--Use function defined below-->
                 <input type="date" id="myEndDate" onchange="endDateTeam()">
-            <script>
-                    function endDateTeam()
-                    {
-                        var selected = $('#myEndDate').val();
-                        console.log(selected);
-                        let csrftoken = '{{ csrf_token }}';
-                        $.ajax({
-                        url:'/enddate/',
-                        type: "POST",
-                        headers:{'X-CSRFToken': csrftoken},
-                        data: {'value' : selected,},
-                        dataType: "json",
-                        });
-                    }
+                <!--Definition of function, look for the specific input-->
+                <script>
+                    <!-- Send selected value to the views.py -->
+                        function endDateTeam()
+                        {
+                            var selected = $('#myEndDate').val();
+                            console.log(selected);
+                            let csrftoken = '{{ csrf_token }}';
+                            $.ajax({
+                            url:'/enddate/',
+                            type: "POST",
+                            headers:{'X-CSRFToken': csrftoken},
+                            data: {'value' : selected,},
+                            dataType: "json",
+                            });
+                        }
                 </script>
         </div>
     </div>
 </div>
+<!-- Chart will pull an individuals stats over a specified period of time and will show all averages of
+stats from that period-->
 {% endblock %}
 </body>
 

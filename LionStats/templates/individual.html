@@ -1,212 +1,240 @@
+<!--INDIVIDUAL PAGE:-->
+<!--This page will allow the user to choose the specific data of a selected athlete-->
+<!--After selecting the Athlete select the start and end date from when the data is-->
 <!DOCTYPE html>
+<!--Implementation of the Navigation bar on the left side of the page-->
 {% extends 'navbar.html' %}
+<!-- Start loading styles and structure for the page-->
 {% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% block css %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <link href="{% static 'styles/individual.css' %}" rel="stylesheet" />
-    <script type="application/javascript" src="{% static 'js/indDropDown.js' %}"></script>
-    {% endblock %}
+    <head>
+        <meta charset="UTF-8">
+         <!--Start loading css file -->
+        {% block css %}
+        <!-- Import all the classes needed: Jquery.js, Chart.js, styles file, and dropdownSummary.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <link href="{% static 'styles/individual.css' %}" rel="stylesheet" />
+        <script type="application/javascript" src="{% static 'js/indDropDown.js' %}"></script>
+        {% endblock %}
 
-    {% block title %}
-    <title>Individual</title>
-    <div class="current"></div>
-    {% endblock %}
-</head>
-<body>
-{% block content %}
+        <!--Title of the page-->
+        <title>Individual</title>
 
-    <div class ="chart">
-    <button type="button" id = "chartBtn" onclick="chart()">Load Chart</button>
-    <canvas id ="teamChart" width="800px" height="500px"></canvas>
-    </div>
-    <script>
-    {% block jquery %}
-    function chart(){
-    var endpoint = '/api/individual'
-    var teamData = []
-    var labels = []
-    $.ajax({
-        method: "GET",
-        url: endpoint,
-        success: function(data){
-    <!--        labels = data.labels-->
-            teamData = data.default
-            console.log(teamData);
-            var ctx = document.getElementById('teamChart').getContext('2d');
-            var teamChart = new Chart(ctx, {
-              type: 'bar',
-              data:{
-              labels: labels,
-              datasets: [{
-                label: 'Duration',
-                data: [teamData[0]],
-                backgroundColor: "Red",
-                borderWidth: 1
-              }, {
-                label: 'eTrimp',
-                data: [teamData[1]],
-                backgroundColor: "Orange",
-                borderWidth: 1
-              }, {
-                label: 'sTrimp',
-                data: [teamData[2]],
-                backgroundColor: "Yellow",
-                borderWidth: 1
-              }, {
-                label: 'EXP',
-                data: [teamData[3]],
-                backgroundColor: "Green",
-                borderWidth: 1
-              }, {
-                label: 'HR90',
-                data: [teamData[4]],
-                backgroundColor: "Blue",
-                borderWidth: 1
-              }, {
-                label: 'DIST',
-                data: [teamData[5]],
-                backgroundColor: "Purple",
-                borderWidth: 1
-              }, {
-                label: 'HSR',
-                data: [teamData[6]],
-                backgroundColor: "Indigo",
-                borderWidth: 1
-              }, {
-                label: 'SPNT',
-                data: [teamData[7]],
-                backgroundColor: "Pink",
-                borderWidth: 1
-              }, {
-                label: 'HSR/SP',
-                data: [teamData[8]],
-                backgroundColor: "LightBlue",
-                borderWidth: 1
-              }, {
-                label: 'rEXP',
-                data: [teamData[9]],
-                backgroundColor: "DarkRed",
-                borderWidth: 1
-              }, {
-                label: 'rDIST',
-                data: [teamData[10]],
-                backgroundColor: "DarkOrange",
-                borderWidth: 1
-              }, {
-                label: 'rHSR',
-                data: [teamData[11]],
-                backgroundColor: "Aquamarine",
-                borderWidth: 1
-              }, {
-                label: 'rSPNT',
-                data: [teamData[12]],
-                backgroundColor: "DarkOrchid",
-                borderWidth: 1
-              }]
-              },
-               options: {
-                    legend: {
-                        display: true,
-                        position: 'bottom'
-                    }
-                }
-            });
+    </head>
 
-            },
-        error: function(error_data){
-            console.log("error")
-            console.log(error_data)
-        }
-    })
-    }
-    {% endblock %}
-    </script>
-    <div class="info">
-        <h5 class="name">Name:</h5>
-    </div>
+    <!--All the content of the page enclosed here-->
+    <body>
+            {% block content %}
+            <!--Area for the Chart and Data, along with its button to start loading it-->
+            <div class ="chart">
+                <!--Load Chart button that will use a Javascript function to achieve it-->
+                <button type="button" id = "chartBtn" onclick="chart()">Load Chart</button>
+                <canvas id ="teamChart" width="800px" height="500px"></canvas>
+            </div>
 
-    <div class="content">
-    <div class="Athlete">
-        <div class="Dropdown">
-
-                <select name ="dropdown" class="menu" id = "dropdownAthlete" onchange="athletes()"></select>
-                <script>
-                function athletes()
-                {
-                    var selected = $('#dropdownAthlete').val();
-                    var array = [];
-                    array.push(selected);
-<!--                var myJson = JSON.stringify(selected);-->
-<!--                console.log(selected);-->
-                    let csrftoken = '{{ csrf_token }}';
+            <!--Implementation of the Javascript functions to load the charts and select items-->
+            <!--from the Dropdown menus-->
+            <script>
+                {% block jquery %}
+                //Function to create the chart
+                function chart(){
+                    var endpoint = '/api/individual'
+                    var teamData = []
+                    var labels = []
                     $.ajax({
-                    url:'/athlete/',
-                    type: "POST",
-                    dataType: "json",
-                    headers:{'X-CSRFToken': csrftoken},
-                    data: {'value' : array},
-                    });
+                        method: "GET",
+                        url: endpoint,
+
+                        //Chart.js implementation
+                        success: function(data){
+                                teamData = data.default
+                                console.log(teamData);
+                                var ctx = document.getElementById('teamChart').getContext('2d');
+                                var teamChart = new Chart(ctx, {
+                                      type: 'bar',
+                                      data:{
+                                      labels: labels,
+                                      datasets: [{
+                                        label: 'Duration',
+                                        data: [teamData[0]],
+                                        backgroundColor: "Red",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'eTrimp',
+                                        data: [teamData[1]],
+                                        backgroundColor: "Orange",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'sTrimp',
+                                        data: [teamData[2]],
+                                        backgroundColor: "Yellow",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'EXP',
+                                        data: [teamData[3]],
+                                        backgroundColor: "Green",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'HR90',
+                                        data: [teamData[4]],
+                                        backgroundColor: "Blue",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'DIST',
+                                        data: [teamData[5]],
+                                        backgroundColor: "Purple",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'HSR',
+                                        data: [teamData[6]],
+                                        backgroundColor: "Indigo",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'SPNT',
+                                        data: [teamData[7]],
+                                        backgroundColor: "Pink",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'HSR/SP',
+                                        data: [teamData[8]],
+                                        backgroundColor: "LightBlue",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'rEXP',
+                                        data: [teamData[9]],
+                                        backgroundColor: "DarkRed",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'rDIST',
+                                        data: [teamData[10]],
+                                        backgroundColor: "DarkOrange",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'rHSR',
+                                        data: [teamData[11]],
+                                        backgroundColor: "Aquamarine",
+                                        borderWidth: 1
+                                      }, {
+                                        label: 'rSPNT',
+                                        data: [teamData[12]],
+                                        backgroundColor: "DarkOrchid",
+                                        borderWidth: 1
+                                      }]
+                                      },
+                                       options: {
+                                            legend: {
+                                                display: true,
+                                                position: 'bottom'
+                                            }
+                                        }
+                                });
+                            },
+
+                            <!--Error Case: Used for Debugging purposes-->
+                            error: function(error_data){
+                                console.log("error")
+                                console.log(error_data)
+                            }
+                        })
                 }
-                </script>
-        </div>
-    </div>
-    </div>
 
-<h1 class="start">Start Date</h1>
-    <div class="date-start">
-        <input type="date" id="start" value="" onchange="startDateTeam()">
-
-            <script>
-                function startDateTeam()
-                    {
-                        var selected = $('#start').val();
-                        console.log(selected);
-                        let csrftoken = '{{ csrf_token }}';
-                        $.ajax({
-                        url:'/startdate/',
-                        type: "POST",
-                        headers:{'X-CSRFToken': csrftoken},
-                        data: {'value' : selected,},
-                        dataType: "json",
-                        });
-                    }
+                {% endblock %}
             </script>
-    </div>
 
-    <h1 class="finish">Finish Date</h1>
-    <div class="date-finish">
-        <input type="date" id="myDate" onchange="endDateTeam()">
+            <!--Right side (Grey Area) of the page, it contains all the content-->
+            <!--Some text information and description-->
+            <div class="info">
+                <!--Title for the Name Dropdown menu bar-->
+                <h5 class="name">Name:</h5>
+            </div>
 
-            <script>
-                function endDateTeam()
-                    {
-                        var selected = $('#myDate').val();
-                        console.log(selected);
-                        let csrftoken = '{{ csrf_token }}';
-                        $.ajax({
-                        url:'/enddate/',
-                        type: "POST",
-                        headers:{'X-CSRFToken': csrftoken},
-                        data: {'value' : selected,},
-                        dataType: "json",
-                        });
-                    }
-            </script>
-    </div>
+            <!--DROPDOWN MENU(S)-->
+            <!--First: Athlete Selection-->
+            <div class="content">
+                <div class="Athlete">
+                    <div class="Dropdown">
+                        <!--Use function defined below-->
+                        <select name ="dropdown" class="menu" id = "dropdownAthlete" onchange="athletes()"></select>
+                        <!--Definition of function, look for the specific input-->
+                        <script>
+                            <!-- Send selected value to the views.py -->
+                            function athletes()
+                            {
+                                var selected = $('#dropdownAthlete').val();
+                                var array = [];
+                                array.push(selected);
+                                let csrftoken = '{{ csrf_token }}';
+                                $.ajax({
+                                url:'/athlete/',
+                                type: "POST",
+                                dataType: "json",
+                                headers:{'X-CSRFToken': csrftoken},
+                                data: {'value' : array},
+                                });
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
 
-<!-- Chart will pull an individuals stats over a specified period of time and will show all averages of
-stats from that period-->
+        <!--Second: Start Date-->
+        <h1 class="start">Start Date</h1>
+            <div class="date-start">
+                 <!--Use function defined below-->
+                <input type="date" id="start" value="" onchange="startDateTeam()">
+                    <!--Definition of function, look for the specific input-->
+                    <script>
+                        <!-- Send selected value to the views.py -->
+                        function startDateTeam()
+                            {
+                                var selected = $('#start').val();
+                                console.log(selected);
+                                let csrftoken = '{{ csrf_token }}';
+                                $.ajax({
+                                url:'/startdate/',
+                                type: "POST",
+                                headers:{'X-CSRFToken': csrftoken},
+                                data: {'value' : selected,},
+                                dataType: "json",
+                                });
+                            }
+                    </script>
+            </div>
 
+            <!--Third Dropdown: Start Date-->
+            <h1 class="finish">Finish Date</h1>
+            <div class="date-finish">
+                <!--Use function defined below-->
+                <input type="date" id="myDate" onchange="endDateTeam()">
+                    <!--Definition of function, look for the specific input-->
+                    <script>
+                        <!-- Send selected value to the views.py -->
+                        function endDateTeam()
+                            {
+                                var selected = $('#myDate').val();
+                                console.log(selected);
+                                let csrftoken = '{{ csrf_token }}';
+                                $.ajax({
+                                url:'/enddate/',
+                                type: "POST",
+                                headers:{'X-CSRFToken': csrftoken},
+                                data: {'value' : selected,},
+                                dataType: "json",
+                                });
+                            }
+                    </script>
+            </div>
 
-{% endblock %}
+        <!-- Chart will pull an individuals stats over a specified period of time and will show all averages of
+        stats from that period-->
 
-{% block topbar %}
-<span class="TopBar">Individual Stats</span>
-{% endblock %}
-</body>
+        {% endblock %}
+
+        <!--Main Title of the page-->
+        {% block topbar %}
+        <span class="TopBar">Individual Stats</span>
+        {% endblock %}
+    </body>
 </html>

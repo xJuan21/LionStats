@@ -1,34 +1,39 @@
+<!-- LOGIN PAGE:  -->
+<!-- First page of the application. it basically contains a Login button that would redirect -->
+<!-- the user to the Polar Login -->
 <!DOCTYPE html>
 {% load static %}
 <html>
 <head>
+    <!--Import the text fonts used in this project -->
     <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=ABeeZee&display=swap" rel="stylesheet" />
-    
+
 </head>
 <body>
+<!-- Right Section of the Login Page with the LionStats Banner-->
     <div class="YellowArea">
         <div id="LU-Logo" ><img src="{% static 'images/Logo.png' %}" alt="Logo" ></div>
     </div>
 
+<!-- Left and Grey area of the page, it contains the Title and the button that will send to the Polar Verification page-->
     <div class="User-Content">
         <div class="User-Content-Inner">
             <span class="UserLoginTitle">User Login</span>
-           
-
-            
-
             <div class="LoginButton">
               <div class="v6_201"></div>
               <span class="LoginText"></span>
+
+                <!-- Link that contains a Django Block that will load and send to the Polar Authorization Page-->
                 <a class="LoginText" href="{% url 'delete_product'%}">Login</a>
-              
+
           </div>
       </div>
     </div>
 </body>
 </html>
 
+<!-- CSS Section that defines the styles for each tag above -->
 <style>* {
   box-sizing: border-box;
 }
@@ -72,20 +77,7 @@ img{
   right: 0;
   overflow: hidden;
 }
-/*
-#RightSection > .LionsStatsTitle {
-  width: 514px;
-  height: 361px;
-  background: url("../images/v6_199.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 282px;
-  right: 0;
-  overflow: hidden;
-} */
+
 #LU-Logo {
   position: absolute;
   top: 34%;
@@ -104,124 +96,11 @@ img{
   opacity: 1;
   text-align: center;
 }
-.UserIDTitle {
-  width: 215px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 402px;
-  left: 86px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 35px;
-  opacity: 1;
-  text-align: center;
-}
-.PasswordTitle {
-  width: 256px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 542px;
-  left: 86px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 35px;
-  opacity: 1;
-  text-align: center;
-}
-.ForgotPassword {
-  width: 257px;
-  color: rgba(252,181,37,1);
-  position: absolute;
-  top: 662px;
-  left: 397px;
-  font-family: Zen Dots;
-  font-weight: Regular;
-  font-size: 20px;
-  opacity: 1;
-  text-align: center;
-}
-.UserTextBox {
-  width: 568px;
-  height: 59px;
-  background: url("../images/v6_187.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 453px;
-  left: 86px;
-  overflow: hidden;
-}
-.v6_188 {
-  width: 568px;
-  height: 59px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  overflow: hidden;
-}
-.v6_189 {
-  width: 164px;
-  color: rgba(112,112,112,1);
-  position: absolute;
-  top: 19px;
-  left: 27px;
-  font-family: ABeeZee;
-  font-weight: Italic;
-  font-size: 18px;
-  opacity: 1;
-  text-align: left;
-}
-.v6_192 {
-  width: 568px;
-  height: 59px;
-  background: url("../images/v6_192.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 593px;
-  left: 86px;
-  overflow: hidden;
-}
-.v6_193 {
-  width: 568px;
-  height: 59px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  overflow: hidden;
-}
-.v6_194 {
-  width: 396px;
-  color: rgba(112,112,112,1);
-  position: absolute;
-  top: 19px;
-  left: 27px;
-  font-family: ABeeZee;
-  font-weight: Italic;
-  font-size: 18px;
-  opacity: 1;
-  text-align: left;
-}
+
 .LoginButton {
   width: 339px;
   height: 89px;
-  background: url("../images/v50_31.png");
+  background: rgba(252,181,37,1);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

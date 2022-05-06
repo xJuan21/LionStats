@@ -9,8 +9,8 @@ import yaml
 def load_config(filename):
     """Load configuration from a yaml file"""
     #BASE = os.path.dirname(os.path.abspath(__file__))
-    #BASE = "C:\LionStats\LionStats"
-    BASE = "C:/LionStats/dist/manage/teamproAPI"
+    BASE = "C:\LionStats\LionStats/teamproAPI"
+    #BASE = "C:/LionStats/dist/manage/teamproAPI"
     print(BASE)
     with open(os.path.join(BASE, "config.yml")) as f:
         return yaml.safe_load(f)
@@ -18,7 +18,8 @@ def load_config(filename):
 
 def save_config(config, filename):
     """Save configuration to a yaml file"""
-    with open("C:/LionStats/dist/manage/teamproAPI/config.yml", "w+") as f:
+    #"C:/LionStats/dist/manage/teamproAPI/config.yml"
+    with open("C:/LionStats/LionStats/teamproAPI/config.yml", "w+") as f:
         yaml.safe_dump(config, f, default_flow_style=False)
 
 

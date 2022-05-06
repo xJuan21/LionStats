@@ -1,145 +1,150 @@
+<!--NAVIGATION BAR-->
+<!--Structure and functionality for the navigation bar, it will allow the user -->
+<!--to navigate and visit the available pages in the application-->
 <!DOCTYPE html>
+<!-- Start loading block for -->
 {% load static %}
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    {% block css %}
-    {% endblock %}
-    <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/navbar.css' %}">
-    {% block title %}
-    {% endblock %}
-</head>
+    <head>
+        {% block css %}
+        {% endblock %}
+        <!--Import the text fonts used in this project -->
+        <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/navbar.css' %}">
+        {% block title %}
+        {% endblock %}
+    </head>
 
-<body>
-<div class="TeamDropdown">
-        <div class="TDropdown">
-            <nav>
-                <h3>Teams</h3>
-                <select name ="teamDrop" class="menu" id = "dropdown" onchange="dataTeam()">
-                </select>
+    <body>
+        <!-- Create a Dropdown menu to show a list of the available Teams-->
+        <div class="TeamDropdown">
+                <div class="TDropdown">
+                    <nav>
+                        <h3>Teams</h3>
+                        <select name ="teamDrop" class="menu" id = "dropdown" onchange="dataTeam()">
+                        </select>
+
+                        <!--Javascript function to send data to the python function-->
+                        <!--Get the option that the user clicked from the Dropdown-->
+                        <script>
+                            function dataTeam()
+                            {
+                                var selected = $("#dropdown option:selected").text();
+                                let csrftoken = '{{ csrf_token }}';
+                                $.ajax({
+                                url:'/JSendpoint/',
+                                type: "POST",
+                                headers:{'X-CSRFToken': csrftoken},
+                                data: {'value' : selected,},
+                                dataType: "json",
+                                });
+                            }
+                        </script>
+                    </nav>
+                </div>
+            </div>
+
+        <!-- Area on the right side of the Navigation bar, it basically encloses the rest of the elements here-->
+        <div class="GreyArea">
+                {% block content %}
+                {% endblock %}
 
                 <script>
-                    function dataTeam()
-                    {
-                        var selected = $("#dropdown option:selected").text();
-                        let csrftoken = '{{ csrf_token }}';
-                        $.ajax({
-                        url:'/JSendpoint/',
-                        type: "POST",
-                        headers:{'X-CSRFToken': csrftoken},
-                        data: {'value' : selected,},
-                        dataType: "json",
-                        });
-                    }
+                {% block jquery %}
+                {% endblock %}
                 </script>
-            </nav>
-        </div>
-    </div>
 
-<div class="GreyArea">
-    {% block content %}
-    {% endblock %}
-    <script>
-    {% block jquery %}
-    {% endblock %}
-</script>
-    <div class="LindenwoodLogo">
-        {% block notitle %}
-        <div class="TopYellowBar">
-        </div>
-        <div class="TopBlackBar">
-        </div>
-        {% block topbar %}
-        <span class="TopBar">Team Filter</span>
-        {% endblock %}
-        {% endblock %}
-    </div>
-        <div class="NavBarBackground">
-
-        </div>
-        <div class="NavBarBackground2">
-            <div class="name">
-
-            </div>
-<!--                <span class="LionStats">LionsStats</span>-->
-                <div class="LindenwoodLogo2">
-                    <style>
-                          .LindenwoodLogo2 {
-                          width: 164px;
-                          height: 150px;
-                          background: url({% static 'images/Logo.png' %});
-                          background-repeat: no-repeat;
-                          background-position: center center;
-                          background-size: cover;
-                          opacity: 1;
-                          position: absolute;
-                          top: 20px;
-                          left: 28px;
-                          overflow: hidden;
-                        }
-                    </style>
-
+                <!--Default structure for a page-->
+                <!--Default structure for the page title-->
+                <div class="LindenwoodLogo">
+                    {% block notitle %}
+                    <div class="TopYellowBar">
+                    </div>
+                    <div class="TopBlackBar">
+                    </div>
+                    {% block topbar %}
+                    <span class="TopBar">Team Filter</span>
+                    {% endblock %}
+                    {% endblock %}
                 </div>
-            </div>
+
+                <!--Create the Section with all the elements in the navigation bar, logo, buttons, etc-->
+                <div class="NavBarBackground"></div>
+
+                <!--Area for the Logo, import image and create div-->
+                <div class="NavBarBackground2">
+                            <div class="LindenwoodLogo2">
+                                <style>
+                                      .LindenwoodLogo2 {
+                                      width: 164px;
+                                      height: 150px;
+                                      background: url({% static 'images/Logo.png' %});
+                                      background-repeat: no-repeat;
+                                      background-position: center center;
+                                      background-size: cover;
+                                      opacity: 1;
+                                      position: absolute;
+                                      top: 20px;
+                                      left: 28px;
+                                      overflow: hidden;
+                                    }
+                                </style>
+
+                            </div>
+                </div>
         </div>
-<div class="LogoArea">
+
+        <!--Class after the logo area and the dropdown menu, it encloses all the available buttons-->
+        <div class="LogoArea">
+            <!--Create Navigation Bar-->
             <nav class = "navbar">
-            <div class="TeamButton">
-                {% block team-filter %}
-                <div class="TeamRectangle">
+                <!--Area for the Dashboard Page Button-->
+                <div class="HomeButton">
+                    {% block dashboard %}
+                    <!--Rectangle Area-->
+                    <!--Link respective Page to this button-->
+                    <a href="http://localhost:8000/dashboard">
+                        <div class="HomeRectangle"> <span class="Home">Home</span></div>
+                    </a>
+                    {% endblock %}
                 </div>
-                {% endblock %}
-                <a href="http://localhost:8000/team"><span class="Team">Team</span></a>
-            </div>
-            <div class="IndividualButton">
-                {% block individual %}
-                <div class="IndividualRectangle">
-                </div>
-                {% endblock %}
-            <a href="http://localhost:8000/individual"><span class="Individual">Individual</span></a>
-        </div>
-            <div class="SummaryButton">
-                {% block summary %}
-                <div class="SummaryRectangle">
-                </div>
-                {% endblock %}
 
-                <a href="http://localhost:8000/summary"><span class="Summary">Summary</span></a>
-            </div>
-            <div class="HomeButton">
-                {% block dashboard %}
-                <div class="HomeRectangle">
+                <!--Area for the Summary Page Button-->
+                <div class="SummaryButton">
+                    {% block summary %}
+                    <!--Rectangle Area-->
+                    <!--Link respective Page to this button-->
+                    <a href="http://localhost:8000/summary">
+                        <div class="SummaryRectangle"><span class="Summary">Summary</span></div>
+                    {% endblock %}
+                    </a>
                 </div>
-                {% endblock %}
-                <a href="http://localhost:8000/dashboard"><span class="Home">Home</span></a>
-            </div>
-<!--            <div class="ComparisonButton">-->
-<!--                {% block comparison %}-->
-<!--                <div class="ComparisonRectangle">-->
-<!--                </div>-->
-<!--                {% endblock %}-->
-<!--                <a href="http://localhost:8000/comparison"><span class="Comparison">Comparison</span></a>-->
-<!--            </div>-->
+
+                <!--Area for the Individual Page Button-->
+                <div class="IndividualButton">
+                    {% block individual %}
+                    <!--Rectangle Area-->
+                    <!--Link respective Page to this button-->
+                    <a href="http://localhost:8000/individual">
+                        <div class="IndividualRectangle"><span class="Individual">Individual</span></div>
+                    </a>
+                    {% endblock %}
+                </div>
+
+                <!--Area for the Team Page Button-->
+                <div class="TeamButton">
+                    {% block team-filter %}
+                    <!--Rectangle Area-->
+                    <!--Link respective Page to this button-->
+                    <a href="http://localhost:8000/team">
+                        <div class="TeamRectangle"><span class="Team">Team</span></div>
+                    </a>
+                    {% endblock %}
+                </div>
             </nav>
-            <div class="name">
-
-            </div>
-            <div class="name">
-
-            </div>
-            <div class="name">
-
-            </div>
-            <div class="name">
-
-            </div>
-            <div class="name">
-
-            </div>
-            <div class="name">
-
-            </div>
         </div>
-<a href="http://localhost:8000"><span class="Logout">Logout</span></a>
-</body>
+
+        <!--Logout Button to return to the Login Page-->
+        <a href="http://localhost:8000"><span class="Logout">Logout</span></a>
+    </body>
 </html>

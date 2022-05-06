@@ -1,41 +1,46 @@
+<!-- DASHBOARD (HOME) PAGE:  -->
+<!-- Redirected from the API authorization page, show the title, along with the data -->
+<!-- and visualization to show the latest session recorded. -->
 <!DOCTYPE html>
+<!--Implementation of the Navigation bar on the left side of the page-->
 {% extends 'navbar.html' %}
+<!-- Start loading styles and structure for the page-->
 {% load static %}
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    {% block css %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-    <link href="{% static 'styles/dashboard.css' %}" rel="stylesheet" />
-    <script  src="{% static 'js/dropdownHome.js' %}"></script>
-    {% endblock %}
+    <head>
+        <!-- Import all the classes needed: Jquery.js, Chart.js, styles file, and dropdownHome.js -->
+        <meta charset="UTF-8">
+        <!--Start loading css file -->
+        {% block css %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+        <link href="{% static 'styles/dashboard.css' %}" rel="stylesheet" />
+        <script  src="{% static 'js/dropdownHome.js' %}"></script>
+        {% endblock %}
 
-    {% block title %}
-    <title>Home</title>
-    {% endblock %}
-</head>
+        <!--Main Title of the page-->
+        {% block title %}
+        <title>Home</title>
+        {% endblock %}
+    </head>
 
-<body>
-{% block notitle %}
+    <body>
+        {% block notitle %}
 
-{% endblock %}
+        {% endblock %}
 
-{% block content %}
+        {% block content %}
+        <!-- Area for the charts and data-->
+        <div class ="chart1">
+            <canvas id="stat1" width="1000" height="600"></canvas>
+        </div>
 
-<div class ="chart1">
-    <canvas id="stat1" width="1000" height="600"></canvas>
-</div>
+        <!--Welcome Message and text for presenting the data-->
+        <h1 class="welcome"> Welcome to LionStats </h1>
+        <h2 class="last"> Last Session Summary: </h2>
+
+        {% endblock  %}
 
 
-<h1 class="welcome"> Welcome to LionStats </h1>
-<h2 class="last"> Last Session Summary: </h2>
-
-{% endblock  %}
-
-{% block dashboard %}
-<div class="current"></div>
-{% endblock %}
-
-</body>
+        </body>
 </html>

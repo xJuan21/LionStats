@@ -1,3 +1,5 @@
+
+
 .myStartDate{
     height: 200%
 }
@@ -13,13 +15,17 @@
     height: 100%;
     display: block;
     position: absolute;
-    top: 50%;
-    left: 40%;
+    top: 850px;
+    left: 700px;
     z-index: 10;
 }
 
 .teamChart {
     margin: 0 auto;
+}
+
+canvas {
+    background: white;
 }
 
 .GreyArea {
@@ -148,9 +154,14 @@
     z-index: 5;
 }
 
+#dropdownAthlete{
+    height: 100px;
+}
+
 input{
     height: 50px;
     width: 200px;
+
     font-size: 18px;
     font-family: 'Zen Dots';
 }
@@ -160,7 +171,14 @@ input{
     font-family: 'Zen Dots';
 }
 
-.Dropdown span{
+.select2-selection__rendered{
+    line-height: 100% !important;
+}
+.select2-container {
+   width: 100% !important;
+}
+
+/*.Dropdown span{
     padding : 30px;
     background : white;
     color : black;
@@ -169,14 +187,14 @@ input{
     cursor : pointer;
     display: block;
     z-index: 100;
-}
+}*/
 
-.Dropdown span::after {
+/*.Dropdown span::after {
   float: right;
   right: 10%;
   content: "+";
   z-index: 5;
-}
+}*/
 
 li a {
     font-family: 'Zen Dots';

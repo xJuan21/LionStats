@@ -1,128 +1,225 @@
+<!--TEAM FILTER PAGE:-->
+<!--This page will show the statistics of a specific group of athletes selected by the user-->
+<!--The program needs 4 components to be selected by the User:-->
+<!--1. Start Date for the data to be shown-->
+<!--2. End Date for the data to be shown-->
+<!--3. Athlete(s) Selection (Which Athletes you want to be shown-->
+<!--4. Session Selection (Date)-->
+<!--After all of these options are selected, user can click on the "Load Chart" Button to prompt the Chart -->
 <!DOCTYPE html>
+<!--Implementation of the Navigation bar on the left side of the page-->
 {% extends 'navbar.html' %}
+<!-- Start loading styles and structure for the page-->
 {% load static %}
 <html lang="en">
 <head>
+    <!--Start loading css file -->
     {% block css %}
+    <!-- Import all the classes needed: Jquery.js, Chart.js, styles file, and dropdownSummary.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>
     <link href="https://fonts.googleapis.com/css?family=Zen+Dots&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static 'styles/team-filter.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="application/javascript" src="{% static 'js/dropdown.js' %}"></script>
     {% endblock %}
+
+    <!--Title of the page-->
     {% block title %}
     <title>Team Filter</title>
     {% endblock %}
+
 </head>
 
+<!--All the content of the page enclosed here-->
 <body>
-{% block team-filter %}
-<div class="current"></div>
-{% endblock %}
-
 {% block content %}
+ <!--Area for the Chart and Data, along with its button to start loading it-->
 <div class ="chart">
+    <!--Load Chart button that will use a Javascript function to achieve it-->
+    <button type="button" id = "chartBtn" onclick="chart()">Load Chart</button>
     <canvas id ="teamChart" width="800px" height="500px"></canvas>
 </div>
 
+<!--Implementation of the Javascript functions to load the charts and select items-->
+<!--from the Dropdown menus-->
 <script>
 {% block jquery %}
+//Function to create the chart
+function chart(){
 var endpoint = '/api/team/data'
 var teamData = []
 var labels = []
 $.ajax({
     method: "GET",
     url: endpoint,
+    //Chart.js implementation
     success: function(data){
-        labels = data.labels
         teamData = data.default
-        //console.log(data)
+        console.log(teamData);
         var ctx = document.getElementById('teamChart').getContext('2d');
         var teamChart = new Chart(ctx, {
           type: 'bar',
           data:{
           labels: labels,
           datasets: [{
-            data: teamData,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 205, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(201, 203, 207, 0.2)'
-            ],
-            borderColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(75, 192, 192)',
-              'rgb(54, 162, 235)',
-              'rgb(153, 102, 255)',
-              'rgb(201, 203, 207)'
-            ],
+            label: 'Duration',
+            data: [teamData[0]],
+            backgroundColor: "Red",
+            borderWidth: 1
+          }, {
+            label: 'eTrimp',
+            data: [teamData[1]],
+            backgroundColor: "Orange",
+            borderWidth: 1
+          }, {
+            label: 'sTrimp',
+            data: [teamData[2]],
+            backgroundColor: "Yellow",
+            borderWidth: 1
+          }, {
+            label: 'EXP',
+            data: [teamData[3]],
+            backgroundColor: "Green",
+            borderWidth: 1
+          }, {
+            label: 'HR90',
+            data: [teamData[4]],
+            backgroundColor: "Blue",
+            borderWidth: 1
+          }, {
+            label: 'DIST',
+            data: [teamData[5]],
+            backgroundColor: "Purple",
+            borderWidth: 1
+          }, {
+            label: 'HSR',
+            data: [teamData[6]],
+            backgroundColor: "Indigo",
+            borderWidth: 1
+          }, {
+            label: 'SPNT',
+            data: [teamData[7]],
+            backgroundColor: "Pink",
+            borderWidth: 1
+          }, {
+            label: 'HSR/SP',
+            data: [teamData[8]],
+            backgroundColor: "LightBlue",
+            borderWidth: 1
+          }, {
+            label: 'rEXP',
+            data: [teamData[9]],
+            backgroundColor: "DarkRed",
+            borderWidth: 1
+          }, {
+            label: 'rDIST',
+            data: [teamData[10]],
+            backgroundColor: "DarkOrange",
+            borderWidth: 1
+          }, {
+            label: 'rHSR',
+            data: [teamData[11]],
+            backgroundColor: "Aquamarine",
+            borderWidth: 1
+          }, {
+            label: 'rSPNT',
+            data: [teamData[12]],
+            backgroundColor: "DarkOrchid",
             borderWidth: 1
           }]
           },
            options: {
-                responsive: false
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
             }
         });
 
         },
-    error: function(error_data){
-        console.log("error")
-        console.log(error_data)
-    }
-})
-
+         <!--Error Case: Used for Debugging purposes-->
+        error: function(error_data){
+            console.log("error")
+            console.log(error_data)
+        }
+    })
+}
 {% endblock %}
 </script>
+
+<!--Right side (Grey Area) of the page, it contains all the content-->
+<!--Some text information and description-->
 <div class="content">
+    <!--Title for the Name Dropdown menu bar-->
     <div class="Athlete">
-        <h4> Athletes </h4>
-        <div class="Dropdown">
-                <select name = "dropdown" class="menu" id = "dropdownAthlete">
+            <!--Title for Dropdown menu-->
+            <h4> Athletes </h4>
+            <div class="Dropdown">
+                <!--Use function defined below-->
+                <select name = "dropdown" class="menu" id = "dropdownAthlete" multiple="multiple" onchange="athletes()"></select>
+                <!--Definition of function, look for the specific input-->
+                <script>
+                    <!-- Send selected value to the views.py -->
+                    function athletes()
+                    {
+                        var selected = $('#dropdownAthlete').val();
 
-                </select>
-<!--                </form>-->
-<!--            </nav>-->
-        </div>
+                        console.log(selected);
+                        let csrftoken = '{{ csrf_token }}';
+                        $.ajax({
+                        url:'/athlete/',
+                        type: "POST",
+                        dataType: "json",
+                        headers:{'X-CSRFToken': csrftoken},
+                        data: {'value' : selected,},
+                        });
+                    }
+                </script>
+            </div>
     </div>
 
-    <div class="Position">
-        <h4> Position </h4>
-        <div class="Dropdown">
-<!--            <nav>-->
-                <select name = "position" class="menu" id = "dropdownPosition">
-                </select>
-<!--            </nav>-->
-        </div>
-    </div>
-
+    <!--Second: Session Dropdown-->
     <div class="Session">
+        <!--Title for Dropdown Menu-->
         <h4> Session </h4>
+        <!--Load Sessions Button-->
         <button type="button" id = "sessionBtn">Load Sessions</button>
         <div class="Dropdown">
-<!--            <nav>-->
-                <select name = "session" class="menu" id = "dropdownSession">
-                </select>
-<!--            </nav>-->
+                <!--Use function defined below-->
+                <select name = "session" class="menu" id = "dropdownSession" onchange="session()"></select>
+                <script>
+                     <!-- Send selected value to the views.py -->
+                function session()
+                    {
+                        var selected = $('#dropdownSession').val();
+                        console.log(selected);
+                        let csrftoken = '{{ csrf_token }}';
+                        $.ajax({
+                        url:'/session/',
+                        type: "POST",
+                        headers:{'X-CSRFToken': csrftoken},
+                        data: {'value' : selected,},
+                        dataType: "json",
+                        });
+                    }
+                </script>
         </div>
     </div>
 
+    <!--Third and Fourth Dropdown: Start and End Date-->
     <div class="AcademicYear">
         <h4> Start/End Date </h4>
         <div class="Dropdown">
-<!--            <nav>-->
-<!--               <select name = "year" class="menu" id = "dropdownYear">-->
-<!--                </select>-->
+                <!--Use function defined below-->
                 <input type="date" name = "start" id="myStartDate" onchange="startDateTeam()">
-            <script>
+                <!--Definition of function, look for the specific input-->
+                <script>
+                    <!-- Send selected value to the views.py -->
                     function startDateTeam()
                     {
-                        var selected = $('#myStartDate').val()
+                        var selected = $('#myStartDate').val();
                         console.log(selected);
                         let csrftoken = '{{ csrf_token }}';
                         $.ajax({
@@ -134,47 +231,30 @@ $.ajax({
                         });
                     }
                 </script>
+                <!--Use function defined below-->
                 <input type="date" id="myEndDate" onchange="endDateTeam()">
-            <script>
-                    function endDateTeam()
-                    {
-                        var selected = $('#myEndDate').val()
-                        console.log(selected);
-                        let csrftoken = '{{ csrf_token }}';
-                        $.ajax({
-                        url:'/enddate/',
-                        type: "POST",
-                        headers:{'X-CSRFToken': csrftoken},
-                        data: {'value' : selected,},
-                        dataType: "json",
-                        });
-                    }
+                <!--Definition of function, look for the specific input-->
+                <script>
+                    <!-- Send selected value to the views.py -->
+                        function endDateTeam()
+                        {
+                            var selected = $('#myEndDate').val();
+                            console.log(selected);
+                            let csrftoken = '{{ csrf_token }}';
+                            $.ajax({
+                            url:'/enddate/',
+                            type: "POST",
+                            headers:{'X-CSRFToken': csrftoken},
+                            data: {'value' : selected,},
+                            dataType: "json",
+                            });
+                        }
                 </script>
-<!--            </nav>-->
         </div>
     </div>
-
-<!--    <div class="StatisticType">-->
-<!--        <h4> Statistic Type </h4>-->
-<!--        <div class="Dropdown">-->
-<!--            <nav>-->
-<!--                <label for="touchType"><span>Type</span></label>-->
-<!--                <input type="checkbox" id="touchType">-->
-
-<!--                <ul class="menu">-->
-<!--                <li><a href="#">Type 1</a></li>-->
-<!--                <li><a href="#">Type 2</a></li>-->
-<!--                <li><a href="#">Type 3</a></li>-->
-<!--                <li><a href="#">Type 4</a></li>-->
-<!--                </ul>-->
-<!--            </nav>-->
-<!--        </div>-->
-<!--    </div>-->
 </div>
-
-<!--<canvas id="teamStats">-->
-
-<!--</canvas>-->
+<!-- Chart will pull an individuals stats over a specified period of time and will show all averages of
+stats from that period-->
 {% endblock %}
 </body>
 

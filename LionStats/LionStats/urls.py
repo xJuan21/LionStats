@@ -16,12 +16,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from django.shortcuts import render
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from LionStats import views
 from .views import *
 
-
+#render pages for the entire app
 def login(request):
     return render(request, 'login.html')
 
@@ -40,7 +39,9 @@ def comparison(request):
 def team(request):
     return render(request, 'team-filter.html')
 
+#various urls used for the application for both rendering and data transfer
 urlpatterns = [
+    #render required pages for app
     path('admin/', admin.site.urls),
     path('', login),
     path('dashboard/', dashboard),
@@ -48,15 +49,22 @@ urlpatterns = [
     path('individual/', individual),
     path('comparison/', comparison),
     path('team/', team),
+    #urls used to get data from the API
     path('api/dropdown/', Dropdown.as_view()),
     path('api/team/data/', TeamData.as_view()),
     path('api/dropdown/team', TeamDetails.as_view()),
     path('api/dropdown/sessions', TeamSessionDate.as_view()),
     path('api/metrics', TeamMetrics.as_view()),
+    path('api/home', HomeData.as_view()),
+    path('api/individual', Metrics.as_view()),
+    path('api/sumData', SumMetrics.as_view()),
     path('delete_product', views.delete_product, name='delete_product'),
+    #urls used to pass data from Javascript to Python
     path('JSendpoint/', views.getData, name='getData'),
     path('startdate/', views.getStartDate, name='startdate'),
-    path('enddate/',views.getEndDate, name='enddate'),
+    path('enddate/', views.getEndDate, name='enddate'),
+    path('athlete/', views.getAthlete, name='atheltes'),
+    path('session/', views.getSession, name='session'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

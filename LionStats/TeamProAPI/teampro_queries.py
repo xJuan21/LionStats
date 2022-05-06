@@ -1,7 +1,7 @@
 from __future__ import print_function
 import sys
-sys.path.append('C:/LionStats/LionStats/teamproAPI/')
-#sys.path.append('C:/LionStats/dist/manage/teamproAPI')
+#sys.path.append('C:/LionStats/LionStats/teamproAPI/')
+sys.path.append('C:/LionStats/dist/manage/teamproAPI')
 # sys.path.append('/Users/connor/PycharmProjects/LionStats2.0/LionStats/teamproAPI')
 from APIutils import load_config, pretty_print_json
 
@@ -221,8 +221,8 @@ class TeamProExample(object):
         return session_id
 
     # use team_id, and player first_name and last_name to get player_id; case-sensitive
-    def get_player_id(self, team_id, first_name, last_name):
-        team_details = self.get_team_details(team_id)
+    def get_player_id(self, team_name, first_name, last_name):
+        team_details = self.get_team_details(team_name)
         player_id = ''
 
         for keyval in team_details['data']['players']:
@@ -548,48 +548,323 @@ class TeamProExample(object):
         return months_json
 
     # given a list of metrics (most likely from get_team_metrics_by_date() method), return team averages by week for
-    # each metric (WORK IN PROGRESS)
     def summarize_by_week(self, metrics):
-        weeks = []
+        week_num = 1
         count = 0
         weeks_json = '{}'
-        months_json = json.loads(weeks_json)
+        weeks_json = json.loads(weeks_json)
 
-        # metrics sums
-        duration_sum = 0
-        e_trimp_sum = 0
-        s_trimp_sum = 0
-        exp_sum = 0
-        hr90_sum = 0
-        dist_sum = 0
-        hsr_sum = 0
-        spnt_sum = 0
-        hsr_div_sp_sum = 0
-        r_exp_sum = 0
-        r_dist_sum = 0
-        r_hsr_sum = 0
-        r_spnt_sum = 0
+        first_date = ''
+        start_date = ''
+        end_date = ''
+        for keyval in reversed(metrics['metrics']):
+            curr_date = date(int(keyval['Date'][0:4]), int(keyval['Date'][5:7]), int(keyval['Date'][8:10]))
+            if first_date == '':
+                first_date = curr_date
+                start_date = keyval['Date'][0:10]
+            if (not count > 0 and curr_date == first_date) or (curr_date - first_date).days >= 7:
+                if (curr_date - first_date).days >= 7:
+                    week_to_add = {"{}".format(week_num): []}
 
-        # metrics averages
-        duration_avg = 0
-        e_trimp_avg = 0
-        s_trimp_avg = 0
-        exp_avg = 0
-        hr90_avg = 0
-        dist_avg = 0
-        hsr_avg = 0
-        spnt_avg = 0
-        hsr_div_sp_avg = 0
-        r_exp_avg = 0
-        r_dist_avg = 0
-        r_hsr_avg = 0
-        r_spnt_avg = 0
+                    duration_obj = {"Duration": duration_avg}
+                    e_trimp_obj = {"eTrimp": e_trimp_avg}
+                    s_trimp_obj = {"sTrimp": s_trimp_avg}
+                    exp_obj = {"EXP": exp_avg}
+                    hr90_obj = {"HR90": hr90_avg}
+                    dist_obj = {"DIST": dist_avg}
+                    hsr_obj = {"HSR": hsr_avg}
+                    spnt_obj = {"SPNT": spnt_avg}
+                    hsr_div_sp_obj = {"HSR/SP": hsr_div_sp_avg}
+                    r_exp_obj = {"rEXP": r_exp_avg}
+                    r_dist_obj = {"rDIST": r_dist_avg}
+                    r_hsr_obj = {"rHSR": r_hsr_avg}
+                    r_spnt_obj = {"rSPNT": r_spnt_avg}
 
-        #for keyval in metrics['metrics']:
+                    start_obj = {"Start_Date": start_date}
+                    end_obj = {"End_Date": end_date}
+
+                    json_metrics = '{}'
+                    json_str = json.loads(json_metrics)
+                    json_str.update(duration_obj)
+                    json_str.update(e_trimp_obj)
+                    json_str.update(s_trimp_obj)
+                    json_str.update(exp_obj)
+                    json_str.update(hr90_obj)
+                    json_str.update(dist_obj)
+                    json_str.update(hsr_obj)
+                    json_str.update(spnt_obj)
+                    json_str.update(hsr_div_sp_obj)
+                    json_str.update(r_exp_obj)
+                    json_str.update(r_dist_obj)
+                    json_str.update(r_hsr_obj)
+                    json_str.update(r_spnt_obj)
+
+                    json_str.update(start_obj)
+                    json_str.update(end_obj)
+
+                    week_to_add["{}".format(week_num)].append(json_str)
+                    weeks_json.update(week_to_add)
+
+                    count = 0
+                    week_num += 1
+                    first_date = curr_date
+                    start_date = keyval['Date'][0:10]
+
+                count += 1
+
+                duration_sum = keyval['Duration']
+                e_trimp_sum = keyval['eTrimp']
+                s_trimp_sum = keyval['sTrimp']
+                exp_sum = keyval['EXP']
+                hr90_sum = keyval['HR90']
+                dist_sum = keyval['DIST']
+                hsr_sum = keyval['HSR']
+                spnt_sum = keyval['SPNT']
+                hsr_div_sp_sum = keyval['HSR/SP']
+                r_exp_sum = keyval['rEXP']
+                r_dist_sum = keyval['rDIST']
+                r_hsr_sum = keyval['rHSR']
+                r_spnt_sum = keyval['rSPNT']
+
+                duration_avg = duration_sum / count
+                e_trimp_avg = e_trimp_sum / count
+                s_trimp_avg = s_trimp_sum / count
+                exp_avg = exp_sum / count
+                hr90_avg = hr90_sum / count
+                dist_avg = dist_sum / count
+                hsr_avg = hsr_sum / count
+                spnt_avg = spnt_sum / count
+                hsr_div_sp_avg = hsr_div_sp_sum / count
+                r_exp_avg = r_exp_sum / count
+                r_dist_avg = r_dist_sum / count
+                r_hsr_avg = r_hsr_sum / count
+                r_spnt_avg = r_spnt_sum / count
+
+                end_date = keyval['Date'][0:4]
+
+            elif 0 <= (curr_date - first_date).days < 7:
+                count += 1
+
+                duration_sum += keyval['Duration']
+                e_trimp_sum += keyval['eTrimp']
+                s_trimp_sum += keyval['sTrimp']
+                exp_sum += keyval['EXP']
+                hr90_sum += keyval['HR90']
+                dist_sum += keyval['DIST']
+                hsr_sum += keyval['HSR']
+                spnt_sum += keyval['SPNT']
+                hsr_div_sp_sum += keyval['HSR/SP']
+                r_exp_sum += keyval['rEXP']
+                r_dist_sum += keyval['rDIST']
+                r_hsr_sum += keyval['rHSR']
+                r_spnt_sum += keyval['rSPNT']
+
+                duration_avg = duration_sum / count
+                e_trimp_avg = e_trimp_sum / count
+                s_trimp_avg = s_trimp_sum / count
+                exp_avg = exp_sum / count
+                hr90_avg = hr90_sum / count
+                dist_avg = dist_sum / count
+                hsr_avg = hsr_sum / count
+                spnt_avg = spnt_sum / count
+                hsr_div_sp_avg = hsr_div_sp_sum / count
+                r_exp_avg = r_exp_sum / count
+                r_dist_avg = r_dist_sum / count
+                r_hsr_avg = r_hsr_sum / count
+                r_spnt_avg = r_spnt_sum / count
+
+                end_date = keyval['Date'][0:10]
+
+        week_to_add = {"{}".format(week_num): []}
+
+        duration_obj = {"Duration": duration_avg}
+        e_trimp_obj = {"eTrimp": e_trimp_avg}
+        s_trimp_obj = {"sTrimp": s_trimp_avg}
+        exp_obj = {"EXP": exp_avg}
+        hr90_obj = {"HR90": hr90_avg}
+        dist_obj = {"DIST": dist_avg}
+        hsr_obj = {"HSR": hsr_avg}
+        spnt_obj = {"SPNT": spnt_avg}
+        hsr_div_sp_obj = {"HSR/SP": hsr_div_sp_avg}
+        r_exp_obj = {"rEXP": r_exp_avg}
+        r_dist_obj = {"rDIST": r_dist_avg}
+        r_hsr_obj = {"rHSR": r_hsr_avg}
+        r_spnt_obj = {"rSPNT": r_spnt_avg}
+
+        start_obj = {"Start_Date": start_date}
+        end_obj = {"End_Date": end_date}
+
+        json_metrics = '{}'
+        json_str = json.loads(json_metrics)
+        json_str.update(duration_obj)
+        json_str.update(e_trimp_obj)
+        json_str.update(s_trimp_obj)
+        json_str.update(exp_obj)
+        json_str.update(hr90_obj)
+        json_str.update(dist_obj)
+        json_str.update(hsr_obj)
+        json_str.update(spnt_obj)
+        json_str.update(hsr_div_sp_obj)
+        json_str.update(r_exp_obj)
+        json_str.update(r_dist_obj)
+        json_str.update(r_hsr_obj)
+        json_str.update(r_spnt_obj)
+
+        json_str.update(start_obj)
+        json_str.update(end_obj)
+
+        week_to_add["{}".format(week_num)].append(json_str)
+        weeks_json.update(week_to_add)
+
+        return weeks_json
 
     # given a list of metrics (most likely from get_team_metrics_by_date() method), return team averages by day for
     # each metric (WORK IN PROGRESS)
-    #def summarize_by_day(self, metrics):
+    def summarize_by_day(self, metrics):
+        days = []
+        count = 0
+        days_json = '{}'
+        days_json = json.loads(days_json)
+
+        for keyval in metrics['metrics']:
+            curr_day = keyval['Date'][0:10]
+            if curr_day not in days:
+                if len(days) > 0:
+                    day_to_add = {"{}".format(days[len(days) - 1]): []}
+
+                    duration_obj = {"Duration": duration_avg}
+                    e_trimp_obj = {"eTrimp": e_trimp_avg}
+                    s_trimp_obj = {"sTrimp": s_trimp_avg}
+                    exp_obj = {"EXP": exp_avg}
+                    hr90_obj = {"HR90": hr90_avg}
+                    dist_obj = {"DIST": dist_avg}
+                    hsr_obj = {"HSR": hsr_avg}
+                    spnt_obj = {"SPNT": spnt_avg}
+                    hsr_div_sp_obj = {"HSR/SP": hsr_div_sp_avg}
+                    r_exp_obj = {"rEXP": r_exp_avg}
+                    r_dist_obj = {"rDIST": r_dist_avg}
+                    r_hsr_obj = {"rHSR": r_hsr_avg}
+                    r_spnt_obj = {"rSPNT": r_spnt_avg}
+
+                    json_metrics = '{}'
+                    json_str = json.loads(json_metrics)
+                    json_str.update(duration_obj)
+                    json_str.update(e_trimp_obj)
+                    json_str.update(s_trimp_obj)
+                    json_str.update(exp_obj)
+                    json_str.update(hr90_obj)
+                    json_str.update(dist_obj)
+                    json_str.update(hsr_obj)
+                    json_str.update(spnt_obj)
+                    json_str.update(hsr_div_sp_obj)
+                    json_str.update(r_exp_obj)
+                    json_str.update(r_dist_obj)
+                    json_str.update(r_hsr_obj)
+                    json_str.update(r_spnt_obj)
+
+                    day_to_add["{}".format(days[len(days) - 1])].append(json_str)
+                    days_json.update(day_to_add)
+
+                    count = 0
+
+                days.append("metrics")
+
+                count += 1
+
+                duration_sum = keyval['Duration']
+                e_trimp_sum = keyval['eTrimp']
+                s_trimp_sum = keyval['sTrimp']
+                exp_sum = keyval['EXP']
+                hr90_sum = keyval['HR90']
+                dist_sum = keyval['DIST']
+                hsr_sum = keyval['HSR']
+                spnt_sum = keyval['SPNT']
+                hsr_div_sp_sum = keyval['HSR/SP']
+                r_exp_sum = keyval['rEXP']
+                r_dist_sum = keyval['rDIST']
+                r_hsr_sum = keyval['rHSR']
+                r_spnt_sum = keyval['rSPNT']
+
+                duration_avg = duration_sum / count
+                e_trimp_avg = e_trimp_sum / count
+                s_trimp_avg = s_trimp_sum / count
+                exp_avg = exp_sum / count
+                hr90_avg = hr90_sum / count
+                dist_avg = dist_sum / count
+                hsr_avg = hsr_sum / count
+                spnt_avg = spnt_sum / count
+                hsr_div_sp_avg = hsr_div_sp_sum / count
+                r_exp_avg = r_exp_sum / count
+                r_dist_avg = r_dist_sum / count
+                r_hsr_avg = r_hsr_sum / count
+                r_spnt_avg = r_spnt_sum / count
+            else:
+                count += 1
+
+                duration_sum += keyval['Duration']
+                e_trimp_sum += keyval['eTrimp']
+                s_trimp_sum += keyval['sTrimp']
+                exp_sum += keyval['EXP']
+                hr90_sum += keyval['HR90']
+                dist_sum += keyval['DIST']
+                hsr_sum += keyval['HSR']
+                spnt_sum += keyval['SPNT']
+                hsr_div_sp_sum += keyval['HSR/SP']
+                r_exp_sum += keyval['rEXP']
+                r_dist_sum += keyval['rDIST']
+                r_hsr_sum += keyval['rHSR']
+                r_spnt_sum += keyval['rSPNT']
+
+                duration_avg = duration_sum / count
+                e_trimp_avg = e_trimp_sum / count
+                s_trimp_avg = s_trimp_sum / count
+                exp_avg = exp_sum / count
+                hr90_avg = hr90_sum / count
+                dist_avg = dist_sum / count
+                hsr_avg = hsr_sum / count
+                spnt_avg = spnt_sum / count
+                hsr_div_sp_avg = hsr_div_sp_sum / count
+                r_exp_avg = r_exp_sum / count
+                r_dist_avg = r_dist_sum / count
+                r_hsr_avg = r_hsr_sum / count
+                r_spnt_avg = r_spnt_sum / count
+
+        day_to_add = {"{}".format(days[len(days) - 1]): []}
+
+        duration_obj = {"Duration": duration_avg}
+        e_trimp_obj = {"eTrimp": e_trimp_avg}
+        s_trimp_obj = {"sTrimp": s_trimp_avg}
+        exp_obj = {"EXP": exp_avg}
+        hr90_obj = {"HR90": hr90_avg}
+        dist_obj = {"DIST": dist_avg}
+        hsr_obj = {"HSR": hsr_avg}
+        spnt_obj = {"SPNT": spnt_avg}
+        hsr_div_sp_obj = {"HSR/SP": hsr_div_sp_avg}
+        r_exp_obj = {"rEXP": r_exp_avg}
+        r_dist_obj = {"rDIST": r_dist_avg}
+        r_hsr_obj = {"rHSR": r_hsr_avg}
+        r_spnt_obj = {"rSPNT": r_spnt_avg}
+
+        json_metrics = '{}'
+        json_str = json.loads(json_metrics)
+        json_str.update(duration_obj)
+        json_str.update(e_trimp_obj)
+        json_str.update(s_trimp_obj)
+        json_str.update(exp_obj)
+        json_str.update(hr90_obj)
+        json_str.update(dist_obj)
+        json_str.update(hsr_obj)
+        json_str.update(spnt_obj)
+        json_str.update(hsr_div_sp_obj)
+        json_str.update(r_exp_obj)
+        json_str.update(r_dist_obj)
+        json_str.update(r_hsr_obj)
+        json_str.update(r_spnt_obj)
+
+        day_to_add["{}".format(days[len(days) - 1])].append(json_str)
+        days_json.update(day_to_add)
+
+        return days_json
 
     def get_individual_metrics_by_date(self, team_id, player_id, start_date, end_date):
         # get all training sessions for a specific team
@@ -641,6 +916,37 @@ class TeamProExample(object):
                 session_dates_json["date"].append(keyval['start_time'][0:10])
 
         return session_dates_json
+
+        # Returns the player session metrics of the latest training session
+
+    def get_home(self, team_id):
+        all_session_data = self.get_team_training_sessions(team_id)
+        session_id = ''
+
+        for data in all_session_data['data']:
+            session_id = data['id']
+            break
+
+        # get training session details
+        latest_session_details = self.get_team_training_session_details(session_id)['data']
+
+        # get all player ids and player session ids
+        player_session_ids = []
+        player_ids = []
+        for keyval in latest_session_details['participants']:
+            player_session_ids.append(keyval['player_session_id'])
+            player_ids.append(keyval['player_id'])
+
+        # append all calculated metrics from every player to a json string
+        all_metrics = {"metrics": []}
+        for i, item in enumerate(player_session_ids):
+            summary = self.get_player_team_training_session_summary(item)['data']
+            metrics = self.calculate_metrics(summary, summary['trimmed_start_time'][0:10], player_ids[i])
+            all_metrics["metrics"].append(metrics)
+
+        return all_metrics
+
+
 
     ##################################
 

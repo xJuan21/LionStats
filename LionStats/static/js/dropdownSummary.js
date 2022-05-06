@@ -1,7 +1,8 @@
-
+//function for populating team dropdown
 function dropdown()
 {
 var teamData;
+//use ajax to get the data from the django rest framework into javascript
 $.ajax({
     async: false,
     url: 'http://localhost:8000/api/dropdown/',
@@ -10,6 +11,7 @@ $.ajax({
         teamData = data;
     }
 });
+//empty dropdown before populating
 let dropdown = document.getElementById('dropdown')
 let option;
 while(dropdown.firstChild)
@@ -17,6 +19,12 @@ while(dropdown.firstChild)
     dropdown.removeChild(dropdown.firstChild);
 }
 
+//create and append empty option to dropdown
+option = document.createElement("option");
+option.value = "";
+dropdown.appendChild(option);
+
+//populate dropdown with data recieved
 for (var i = 0; i < teamData.data.length; i++)
 {
     option = document.createElement("option");
@@ -25,46 +33,11 @@ for (var i = 0; i < teamData.data.length; i++)
 }
 }
 
-function dropdownPosition()
-{
-var teamData;
-$.ajax({
-    async: false,
-    url: 'http://localhost:8000/api/dropdown/team',
-    success: function(data)
-    {
-        teamData = data;
-    }
-});
-let dropdown = document.getElementById('dropdownPosition')
-let option;
-while(dropdown.firstChild)
-{
-    dropdown.removeChild(dropdown.firstChild);
-}
 
-for (var i = 0; i < teamData.data.players.length; i++)
-{
-    option = document.createElement("option");
-    option.text = teamData.data.players[i].role;
-    dropdown.appendChild(option);
-}
-var usedNames = {};
-$("select[name='summaryPosition'] > option").each(function () {
-    if(usedNames[this.text]) {
-        $(this).remove();
-    } else {
-        usedNames[this.text] = this.value;
-    }
-});
-
-}
 
 window.onload = function()
 {
+    //on page load populate team dropdown
     let btn = document.getElementById("dropdown");
-
     dropdown();
-    btn.onclick = dropdownPosition();
 }
-

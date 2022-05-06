@@ -129,7 +129,7 @@ body {
   background-size: cover;
   opacity: 1;
   position: absolute;
-  top: 314px;
+  top: 240px;
   left: 1px;
   overflow: hidden;
 }
@@ -147,7 +147,7 @@ body {
   width: 105px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 23px;
+  top: 15px;
   left: 68px;
   font-family: Zen Dots;
   font-weight: Regular;

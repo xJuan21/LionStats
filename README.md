@@ -1,8 +1,5 @@
 # Install and run application
 
-REPO CLONED FROM Binary Athlete's https://github.com/ConnorWMcClellan/LionStats We will test database functionality here. 
-- 03/20 UPDATED version I pulled.
-
 ## Steps to follow
 
 In order to install the application for development this steps must be followed
